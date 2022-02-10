@@ -23,7 +23,7 @@ Flask (Python), React (JS), SQLite
 
 ## Installation
 
-## Pre-requisites
+**Pre-requisites**
 
 - git
 - python 3
