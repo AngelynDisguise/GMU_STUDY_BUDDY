@@ -29,4 +29,3 @@ Flask (Python), React (JS), SQLite
 - python 3
 - pip
 - node
-- docker
