@@ -28,5 +28,5 @@ Flask (Python), React (JS), SQLite
 - git
 - python 3
 - pip
-- nodejs
+- node
 - docker
