@@ -15,14 +15,18 @@ Flask (Python), React (JS), SQLite
 
 **Deployment**
 
-### **Next steps**
+## Project Story
 
-### Pre-requisites
+**Challenges we ran into**
+
+**Next steps**
+
+## Installation
+
+## Pre-requisites
 
 - git
 - python 3
 - pip
 - nodejs
 - docker
-
-## Installation
