@@ -7,8 +7,8 @@ function Header() {
     return (
         <div>
             <PersonIcon />
-            <h2>Header</h2>
             <MessageIcon />
+            <h2>Header</h2>
         </div>
     )
 }
