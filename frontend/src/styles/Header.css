@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lightgreen;
+}
+
+.patriotLogo {
+    display: block;
+    width: 50px;
+    object-fit: contain;
+}
+
+.navButton {
+    display: block;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+}
