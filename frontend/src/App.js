@@ -4,15 +4,32 @@ import {
   Routes,
 } from 'react-router-dom';
 
+//components
+import Header from './components/Header';
+import Home from './components/Home';
+import ChatList from './components/ChatList';
+import Chat from './components/Chat';
+
+//styles
 import './App.css';
+import './styles/Header.css';
+import './styles/Home.css';
+import './styles/ChatList.css';
+import './styles/Chat.css';
+
 
 function App() {
   return ( 
     <div className="App" >
-      <h1> Study Buddy App! </h1>
+      {/* Header */}
+      <Header />
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
+        {/* Home: Login -> Study Buddy Card */}
+        <Route path="/" element={<Home />} />
+        {/* Chat list screen */}
+        <Route path="/chatList" element={<ChatList />} />
+        {/* Individual chat screen */}
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </div>
   );
