@@ -26,8 +26,13 @@ function App() {
       {/* Header */}
       <Header />
       <div className="wrapper">
+        
         {/* Routes */}
         <Routes>
+
+        {/* Chat list screen */}
+        <Route path="/login" element={<Login />} />
+        
         {/* Chat list screen */}
         <Route path="/chatList" element={<ChatList />} />
 
