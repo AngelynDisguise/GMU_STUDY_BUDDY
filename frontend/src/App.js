@@ -23,13 +23,17 @@ function App() {
     <div className="App" >
       {/* Header */}
       <Header />
+
+      {/* Routes */}
       <Routes>
-        {/* Home: Login -> Study Buddy Card */}
-        <Route path="/" element={<Home />} />
         {/* Chat list screen */}
         <Route path="/chatList" element={<ChatList />} />
+
         {/* Individual chat screen */}
         <Route path="/chat" element={<Chat />} />
+        
+        {/* Home: Login + Study Buddy Card */}
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );
