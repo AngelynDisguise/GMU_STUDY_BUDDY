@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import {
   Route,
@@ -27,15 +26,13 @@ import Header from './Header';
 import './App.css';
 
 import './App.css';
-=======
->>>>>>> a670316 (Formatted a couple of things)
 import React from 'react';
-
 import Header from './Header';
+import { Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
-<<<<<<< HEAD
+
 
 function App() {
   const [token, setToken] = useState();
@@ -62,21 +59,7 @@ function App() {
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
-=======
-function App() {
-  return (
-    <div className="App">
-        <Header />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        just noodlin hehe
->>>>>>> 666ae62 (just noodlin)
-=======
->>>>>>> 5e6789a (fixed my noodlin hehe)
       </div>
-=======
-
->>>>>>> a670316 (Formatted a couple of things)
     </div>
   );
 }
