@@ -3,8 +3,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> f4aebe4 (Implemented a simple header)
+=======
+>>>>>>> 262226a (Implemented a simple header)
 import React, { useState } from 'react';
 import {
   Route,
@@ -26,9 +29,23 @@ import './styles/Header.css';
 import './styles/Home.css';
 import './styles/ChatList.css';
 import './styles/Chat.css';
+<<<<<<< HEAD
+=======
+
+import React from 'react';
+
+import Header from './Header';
+
+import './App.css';
+
+import './App.css';
+import React from 'react';
+import Header from './Header';
+import { Router, Routes, Route } from 'react-router-dom';
+
+>>>>>>> 262226a (Implemented a simple header)
 
 function App() {
-<<<<<<< HEAD
   const [token, setToken] = useState();
 
   if(!token) {
@@ -53,6 +70,7 @@ function App() {
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 import './App.css';
@@ -157,6 +175,9 @@ function App() {
       </Routes>
       </div>
 >>>>>>> f4aebe4 (Implemented a simple header)
+=======
+      </div>
+>>>>>>> 262226a (Implemented a simple header)
     </div>
   );
 }

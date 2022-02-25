@@ -1,6 +1,9 @@
 import React from 'react'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 262226a (Implemented a simple header)
 
 import PersonIcon from '@material-ui/icons/Person';
 import MmsIcon from '@material-ui/icons/Mms';
@@ -8,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import "./Header.css"
 =======
+<<<<<<< HEAD
 =======
 
 >>>>>>> a670316 (Formatted a couple of things)
@@ -17,6 +21,13 @@ import IconButton from '@material-ui/core/IconButton';
 >>>>>>> 0c2edba (Implemented a simple header)
 
 import "./Header.css"
+=======
+import PersonIcon from '@material-ui/icons/Person';
+import MmsIcon from '@material-ui/icons/Mms';
+import "./Header.css"
+import IconButton from '@material-ui/core/IconButton';
+>>>>>>> 0c2edba (Implemented a simple header)
+>>>>>>> 262226a (Implemented a simple header)
 
 function Header (){
     return(

@@ -16,8 +16,10 @@ import { BrowserRouter } from 'react-router-dom';
 =======
 
 import App from './App';
+<<<<<<< HEAD
 
 import './index.css';
+<<<<<<< HEAD
 >>>>>>> d2c69de (Formatted a couple of things)
 =======
 >>>>>>> 0c2edba (Implemented a simple header)
@@ -27,6 +29,12 @@ import App from './App';
 
 import './index.css';
 >>>>>>> a670316 (Formatted a couple of things)
+=======
+=======
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+>>>>>>> 0c2edba (Implemented a simple header)
+>>>>>>> 262226a (Implemented a simple header)
 
 ReactDOM.render(
   <BrowserRouter>
