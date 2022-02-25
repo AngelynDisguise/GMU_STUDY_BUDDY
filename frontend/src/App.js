@@ -20,6 +20,7 @@ import './styles/ChatList.css';
 import './styles/Chat.css';
 
 function App() {
+<<<<<<< HEAD
   const [token, setToken] = useState();
 
   if(!token) {
@@ -44,6 +45,13 @@ function App() {
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
+=======
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        just noodlin hehe
+>>>>>>> e1020d8 (just noodlin)
       </div>
     </div>
   );
