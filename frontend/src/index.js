@@ -10,6 +10,7 @@ import './index.css';
 =======
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+<<<<<<< HEAD
 >>>>>>> 83ea817 (Implemented a simple header)
 =======
 
@@ -17,6 +18,8 @@ import App from './App';
 
 import './index.css';
 >>>>>>> d2c69de (Formatted a couple of things)
+=======
+>>>>>>> 0c2edba (Implemented a simple header)
 
 ReactDOM.render(
   <BrowserRouter>

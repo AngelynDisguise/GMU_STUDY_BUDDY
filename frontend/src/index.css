@@ -1,8 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 * {
     margin: 0;
 =======
 *{
+=======
+*{
+  margin: 0;
+}
+
+body {
+>>>>>>> 0c2edba (Implemented a simple header)
   margin: 0;
 >>>>>>> 83ea817 (Implemented a simple header)
 }
