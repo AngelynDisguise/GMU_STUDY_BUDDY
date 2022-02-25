@@ -8,7 +8,6 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
-        just noodlin hehe
       </div>
     </div>
   );
