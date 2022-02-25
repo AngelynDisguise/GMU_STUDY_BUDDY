@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import {
   Route,
@@ -58,13 +59,18 @@ import Header from './Header';
 =======
 >>>>>>> 0c2edba (Implemented a simple header)
 import './App.css';
+=======
+>>>>>>> a670316 (Formatted a couple of things)
 import React from 'react';
+
 import Header from './Header';
-import { Router, Routes, Route } from 'react-router-dom';
+
+import './App.css';
 
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <Header />
 <<<<<<< HEAD
@@ -86,6 +92,10 @@ function App() {
         <Header />
       </div>
 >>>>>>> 0c2edba (Implemented a simple header)
+=======
+        <Header />
+
+>>>>>>> a670316 (Formatted a couple of things)
     </div>
   );
 }

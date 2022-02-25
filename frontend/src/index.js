@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from "@auth0/auth0-react";
 
@@ -20,6 +21,12 @@ import './index.css';
 >>>>>>> d2c69de (Formatted a couple of things)
 =======
 >>>>>>> 0c2edba (Implemented a simple header)
+=======
+
+import App from './App';
+
+import './index.css';
+>>>>>>> a670316 (Formatted a couple of things)
 
 ReactDOM.render(
   <BrowserRouter>
@@ -33,8 +40,12 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 <<<<<<< HEAD
+<<<<<<< HEAD
 );
 
 =======
 );
 >>>>>>> d2c69de (Formatted a couple of things)
+=======
+);
+>>>>>>> a670316 (Formatted a couple of things)
