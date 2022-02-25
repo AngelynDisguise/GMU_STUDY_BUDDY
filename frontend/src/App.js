@@ -56,8 +56,12 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
+<<<<<<< HEAD
 
 >>>>>>> 83ea817 (Implemented a simple header)
+=======
+        just noodlin hehe
+>>>>>>> e1020d8 (just noodlin)
       </div>
     </div>
   );
