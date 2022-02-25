@@ -57,11 +57,14 @@ function App() {
       <div className="wrapper">
         <Header />
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> 83ea817 (Implemented a simple header)
 =======
         just noodlin hehe
 >>>>>>> e1020d8 (just noodlin)
+=======
+>>>>>>> 578890f (fixed my noodlin hehe)
       </div>
     </div>
   );
