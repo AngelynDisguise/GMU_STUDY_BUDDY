@@ -137,6 +137,7 @@ function App() {
         <Header />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         just noodlin hehe
 >>>>>>> e1020d8 (just noodlin)
 <<<<<<< HEAD
@@ -149,6 +150,12 @@ function App() {
         just noodlin hehe
 >>>>>>> 666ae62 (just noodlin)
 >>>>>>> 5226bd6 (just noodlin)
+=======
+        just noodlin hehe
+>>>>>>> 666ae62 (just noodlin)
+=======
+>>>>>>> 5e6789a (fixed my noodlin hehe)
+>>>>>>> c042763 (fixed my noodlin hehe)
       </div>
 =======
 
