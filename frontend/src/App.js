@@ -63,8 +63,11 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
+<<<<<<< HEAD
         just noodlin hehe
 >>>>>>> 666ae62 (just noodlin)
+=======
+>>>>>>> 5e6789a (fixed my noodlin hehe)
       </div>
     </div>
   );
