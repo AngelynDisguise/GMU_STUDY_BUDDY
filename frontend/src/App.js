@@ -28,6 +28,7 @@ import './styles/ChatList.css';
 import './styles/Chat.css';
 
 function App() {
+<<<<<<< HEAD
   const [token, setToken] = useState();
 
   if(!token) {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/" element={<Home />} />
       </Routes>
 =======
+<<<<<<< HEAD
 import './App.css';
 =======
 >>>>>>> d2c69de (Formatted a couple of things)
@@ -101,6 +103,14 @@ function App() {
 >>>>>>> e1020d8 (just noodlin)
 =======
 >>>>>>> 578890f (fixed my noodlin hehe)
+=======
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        just noodlin hehe
+>>>>>>> e1020d8 (just noodlin)
+>>>>>>> 928a875 (just noodlin)
       </div>
 =======
 
