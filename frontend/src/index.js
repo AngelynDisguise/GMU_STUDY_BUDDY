@@ -4,7 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import App from './App';
+<<<<<<< HEAD
 import './index.css';
+=======
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+>>>>>>> 83ea817 (Implemented a simple header)
 
 ReactDOM.render(
   <BrowserRouter>

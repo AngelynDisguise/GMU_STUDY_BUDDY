@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import {
   Route,
@@ -44,10 +45,27 @@ function App() {
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
+=======
+import './App.css';
+import React from 'react';
+import Header from './Header';
+import { Router, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+
+>>>>>>> 83ea817 (Implemented a simple header)
       </div>
     </div>
   );
 }
 
+<<<<<<< HEAD
 export default App;
 
+=======
+export default App;
+>>>>>>> 83ea817 (Implemented a simple header)

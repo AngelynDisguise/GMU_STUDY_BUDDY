@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 .env
+=======
+node_modules
+>>>>>>> 83ea817 (Implemented a simple header)
