@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import {
   Route,
@@ -26,9 +27,13 @@ import Header from './Header';
 import './App.css';
 
 import './App.css';
+=======
+>>>>>>> a670316 (Formatted a couple of things)
 import React from 'react';
+
 import Header from './Header';
-import { Router, Routes, Route } from 'react-router-dom';
+
+import './App.css';
 
 <<<<<<< HEAD
 
@@ -61,14 +66,17 @@ function App() {
 function App() {
   return (
     <div className="App">
-      <div className="wrapper">
         <Header />
+<<<<<<< HEAD
 <<<<<<< HEAD
         just noodlin hehe
 >>>>>>> 666ae62 (just noodlin)
 =======
 >>>>>>> 5e6789a (fixed my noodlin hehe)
       </div>
+=======
+
+>>>>>>> a670316 (Formatted a couple of things)
     </div>
   );
 }
