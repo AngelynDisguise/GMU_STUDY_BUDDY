@@ -84,7 +84,7 @@ function App() {
 =======
       <div className="wrapper">
         <Header />
-
+        just noodlin hehe
       </div>
 >>>>>>> 0c2edba (Implemented a simple header)
     </div>
