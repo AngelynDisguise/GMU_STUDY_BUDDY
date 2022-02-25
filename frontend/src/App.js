@@ -50,8 +50,11 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
+<<<<<<< HEAD
         just noodlin hehe
 >>>>>>> e1020d8 (just noodlin)
+=======
+>>>>>>> 578890f (fixed my noodlin hehe)
       </div>
     </div>
   );
