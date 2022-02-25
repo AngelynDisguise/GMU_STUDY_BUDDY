@@ -2,11 +2,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f4aebe4 (Implemented a simple header)
 import React, { useState } from 'react';
 import {
   Route,
   Routes,
 } from 'react-router-dom';
+<<<<<<< HEAD
 
 //components
 import Login from './components/Login';
@@ -62,12 +66,26 @@ import './App.css';
 =======
 >>>>>>> a670316 (Formatted a couple of things)
 import React from 'react';
+=======
+>>>>>>> f4aebe4 (Implemented a simple header)
 
-import Header from './Header';
+//components
+import Login from './components/Login';
+import Header from './components/Header';
+import Home from './components/Home';
+import ChatList from './components/ChatList';
+import Chat from './components/Chat';
 
+//styles
 import './App.css';
+import './styles/Login.css';
+import './styles/Header.css';
+import './styles/Home.css';
+import './styles/ChatList.css';
+import './styles/Chat.css';
 
 function App() {
+<<<<<<< HEAD
   return (
     <div className="App">
 <<<<<<< HEAD
@@ -96,10 +114,38 @@ function App() {
         <Header />
 
 >>>>>>> a670316 (Formatted a couple of things)
+=======
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+
+  return ( 
+    <div className="App" >
+      {/* Header */}
+      <Header />
+      <div className="wrapper">
+        
+        {/* Routes */}
+        <Routes>
+        
+          {/* Chat list screen */}
+          <Route path="/chatList" element={<ChatList />} />
+
+          {/* Individual chat screen */}
+          <Route path="/chat" element={<Chat />} />
+          
+          {/* Home: Login + Study Buddy Card */}
+          <Route path="/" element={<Home />} />
+      </Routes>
+      </div>
+>>>>>>> f4aebe4 (Implemented a simple header)
     </div>
   );
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 export default App;
@@ -110,3 +156,6 @@ export default App;
 =======
 export default App;
 >>>>>>> 0c2edba (Implemented a simple header)
+=======
+export default App;
+>>>>>>> f4aebe4 (Implemented a simple header)
