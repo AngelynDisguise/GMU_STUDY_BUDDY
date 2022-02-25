@@ -30,6 +30,7 @@ import React from 'react';
 import Header from './Header';
 import { Router, Routes, Route } from 'react-router-dom';
 
+<<<<<<< HEAD
 
 function App() {
   const [token, setToken] = useState();
@@ -56,6 +57,14 @@ function App() {
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
+=======
+function App() {
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        just noodlin hehe
+>>>>>>> 666ae62 (just noodlin)
       </div>
     </div>
   );
