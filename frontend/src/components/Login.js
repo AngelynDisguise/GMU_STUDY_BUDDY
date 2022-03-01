@@ -1,8 +1,10 @@
 import React from 'react';
 
+import '../styles/Login.css';
+
 export default function Login() {
   return(
-    <form>
+    <form className='wrapper'>
       <label>
         <p>Username</p>
         <input type="text" />

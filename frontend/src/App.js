@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Route,
   Routes,
@@ -19,8 +19,13 @@ import './styles/Home.css';
 import './styles/ChatList.css';
 import './styles/Chat.css';
 
-
 function App() {
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+
   return ( 
     <div className="App" >
       {/* Header */}
@@ -29,18 +34,15 @@ function App() {
         
         {/* Routes */}
         <Routes>
-
-        {/* Chat list screen */}
-        <Route path="/login" element={<Login />} />
         
-        {/* Chat list screen */}
-        <Route path="/chatList" element={<ChatList />} />
+          {/* Chat list screen */}
+          <Route path="/chatList" element={<ChatList />} />
 
-        {/* Individual chat screen */}
-        <Route path="/chat" element={<Chat />} />
-        
-        {/* Home: Login + Study Buddy Card */}
-        <Route path="/" element={<Home />} />
+          {/* Individual chat screen */}
+          <Route path="/chat" element={<Chat />} />
+          
+          {/* Home: Login + Study Buddy Card */}
+          <Route path="/" element={<Home />} />
       </Routes>
       </div>
     </div>
