@@ -1,20 +1,8 @@
 import React from 'react'
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 import PersonIcon from '@material-ui/icons/Person';
 import MmsIcon from '@material-ui/icons/Mms';
 import IconButton from '@material-ui/core/IconButton';
-
-import "./Header.css"
-=======
-=======
-
->>>>>>> a670316 (Formatted a couple of things)
-import PersonIcon from '@material-ui/icons/Person';
-import MmsIcon from '@material-ui/icons/Mms';
-import IconButton from '@material-ui/core/IconButton';
->>>>>>> 0c2edba (Implemented a simple header)
 
 import "./Header.css"
 
