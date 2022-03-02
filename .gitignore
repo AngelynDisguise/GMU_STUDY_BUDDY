@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 .env
 =======
 node_modules
@@ -7,3 +8,6 @@ node_modules
 =======
 node_modules
 >>>>>>> 0c2edba (Implemented a simple header)
+=======
+node_modules
+>>>>>>> c37ca2a86795b162a5de645c0d60560422b216f1
