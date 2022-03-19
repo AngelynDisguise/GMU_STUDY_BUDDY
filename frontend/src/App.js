@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import {
   Route,
   Routes,
@@ -20,6 +20,11 @@ import './styles/ChatList.css';
 import './styles/Chat.css';
 
 function App() {
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
   return ( 
     <div className="App" >
       {/* Header */}
