@@ -1,7 +1,11 @@
 const express = require('express');
-const cors = require('cors')
 const app = express();
+// const cors = require('cors');
+const db = require("./models");
 
-app.use(cors());
-
-app.listen(8080, () => console.log('API is running on http://localhost:8080/login'));
+//app.use(cors())
+db.sequelize.sync().then(() => {
+    app.listen(3000, () => {
+        console.log('API is running on http://localhost:3000/login')
+    });
+});
