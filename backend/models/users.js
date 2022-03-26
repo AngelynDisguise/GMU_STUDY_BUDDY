@@ -1,6 +1,5 @@
-// import { picture } from './attachments';
-modules.exports = (sequelize, DataTypes) => {
-    const userinfo = sequelize.define("userinfo", {
+module.exports = (sequelize, DataTypes) => {
+    const Users = sequelize.define("Users", {
         /****************** PRIVATE INFO *****************/
         /**
          * Check if includes “@gmu.edu” substring
@@ -43,6 +42,5 @@ modules.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     });
-    // picture.addTo(userinfo);
     return Users;
 };
