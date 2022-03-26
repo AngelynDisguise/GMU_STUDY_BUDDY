@@ -44,5 +44,5 @@ modules.exports = (sequelize, DataTypes) => {
         },
     });
     // picture.addTo(userinfo);
-    return userinfo;
+    return Users;
 };
