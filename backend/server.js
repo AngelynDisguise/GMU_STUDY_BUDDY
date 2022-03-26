@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 // const cors = require('cors');
+
+app.use(express.json());
+
 const db = require("./models");
 
 //Routers
 const userRouter = require('./routes/Users');
-app.use("/posts, userRouter");
+app.use("/users", userRouter);
 
 //app.use(cors())
 db.sequelize.sync().then(() => {
