@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import ChatList from './components/ChatList';
 import Chat from './components/Chat';
+import Register from './components/Register';
 
 //styles
 import './App.css';
@@ -43,6 +44,10 @@ function App() {
           {/* Individual chat screen */}
           <Route path="/chat" element={<Chat />} />
           
+          {/* Create Account Screen */}
+          <Route path="/register" element={<Register />} />
+
+          <Route path="/login" element={<Login />} />
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
