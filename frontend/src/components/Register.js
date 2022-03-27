@@ -32,9 +32,11 @@ function Register (){
                 <p>Last Name</p>
                 <input type="text"/>
             </label>
-
-            <button type="submit">Submit</button>
-
+            
+            <div>
+                <br></br>
+                <button type="submit">Submit</button>
+            </div>
         </div>
     );
 }

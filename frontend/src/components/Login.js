@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Login.css';
+import Register from './Register.js'
 
 async function loginUser(credentials) {
   return fetch('http://localhost:8080/login', {
@@ -39,6 +40,17 @@ export default function Login({ setToken }) {
       </label>
       <div>
         <button type="submit">Submit</button>
+      </div>
+      <label>
+        <br></br>
+          <p>New user? Click here!</p>
+        </label>
+      <div>       
+        <form action="./register">
+          <button type="submit">
+            Register
+          </button>
+        </form>
       </div>
     </form>
   )
