@@ -37,7 +37,6 @@ function App() {
         
         {/* Routes */}
         <Routes>
-        
           {/* Chat list screen */}
           <Route path="/chatList" element={<ChatList />} />
 
@@ -46,8 +45,10 @@ function App() {
           
           {/* Create Account Screen */}
           <Route path="/register" element={<Register />} />
-
+          
+          {/* Login Screen */}
           <Route path="/login" element={<Login />} />
+          
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>
