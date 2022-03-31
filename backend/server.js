@@ -8,8 +8,13 @@ app.use(cors())
 const db = require("./models");
 
 //Routers
+
+app.use("/health", (req, res) => {
+    res.send("Health Check Success!")
+});
+
 const userRouter = require('./routes/Users');
-app.use("/posts", userRouter);
+app.use("/users", userRouter);
 
 app.use("/login", (req, res) => {
     res.send({
