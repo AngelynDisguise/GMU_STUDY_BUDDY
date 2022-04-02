@@ -4,8 +4,6 @@ import {
   Routes,
 } from 'react-router-dom';
 
-//Angelyn's change
-
 //components
 import Login from './components/Login';
 import Header from './components/Header';
@@ -37,7 +35,6 @@ function App() {
         
         {/* Routes */}
         <Routes>
-        
           {/* Chat list screen */}
           <Route path="/chatList" element={<ChatList />} />
 
