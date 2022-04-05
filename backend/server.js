@@ -13,7 +13,7 @@ app.use("/health", (req, res) => {
 });
 
 const userRouter = require('./routes/Users');
-app.use("/users", userRouter);
+app.use("/auth", userRouter);
 
 app.use("/login", (req, res) => {
     res.send({
