@@ -5,13 +5,21 @@ Hi! The GMU Study Buddy app is a Tinder-like social media app that helps connect
 
 React.js, Node.js (Express and Axios), MySQL
 
-## Project Components
+## Requirements
 
-**Web Server**
+**Functional Requirements**
 
-**Database**
+**Non-functional Requirements**
 
-**CI/CD**
+## Architecture
+
+**Event-Driven Architecture**
+
+## Design
+
+**Frontend**
+
+**Backend**
 
 **Deployment**
 
