@@ -13,7 +13,7 @@ app.use("/health", (req, res) => {
 });
 
 const userRouter = require('./routes/Users');
-app.use("/auth", userRouter);
+app.use("/users", userRouter);
 
 //Initialize the server
 db.sequelize.sync().then(() => {
