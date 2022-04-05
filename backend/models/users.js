@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         /**
          * Date format: [month/day/year]
          * Index 1 = month
@@ -25,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
