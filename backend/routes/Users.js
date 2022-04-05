@@ -3,11 +3,13 @@ const router = express.Router();
 const { Users } = require("../models");
 const bycrypt = require("bcrypt");
 
+//List all users
 router.get("/", async(req, res) => {
     const listOfUsers = await Users.findAll();
     res.json(listOfUsers);
 });
 
+//Register a new user
 router.post("/register", async(req, res) => {
     const { email, password } = req.body;
     const user = await Users.findOne({
@@ -32,7 +34,7 @@ router.post("/register", async(req, res) => {
     }
 });
 
-//Login
+//Login an existing user
 router.post("/login", async(req, res) => {
     const { email, password } = req.body;
     const user = await Users.findOne({
