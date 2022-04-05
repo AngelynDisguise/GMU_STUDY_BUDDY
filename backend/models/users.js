@@ -22,12 +22,14 @@ module.exports = (sequelize, DataTypes) => {
          */
         date: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
         /**
          * Limited to Male/Female (for now)
@@ -35,14 +37,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         gender: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
         /**
          * Limited to one major (for now)
          */
         major: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
     });
     return Users;
