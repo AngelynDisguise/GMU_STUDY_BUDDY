@@ -33,15 +33,18 @@ function App() {
   return ( 
     <div className="App" >
       {/* Header */}
-      <Header />
+      <Header/>
+      
+
       {/* {!token ?? <Login setToken={setToken} />} */}
       <div className="wrapper">
         
         {/* Routes */}
         <Routes>
+          
           {/* Chat list screen */}
           <Route path="/chatList" element={<ChatList />} />
-
+          
           {/* Individual chat screen */}
           <Route path="/chat" element={<Chat />} />
           

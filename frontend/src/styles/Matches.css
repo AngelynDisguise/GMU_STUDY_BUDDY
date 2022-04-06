@@ -1,0 +1,9 @@
+.matches{
+    display: inline;
+    
+}
+
+.profpics{
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 // material-ui
 import { IconButton } from '@material-ui/core';
@@ -12,13 +13,20 @@ import "../styles/Header.css";
 function Header() {
     return (
         <div className="header">
+            
             <IconButton>
                 <PersonIcon className="navButton"/>
             </IconButton>
-            <img alt="Patriot Logo" className="patriotLogo" src={PatriotLogo} />
-            <IconButton>
-                <ForumIcon className="navButton"/>
-            </IconButton>
+            
+            <Link to="/">
+                <img alt="Patriot Logo" className="patriotLogo" src={PatriotLogo} />
+            </Link>
+            
+            <Link to="/matches">
+                <IconButton>
+                    <ForumIcon className="navButton"/>
+                </IconButton>
+            </Link>
         </div>
     );
 }
