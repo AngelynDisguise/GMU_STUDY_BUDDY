@@ -15,12 +15,7 @@ app.use("/health", (req, res) => {
 const userRouter = require('./routes/Users');
 app.use("/users", userRouter);
 
-app.use("/login", (req, res) => {
-    res.send({
-        token: 'test123'
-    })
-});
-
+//Initialize the server
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {
         console.log("Server is running on port 3001");

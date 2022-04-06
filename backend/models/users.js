@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         /**
          * Date format: [month/day/year]
          * Index 1 = month
@@ -16,15 +20,16 @@ module.exports = (sequelize, DataTypes) => {
          * 
          * Prop not shown on matches list; shown as age only
          */
-        password: {
+        date: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
-
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
         /**
          * Limited to Male/Female (for now)
@@ -32,14 +37,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         gender: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
         /**
          * Limited to one major (for now)
          */
         major: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
     });
     return Users;
