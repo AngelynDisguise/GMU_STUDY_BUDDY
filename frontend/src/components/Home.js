@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import TinderCard from 'react-tinder-card';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 
 //images
 import Mengistu from '../images/mengistu.jfif';
@@ -49,10 +52,16 @@ function Home() {
               style={{ backgroundImage: `url(${student.url})` }}
             >
               <h3>{student.name}</h3>
-            
+              
+              <Link to="/matchUser">
+                <IconButton>
+                  <InfoIcon />
+                </IconButton>
+              </Link>
             </div>
-            
-          </TinderCard>
+          
+            </TinderCard>
+          
         ))}
       </div>
      

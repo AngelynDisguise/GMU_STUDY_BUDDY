@@ -15,6 +15,7 @@ import Chat from './components/Chat';
 import Register from './components/Register';
 import Matches from './components/Matches';
 import Profile from './components/Profile';
+import MatchUser from './components/MatchUser';
 
 //styles
 import './App.css';
@@ -25,6 +26,7 @@ import './styles/ChatList.css';
 import './styles/Chat.css';
 import './styles/Matches.css';
 import './styles/Profile.css';
+import './styles/MatchUser.css';
 
 function App() {
   const [token, setToken] = useState();
@@ -62,6 +64,9 @@ function App() {
           {/* Profile UI */}
           <Route path="/profile" element={<Profile />} />
           
+          {/* Match User Page */}
+          <Route path="/matchUser" element={<MatchUser/>} />
+
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
       </Routes>

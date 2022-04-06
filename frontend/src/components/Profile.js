@@ -3,7 +3,12 @@ import '../styles/Profile.css';
 
 function Profile(){
     return(
-        <h1>HEHE Profile</h1>
+        <div className="wrapper">
+            <h2>Account Information</h2>
+            
+            <button type="button">Logout</button>
+            <button type="button">Deactivate Account</button>
+        </div>
     );
 }
 
