@@ -3,6 +3,7 @@ import TinderCard from 'react-tinder-card';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import MatchUser from './MatchUser';
 
 //images
 import Mengistu from '../images/mengistu.jfif';
@@ -53,14 +54,15 @@ function Home() {
             >
               <h3>{student.name}</h3>
               
-              <Link to="/matchUser">
+              <Link to="/matchuser">
                 <IconButton>
                   <InfoIcon />
                 </IconButton>
               </Link>
+            
             </div>
           
-            </TinderCard>
+          </TinderCard>
           
         ))}
       </div>

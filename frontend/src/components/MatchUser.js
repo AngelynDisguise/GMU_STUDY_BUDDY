@@ -1,9 +1,9 @@
 import React from 'react';
 
-function MatchUser(){
+function MatchUser(student){
     return(
         <div className='wrapper'>
-            <h1>User Info</h1>
+            <h1>User info</h1>
         </div>
     );
 }
