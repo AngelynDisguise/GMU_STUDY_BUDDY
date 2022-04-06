@@ -1,5 +1,9 @@
 import React , { useState } from 'react';
 import PropTypes from 'prop-types';
+import { axios } from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import '../styles/Login.css';
 
 async function loginUser(credentials) {
@@ -11,13 +15,13 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
+}
 
 export default function Login({ setToken }) {
   const [username, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  // Form submit handler
+  // Token handler
   const handleSubmit = async e => {
     e.preventDefault();
     const token = await loginUser({
@@ -27,6 +31,24 @@ export default function Login({ setToken }) {
     setToken(token);
     // console.log(token);
   }
+
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email()
+      .required('GMU email is required.'),
+    password: Yup.string()
+      .min(5, 'Password must be 5-15 characters.')
+      .max(15, 'Password must be 5-15 characters.')
+      .required('Password is required.')
+  });
 
   return(
     <div className='login-wrapper'>
@@ -38,7 +60,28 @@ export default function Login({ setToken }) {
         <h1>Login or Register:</h1>
       </div>
       <div className = 'login-wrapper'>
-        <form onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+          <Form className = 'form-container'>
+            <label>Email: </label>
+            <Field 
+            id="input-email" 
+            type="email" 
+            name="email" 
+            placeholder="{student@gmu.edu}" 
+            />
+            <label>Password: </label>
+            <Field 
+            id="input-password" 
+            type="password" 
+            name="password" 
+            placeholder="{password}" />
+            <button type="submit">Login</button>
+            <button type="submit">Register</button>
+          </Form>
+        </Formik>
+        
+        
+        {/* <form onSubmit={handleSubmit}>
             <label>
               <p>Email</p>
               <input type="email" onChange={e => setEmail(e.target.value)}/>
@@ -51,7 +94,7 @@ export default function Login({ setToken }) {
               <button type="submit">Login</button>
               <button type="submit">Register</button>
             </div>
-          </form>
+          </form> */}
       </div>
     </div>
   )
