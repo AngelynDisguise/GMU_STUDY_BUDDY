@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/Matches.css';
-import Match from './Match';
+
 
 import Mengistu from '../images/mengistu.jfif';
 import Monkeh from '../images/monkeh.jpg';

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // material-ui
 import { IconButton } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import ForumIcon from '@material-ui/icons/Forum';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 
 //styles and images
 import PatriotLogo from "../images/patlogo.png";
@@ -15,7 +15,9 @@ function Header() {
         <div className="header">
             
             <IconButton>
-                <PersonIcon className="navButton"/>
+                <Link to="/profile">
+                    <PersonIcon className="navButton"/>
+                </Link>
             </IconButton>
             
             <Link to="/">
@@ -24,7 +26,7 @@ function Header() {
             
             <Link to="/matches">
                 <IconButton>
-                    <ForumIcon className="navButton"/>
+                    <DensityMediumIcon className="navButton"/>
                 </IconButton>
             </Link>
         </div>

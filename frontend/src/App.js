@@ -14,6 +14,7 @@ import ChatList from './components/ChatList';
 import Chat from './components/Chat';
 import Register from './components/Register';
 import Matches from './components/Matches';
+import Profile from './components/Profile';
 
 //styles
 import './App.css';
@@ -22,7 +23,8 @@ import './styles/Header.css';
 import './styles/Home.css';
 import './styles/ChatList.css';
 import './styles/Chat.css';
-import './styles/Matches.css'
+import './styles/Matches.css';
+import './styles/Profile.css';
 
 function App() {
   const [token, setToken] = useState();
@@ -56,6 +58,9 @@ function App() {
 
           {/* Matches Screen */}
           <Route path="/matches" element={<Matches />} />
+
+          {/* Profile UI */}
+          <Route path="/profile" element={<Profile />} />
           
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
