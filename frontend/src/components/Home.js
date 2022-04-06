@@ -36,7 +36,9 @@ function Home() {
     <div className='wrap'>
       <h1>Home!</h1>
       <div className='cardsContainer'>
+        
         {students.map((student) => (
+          
           <TinderCard 
             className="Swipe"
             key={student.name}
@@ -47,7 +49,9 @@ function Home() {
               style={{ backgroundImage: `url(${student.url})` }}
             >
               <h3>{student.name}</h3>
+            
             </div>
+            
           </TinderCard>
         ))}
       </div>
