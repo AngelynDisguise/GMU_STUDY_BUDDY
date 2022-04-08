@@ -1,9 +1,13 @@
 import React , { useState } from 'react';
 import PropTypes from 'prop-types';
+import { axios } from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import '../styles/Login.css';
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8080/login', {
+  return fetch('http://localhost:3001/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -11,12 +15,13 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
+}
 
 export default function Login({ setToken }) {
-  const [username, setUserName] = useState();
+  const [username, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  // Token handler
   const handleSubmit = async e => {
     e.preventDefault();
     const token = await loginUser({
@@ -27,39 +32,73 @@ export default function Login({ setToken }) {
     // console.log(token);
   }
 
-  return(
-    <form className='wrapper' onSubmit={handleSubmit}>
-      <label>
-        <p>Username</p>
-        <input type="text" onChange={e => setUserName(e.target.value)}/>
-      </label>
-      
-      <label>
-        <p>Password</p>
-        <input type="password" onChange={e => setPassword(e.target.value)}/>
-      </label>
-      
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-      
-      <label>
-        <br></br>
-          <p>New user? Click here!</p>
-      </label>
-      
-      <div>       
-        <form action="./register">
-          <button type="submit">
-            Register
-          </button>
-        </form>
-      </div>
+  const initialValues = {
+    username: "",
+    password: "",
+  };
 
-    </form>
+  const onSubmit = (data) => {
+    console.log(data);
+  }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email()
+      .required('GMU email is required.'),
+    password: Yup.string()
+      .min(5, 'Password must be 5-15 characters.')
+      .max(15, 'Password must be 5-15 characters.')
+      .required('Password is required.')
+  });
+
+  return(
+    <div className='login-wrapper'>
+      <div className= 'login-banner'>
+        <h1>GMU STUDY BUDDY</h1>
+        <h3>...Tinder, but for GMU students looking for study partners ;)</h3>
+      </div>
+      <div className= 'login-title'>
+        <h1>Login or Register:</h1>
+      </div>
+      <div className = 'login-wrapper'>
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+          <Form className = 'form-container'>
+            <label>Email: </label>
+            <Field 
+            id="input-email" 
+            type="email" 
+            name="email" 
+            placeholder="{student@gmu.edu}" 
+            />
+            <label>Password: </label>
+            <Field 
+            id="input-password" 
+            type="password" 
+            name="password" 
+            placeholder="{password}" />
+            <button type="submit">Login</button>
+            <button type="submit">Register</button>
+          </Form>
+        </Formik>
+        
+        
+        {/* <form onSubmit={handleSubmit}>
+            <label>
+              <p>Email</p>
+              <input type="email" onChange={e => setEmail(e.target.value)}/>
+            </label>
+            <label>
+              <p>Password</p>
+              <input type="password" onChange={e => setPassword(e.target.value)}/>
+            </label>
+            <div>
+              <button type="submit">Login</button>
+              <button type="submit">Register</button>
+            </div>
+          </form> */}
+      </div>
+    </div>
   )
 }
-
 Login.propTypes = {
   setToken: PropTypes.func.isRequired
 }
