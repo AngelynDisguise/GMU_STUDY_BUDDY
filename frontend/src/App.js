@@ -4,8 +4,6 @@ import {
   Routes,
 } from 'react-router-dom';
 
-//Angelyn's change
-
 //components
 import Login from './components/Login';
 import Header from './components/Header';
@@ -31,9 +29,10 @@ import './styles/MatchUser.css';
 function App() {
   const [token, setToken] = useState();
 
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
+  {/*if(!token) {
+    return <Login setToken={setToken} />
+  }*/ }
+  
   return ( 
     <div className="App" >
       {/* Header */}
@@ -45,7 +44,6 @@ function App() {
         
         {/* Routes */}
         <Routes>
-          
           {/* Chat list screen */}
           <Route path="/chatList" element={<ChatList />} />
           
