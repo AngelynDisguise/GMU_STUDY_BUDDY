@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import TinderCard from 'react-tinder-card';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import MatchUser from './MatchUser';
 
 //images
 import Mengistu from '../images/mengistu.jfif';
 import Russell from '../images/russell.jfif';
+import Helms from '../images/helms.jpg';
+import Monkeh from '../images/monkeh.jpg'
 
 function Home() {
   /*Array of Tinder Cards 
@@ -13,33 +19,54 @@ function Home() {
   */
   const [students, setStudents] = useState([
     {
-      name: "mengistu",
+      name: "Mengistu",
       url: Mengistu,
     },
     {
-      name: "russell",
+      name: "Monkeh, hehe",
+      url: Monkeh,
+    },
+    {
+      name: "Russell",
       url: Russell,
+    }, 
+    {
+      name: "Ed Helms",
+      url: Helms,     
     },
   ]);
 
   return (
-    <div>
+    <div className='wrap'>
       <h1>Home!</h1>
-
-      {students.map((student) => (
-        <TinderCard 
-          className="Swipe"
-          key={student.name}
-          preventSwipe={['up', 'down']}
-        >
-          <div 
-            className="card"
-            style={{ backgroundImage: `url(${student.url})` }}
+      <div className='cardsContainer'>
+        
+        {students.map((student) => (
+          
+          <TinderCard 
+            className="Swipe"
+            key={student.name}
+            preventSwipe={['up', 'down']}
           >
-            <h3>{student.name}</h3>
-          </div>
-        </TinderCard>
-      ))}
+            <div 
+              className="card"
+              style={{ backgroundImage: `url(${student.url})` }}
+            >
+              <h3>{student.name}</h3>
+              
+              <Link to="/matchuser">
+                <IconButton>
+                  <InfoIcon />
+                </IconButton>
+              </Link>
+            
+            </div>
+          
+          </TinderCard>
+          
+        ))}
+      </div>
+     
     </div>
   );
 }
