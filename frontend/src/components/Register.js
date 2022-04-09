@@ -18,7 +18,7 @@ import '../styles/Login.css';
 //     .then(data => data.json())
 // }
 
-export default function Login({ setToken }) {
+export default function Register({ setToken }) {
   const [username, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -39,7 +39,7 @@ export default function Login({ setToken }) {
   };
 
   const onSubmit = (data) => {
-    axios.post('http://localhost:3001/users/login', data);
+    axios.post('http://localhost:3001/users/register', data);
     console.log(data);
   }
 
@@ -65,7 +65,7 @@ export default function Login({ setToken }) {
         </div>
         <Formik initialValues={initialValues} validationSchema={validationSchema}>
           <Form className = 'form-container'>
-            <div className='email-container'>
+            <div className='email-container'> 
               <label>Email: </label>
               <Field 
               id="input-email" 
@@ -85,12 +85,12 @@ export default function Login({ setToken }) {
             </div>
             <ErrorMessage name="password" component="span" />
             <div className='login-button-container'>
-              <button type="submit">Login</button>
+              <button type="submit">Register</button>
             </div>
           </Form>
         </Formik>
-        <Link to= '/register'>
-          <button>Register</button>
+        <Link to= '/login'>
+          <button>Login</button>
         </Link>
       </div>
     </div>
