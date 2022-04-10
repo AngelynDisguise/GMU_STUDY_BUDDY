@@ -1,47 +1,17 @@
 import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { axios } from 'axios';
+import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 import '../styles/Login.css';
 
-// async function loginUser(credentials) {
-//   return fetch('http://localhost:3001/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(credentials)
-//   })
-//     .then(data => data.json())
-// }
-
 export default function Register({ setToken }) {
-  const [username, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  // Token handler
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const token = await loginUser({
-  //     username,
-  //     password
-  //   });
-  //   setToken(token);
-    // console.log(token);
-  //}
-
   const initialValues = {
-    username: "",
+    email: "",
     password: "",
   };
-
-  const onSubmit = (data) => {
-    axios.post('http://localhost:3001/users/register', data);
-    console.log(data);
-  }
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address.')
@@ -53,22 +23,66 @@ export default function Register({ setToken }) {
       .required('Password is required.')
   });
 
+  // const onSubmit = (data) => {
+  //   axios.post("http://localhost:3001/users/register", data);
+  //   console.log(response);
+  // };
+  //UNHANDLED ERROR
+
+  // const onSubmit = () => {
+  //   const data = {
+  //     "email": "ex@gmu.edu",
+  //     "password": "password",
+  //   };
+  //   try {
+  //     axios.post("http://localhost:3001/users/register", data).then((response) => {
+  //     console.log(response);
+  //   });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }; //TypeError: Cannot read properties of undefined (reading 'post')
+  
+  const onSubmit = async (data) => {
+    if(data === undefined) {
+      console.log("undefined data");
+    }
+    else {
+      console.log(data); //works!
+    }
+    try {
+      const response = await axios.post("http://localhost:3001/users/register", data);
+      if(response === undefined){
+        console.log("undefined response");
+      } else {
+        console.log("it's alright...");
+      }
+      console.log(response);
+    } catch(error) {
+        console.log(error);
+    }
+  }; //TypeError: Cannot read properties of undefined (reading 'post')
+
   return(
     <div className='login-wrapper'>
       <div className= 'login-banner'>
         <h1>GMU STUDY BUDDY</h1>
-        <h3>...Tinder, but for GMU students looking for study partners ;)</h3>
+        <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
       </div>
       <div className = 'login-wrapper'>
         <div className= 'login-title'>
-          <h1>Login or Register:</h1>
+          <h1>Register:</h1>
         </div>
-        <Formik initialValues={initialValues} validationSchema={validationSchema}>
+        <Formik 
+          initialValues={initialValues} 
+          onSubmit={onSubmit} 
+          validationSchema={validationSchema}
+          >
           <Form className = 'form-container'>
             <div className='email-container'> 
               <label>Email: </label>
               <Field 
-              id="input-email" 
+              id="email" 
               type="email" 
               name="email" 
               placeholder="{student@gmu.edu}"
@@ -78,7 +92,7 @@ export default function Register({ setToken }) {
             <div className= 'password-container'>
               <label>Password: </label>
               <Field 
-              id="input-password" 
+              id="password" 
               type="password" 
               name="password" 
               placeholder="{password}" />
@@ -90,12 +104,9 @@ export default function Register({ setToken }) {
           </Form>
         </Formik>
         <Link to= '/login'>
-          <button>Login</button>
+          <button>Already have an account?</button>
         </Link>
       </div>
     </div>
   )
-}
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
 }

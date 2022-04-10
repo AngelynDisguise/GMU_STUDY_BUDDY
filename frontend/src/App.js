@@ -6,6 +6,7 @@ import {
 
 //components
 import Login from './components/Login';
+import Register from './components/Register';
 import Header from './components/Header';
 import Home from './components/Home';
 import ChatList from './components/ChatList';
@@ -22,9 +23,9 @@ import './styles/Chat.css';
 function App() {
   const [token, setToken] = useState();
 
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // }
   
   return ( 
     <div className="App" >
@@ -35,15 +36,16 @@ function App() {
         
         {/* Routes */}
         <Routes>
-          {/* Chat list screen */}
-          <Route path="/chatList" element={<ChatList />} />
+          {/* Login and Register */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Individual chat screen */}
           <Route path="/chat" element={<Chat />} />
           
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
-      </Routes>
+        </Routes>
       </div>
     </div>
   );

@@ -56,11 +56,12 @@
     padding-right: 1.6em;
 }
 
-.login-button-container {
-    /* padding-left: 4em; */
+
+/* .login-button-container {
+    padding-left: 4em;
     padding: 1em;
     align-items: center;
-}
+} */
 
 span {
     color: red;

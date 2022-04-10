@@ -39,15 +39,19 @@ export default function Login({ setToken }) {
   };
 
   const onSubmit = (data) => {
-    axios.post('http://localhost:3001/users/login', data);
+    axios.post('http://localhost:3001/users/login', data).then((response) => {
     console.log(data);
-  }
+    });
+  };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email address.')
+    email: 
+    Yup.string()
+    .email('Invalid email address.')
     .matches(/@gmu.edu/, 'Must be a GMU email address (i.e. student@gmu.edu)')
     .required('GMU email is required.'),
-    password: Yup.string()
+    password: 
+      Yup.string()
       .min(5, 'Password must be 5-15 characters.')
       .max(15, 'Password must be 5-15 characters.')
       .required('Password is required.')
@@ -57,19 +61,23 @@ export default function Login({ setToken }) {
     <div className='login-wrapper'>
       <div className= 'login-banner'>
         <h1>GMU STUDY BUDDY</h1>
-        <h3>...Tinder, but for GMU students looking for study partners ;)</h3>
+        <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
       </div>
       <div className = 'login-wrapper'>
         <div className= 'login-title'>
-          <h1>Login or Register:</h1>
+          <h1>Login:</h1>
         </div>
-        <Formik initialValues={initialValues} validationSchema={validationSchema}>
+        <Formik 
+          initialValues={initialValues} 
+          onSubmit={onSubmit} 
+          validationSchema={validationSchema}
+          >
           <Form className = 'form-container'>
             <div className='email-container'>
               <label>Email: </label>
               <Field 
               id="input-email" 
-              type="email" 
+              //type="email" 
               name="email" 
               placeholder="{student@gmu.edu}"
               />
@@ -79,7 +87,7 @@ export default function Login({ setToken }) {
               <label>Password: </label>
               <Field 
               id="input-password" 
-              type="password" 
+              //type="password" 
               name="password" 
               placeholder="{password}" />
             </div>
@@ -90,12 +98,13 @@ export default function Login({ setToken }) {
           </Form>
         </Formik>
         <Link to= '/register'>
-          <button>Register</button>
+          <button>Don't have an account?</button>
         </Link>
       </div>
     </div>
   )
 }
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+
+// Login.propTypes = {
+//   setToken: PropTypes.func.isRequired
+// }
