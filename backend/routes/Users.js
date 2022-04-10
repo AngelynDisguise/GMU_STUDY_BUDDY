@@ -3,6 +3,8 @@ const router = express.Router();
 const { Users } = require("../models");
 const bycrypt = require("bcrypt");
 
+const { sign } = require("jsonwebtoken");
+
 //List all users
 router.get("/", async(req, res) => {
     const listOfUsers = await Users.findAll();
@@ -45,7 +47,9 @@ router.post("/login", async(req, res) => {
     if (user) {
         const isMatch = await bycrypt.compare(password, user.password);
         if (isMatch) {
-            res.json("Login Success");
+            const token = sign({ email: user.email, id: user.id }, "secret");
+            //res.json("Login Success");
+            res.json(token);
         } else {
             res.json("Incorrect Password");
         }
