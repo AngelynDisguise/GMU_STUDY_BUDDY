@@ -11,6 +11,24 @@ export default function Login() {
     email: "",
     password: "",
   };
+  
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const colorMessage = (message) => {
+    if (message === "Login successful!") {
+      return (<p className="status-message" 
+      style={{color: 'blue', paddingTop: '.5em'}}
+      >
+        {message}
+      </p>);
+    } else if(message !== ""){
+      return (<p className="status-message" 
+      style={{color: 'red', paddingTop: '.5em'}}
+      >
+        {message}
+      </p>);
+    }
+  };
 
   const validationSchema = Yup.object().shape({
     email: 
@@ -26,15 +44,10 @@ export default function Login() {
   });
 
   const onSubmit = async (data) => {
-    // if(data === undefined) {
-    //   console.log("undefined data");
-    // }
-    // else {
-    //   console.log(data); //works!
-    // }
     try {
       const response = await axios.post("http://localhost:3001/users/login", data);
       console.log(response.data);
+      setStatusMessage(response.data);
     } catch(error) {
         console.log(error);
     }
@@ -49,6 +62,7 @@ export default function Login() {
       <div className = 'login-wrapper'>
         <div className= 'login-title'>
           <h1>Login:</h1>
+          {colorMessage(statusMessage)}
         </div>
         <Formik 
           initialValues={initialValues} 

@@ -12,6 +12,24 @@ export default function Register() {
     password: "",
   };
 
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const colorMessage = (message) => {
+    if (message === "Registration successful!") {
+      return (<p className="status-message" 
+      style={{color: 'blue', paddingTop: '.5em'}}
+      >
+        {message}
+      </p>);
+    } else if(message !== ""){
+      return (<p className="status-message" 
+      style={{color: 'red', paddingTop: '.5em'}}
+      >
+        {message}
+      </p>);
+    }
+  };
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address.')
     .matches(/@gmu.edu/, 'Must be a GMU email address (i.e. student@gmu.edu)')
@@ -23,15 +41,10 @@ export default function Register() {
   });
   
   const onSubmit = async (data) => {
-    // if(data === undefined) {
-    //   console.log("undefined data");
-    // }
-    // else {
-    //   console.log(data); //works!
-    // }
     try {
       const response = await axios.post("http://localhost:3001/users/register", data);
       console.log(response.data);
+      setStatusMessage(response.data);
     } catch(error) {
         console.log(error);
     }
@@ -46,6 +59,7 @@ export default function Register() {
       <div className = 'login-wrapper'>
         <div className= 'login-title'>
           <h1>Register:</h1>
+          {colorMessage(statusMessage)}
         </div>
         <Formik 
           initialValues={initialValues} 
