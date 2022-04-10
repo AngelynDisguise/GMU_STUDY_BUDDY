@@ -1,47 +1,15 @@
 import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { axios } from 'axios';
+import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 import '../styles/Login.css';
 
-// async function loginUser(credentials) {
-//   return fetch('http://localhost:3001/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(credentials)
-//   })
-//     .then(data => data.json())
-// }
-
-export default function Login({ setToken }) {
-  const [username, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  // Token handler
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const token = await loginUser({
-  //     username,
-  //     password
-  //   });
-  //   setToken(token);
-    // console.log(token);
-  //}
-
+export default function Login() {
   const initialValues = {
-    username: "",
+    email: "",
     password: "",
-  };
-
-  const onSubmit = (data) => {
-    axios.post('http://localhost:3001/users/login', data).then((response) => {
-    console.log(data);
-    });
   };
 
   const validationSchema = Yup.object().shape({
@@ -56,6 +24,21 @@ export default function Login({ setToken }) {
       .max(15, 'Password must be 5-15 characters.')
       .required('Password is required.')
   });
+
+  const onSubmit = async (data) => {
+    // if(data === undefined) {
+    //   console.log("undefined data");
+    // }
+    // else {
+    //   console.log(data); //works!
+    // }
+    try {
+      const response = await axios.post("http://localhost:3001/users/login", data);
+      console.log(response.data);
+    } catch(error) {
+        console.log(error);
+    }
+  };
 
   return(
     <div className='login-wrapper'>
@@ -76,8 +59,8 @@ export default function Login({ setToken }) {
             <div className='email-container'>
               <label>Email: </label>
               <Field 
-              id="input-email" 
-              //type="email" 
+              id="email" 
+              type="email" 
               name="email" 
               placeholder="{student@gmu.edu}"
               />
@@ -86,15 +69,13 @@ export default function Login({ setToken }) {
             <div className= 'password-container'>
               <label>Password: </label>
               <Field 
-              id="input-password" 
-              //type="password" 
+              id="password" 
+              type="password" 
               name="password" 
               placeholder="{password}" />
             </div>
             <ErrorMessage name="password" component="span" />
-            <div className='login-button-container'>
-              <button type="submit">Login</button>
-            </div>
+            <button type="submit">Login</button>
           </Form>
         </Formik>
         <Link to= '/register'>
@@ -104,7 +85,3 @@ export default function Login({ setToken }) {
     </div>
   )
 }
-
-// Login.propTypes = {
-//   setToken: PropTypes.func.isRequired
-// }

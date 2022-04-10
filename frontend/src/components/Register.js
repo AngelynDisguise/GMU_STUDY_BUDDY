@@ -1,13 +1,12 @@
 import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 import '../styles/Login.css';
 
-export default function Register({ setToken }) {
+export default function Register() {
   const initialValues = {
     email: "",
     password: "",
@@ -22,46 +21,21 @@ export default function Register({ setToken }) {
       .max(15, 'Password must be 5-15 characters.')
       .required('Password is required.')
   });
-
-  // const onSubmit = (data) => {
-  //   axios.post("http://localhost:3001/users/register", data);
-  //   console.log(response);
-  // };
-  //UNHANDLED ERROR
-
-  // const onSubmit = () => {
-  //   const data = {
-  //     "email": "ex@gmu.edu",
-  //     "password": "password",
-  //   };
-  //   try {
-  //     axios.post("http://localhost:3001/users/register", data).then((response) => {
-  //     console.log(response);
-  //   });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }; //TypeError: Cannot read properties of undefined (reading 'post')
   
   const onSubmit = async (data) => {
-    if(data === undefined) {
-      console.log("undefined data");
-    }
-    else {
-      console.log(data); //works!
-    }
+    // if(data === undefined) {
+    //   console.log("undefined data");
+    // }
+    // else {
+    //   console.log(data); //works!
+    // }
     try {
       const response = await axios.post("http://localhost:3001/users/register", data);
-      if(response === undefined){
-        console.log("undefined response");
-      } else {
-        console.log("it's alright...");
-      }
-      console.log(response);
+      console.log(response.data);
     } catch(error) {
         console.log(error);
     }
-  }; //TypeError: Cannot read properties of undefined (reading 'post')
+  };
 
   return(
     <div className='login-wrapper'>
@@ -98,9 +72,7 @@ export default function Register({ setToken }) {
               placeholder="{password}" />
             </div>
             <ErrorMessage name="password" component="span" />
-            <div className='login-button-container'>
-              <button type="submit">Register</button>
-            </div>
+            <button type="submit">Register</button>
           </Form>
         </Formik>
         <Link to= '/login'>
