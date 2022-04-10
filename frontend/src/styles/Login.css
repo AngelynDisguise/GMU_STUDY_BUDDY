@@ -30,12 +30,41 @@
 }
 
 .login-wrapper {
-    padding: 1em;
+    padding: 2em;
     padding-bottom: 5em;
     background-color: gold;
     border: 10px solid goldenrod;
 }
 
 .login-title {
-    padding: 2em;
+    padding-top: 1em;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.email-container,
+.password-container {
+    display: block;
+}
+
+.password-container {
+    padding-right: 1.6em;
+}
+
+
+/* .login-button-container {
+    padding-left: 4em;
+    padding: 1em;
+    align-items: center;
+} */
+
+span {
+    color: red;
+    padding-left: 4em;
+    margin-bottom: .5em;
 }

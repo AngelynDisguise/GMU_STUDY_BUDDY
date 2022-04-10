@@ -6,14 +6,11 @@ import {
 
 //components
 import Login from './components/Login';
+import Register from './components/Register';
 import Header from './components/Header';
 import Home from './components/Home';
 import ChatList from './components/ChatList';
 import Chat from './components/Chat';
-import Register from './components/Register';
-import Matches from './components/Matches';
-import Profile from './components/Profile';
-import MatchUser from './components/MatchUser';
 
 //styles
 import './App.css';
@@ -22,52 +19,33 @@ import './styles/Header.css';
 import './styles/Home.css';
 import './styles/ChatList.css';
 import './styles/Chat.css';
-import './styles/Matches.css';
-import './styles/Profile.css';
-import './styles/MatchUser.css';
 
 function App() {
   const [token, setToken] = useState();
 
-  {/*if(!token) {
-    return <Login setToken={setToken} />
-  }*/ }
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // }
   
   return ( 
     <div className="App" >
       {/* Header */}
-      <Header/>
-      
-
+      <Header />
       {/* {!token ?? <Login setToken={setToken} />} */}
       <div className="wrapper">
         
         {/* Routes */}
         <Routes>
-          {/* Chat list screen */}
-          <Route path="/chatList" element={<ChatList />} />
-          
+          {/* Login and Register */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
           {/* Individual chat screen */}
           <Route path="/chat" element={<Chat />} />
           
-          {/* Create Account Screen */}
-          <Route path="/register" element={<Register />} />
-          
-          {/* Login Screen */}
-          <Route path="/login" element={<Login />} />
-
-          {/* Matches Screen */}
-          <Route path="/matches" element={<Matches />} />
-
-          {/* Profile UI */}
-          <Route path="/profile" element={<Profile />} />
-          
-          {/* Match User Page */}
-          <Route path="/matchUser" element={<MatchUser/>} />
-
           {/* Home: Login + Study Buddy Card */}
           <Route path="/" element={<Home />} />
-      </Routes>
+        </Routes>
       </div>
     </div>
   );
