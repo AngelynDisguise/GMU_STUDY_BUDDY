@@ -4,8 +4,10 @@ const { Users } = require("../models");
 const bycrypt = require("bcrypt");
 
 const { sign } = require("jsonwebtoken");
+// const cookieParser = require("cookie-parser");
+// app.use(cookieParser());
 
-//List all users
+//Display logged in user's profile
 router.get("/", async(req, res) => {
     const listOfUsers = await Users.findAll();
     res.json(listOfUsers);
