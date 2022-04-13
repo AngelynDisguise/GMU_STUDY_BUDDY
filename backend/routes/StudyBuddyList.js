@@ -10,12 +10,13 @@ router.get("/", async(req, res) => {
 
 //Added a new user
 router.post("/add", async(req, res) => {
-    const user = req.body; //get body of data being pass in
+    const {email} = req.body; //get body of data being pass in
     try {
-        await StudyBuddyList.create(user); //Sequelize table puts data into table
-        res.json("Added a buddy!");
+        const newUser = await StudyBuddyList.create({email : email});
+        res.json(newUser);
+        //res.json("Added a buddy!");
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send(err); 
     }
 });
 

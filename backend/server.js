@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 const db = require("./models");
 
@@ -15,7 +15,7 @@ app.use("/health", (req, res) => {
 const userRouter = require('./routes/Users');
 app.use("/users", userRouter);
 
-const studybuddyRouter = require('./routes/StudyBuddylist');
+const studybuddyRouter = require('./routes/StudyBuddyList');
 app.use("/StudyBuddy", studybuddyRouter);
 
 //Initialize the server
