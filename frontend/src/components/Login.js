@@ -1,34 +1,96 @@
-import React , { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React , { useState, useEffect } from 'react';
+import { Link, Route, Routes, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
+import Register from './Register';
 import '../styles/Login.css';
 
-export default function Login() {
+//export default function Login({setToken}, {setRegister}) {
+export default function Login({setToken}) {
   const initialValues = {
     email: "",
     password: "",
   };
   
-  const [statusMessage, setStatusMessage] = useState("");
+  const [response, setResponse] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const colorMessage = (message) => {
-    if (message === "Login successful!") {
+  <Routes>
+    <Route path="/register" element={<Register />} />
+  </Routes>
+
+  // useEffect(() => {
+  //   console.log("(useEffect) Response: "+response); //doesn't work
+  //   //Assign token if user authenticated
+  //   authenticate(response);
+  //   console.log("(useEffect) Logged in: "+loggedIn); //doesn't work
+  //   if(loggedIn){
+  //     //Redirect to home page
+  //     <App />
+  //   }
+  // }, []);
+
+
+  function statusMessage(response){
+    // if (response === "Incorrect Password!" ||
+    //     response === "Email not found - please register!") {
+    if (loggedIn) {
+      console.log("(statusMessage) Logged in: "+loggedIn);
+      //authenticate(response);
       return (<p className="status-message" 
       style={{color: 'blue', paddingTop: '.5em'}}
       >
-        {message}
+        Login successful!
       </p>);
-    } else if(message !== ""){
+      // return <Navigate to="/" />;
+    } else {
+      console.log("(statusMessage) Logged in: "+loggedIn);
       return (<p className="status-message" 
       style={{color: 'red', paddingTop: '.5em'}}
       >
-        {message}
+        {response}
       </p>);
     }
   };
+
+  function authenticate(response) {
+    //response is the token
+    console.log("(authenticate) Response: "+response); //doesn't work
+    if (response !== "Incorrect Password!" &&
+    response !== "Email not found - please register!" &&
+    response !== "") {
+      const userToken = JSON.stringify(response);
+      localStorage.setItem('token', userToken);
+      setLoggedIn(true);
+      console.log("(authenticate) Logged in: "+loggedIn);
+      setToken(userToken);
+      //return <Navigate to="/" />;
+    }
+  }
+
+  async function onSubmit(data){
+    try {
+      //HTTP Request to post data to server
+      const responseVal = await axios.post("http://localhost:3001/users/login", data);
+      //Save and display response from server
+      setResponse(responseVal.data); //doesn't save until after function???
+      console.log("(onSubmit) ResponseVal: "+responseVal.data); //works
+      console.log("(onSubmit) Response: "+response); //doesn't work
+      //Assign token if user authenticated
+      authenticate(responseVal.data);
+      console.log("(onSubmit) Logged in: "+loggedIn); //doesn't work
+      // if(loggedIn){
+      //   //Redirect to home page
+      //   <Link to="/"/>
+      // }
+    } catch(error) {
+        console.log(error);
+    }
+  };
+
 
   const validationSchema = Yup.object().shape({
     email: 
@@ -43,16 +105,6 @@ export default function Login() {
       .required('Password is required.')
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await axios.post("http://localhost:3001/users/login", data);
-      console.log(response.data);
-      setStatusMessage(response.data);
-    } catch(error) {
-        console.log(error);
-    }
-  };
-
   return(
     <div className='login-wrapper'>
       <div className= 'login-banner'>
@@ -62,7 +114,7 @@ export default function Login() {
       <div className = 'login-wrapper'>
         <div className= 'login-title'>
           <h1>Login:</h1>
-          {colorMessage(statusMessage)}
+          {statusMessage(response)}
         </div>
         <Formik 
           initialValues={initialValues} 
@@ -93,9 +145,17 @@ export default function Login() {
           </Form>
         </Formik>
         <Link to= '/register'>
-          <button>Don't have an account?</button>
+          {/* <button onClick={setRegister(true)}> */}
+          <button>
+            Don't have an account?
+          </button>
         </Link>
       </div>
     </div>
   )
 }
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
+  // setRegister: PropTypes.func.isRequired
+};

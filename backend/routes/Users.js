@@ -4,8 +4,11 @@ const { Users } = require("../models");
 const bycrypt = require("bcrypt");
 
 const { sign } = require("jsonwebtoken");
+//const { validateToken } = require("../middleware/AuthMiddleware");
+// const cookieParser = require("cookie-parser");
+// app.use(cookieParser());
 
-//List all users
+//Display logged in user's profile
 router.get("/", async(req, res) => {
     const listOfUsers = await Users.findAll();
     res.json(listOfUsers);
@@ -27,6 +30,8 @@ router.post("/register", async(req, res) => {
                     password: hash,
                 });
                 // res.json(newUser);
+                const token = sign({ email: newUser.email, password: newUser.password }, "secret");
+                // res.json(token);
                 res.json("Registration successful!");
             } catch (err) {
                 res.json("Error occured! :(");
@@ -50,8 +55,8 @@ router.post("/login", async(req, res) => {
         const isMatch = await bycrypt.compare(password, user.password);
         if (isMatch) {
             const token = sign({ email: user.email, id: user.id }, "secret");
-            res.json("Login successful!");
-            //res.json(token);
+            //res.json("Login successful!");
+            res.json(token);
         } else {
             res.json("Incorrect Password!");
         }
