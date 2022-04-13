@@ -1,13 +1,13 @@
 const { verify } = require('jsonwebtoken');
 
 const validateToken = (req, res, next) => {
-    const accessToken = req.headers['accessToken'];
-    if (!accessToken) {
+    const token = req.headers['token'];
+    if (!token) {
         return res.json({ error: 'User is not logged in' });
     }
 
     try {
-        const validToken = verify(accessToken, process.env.SECRET_KEY);
+        const validToken = verify(token, process.env.SECRET_KEY);
         if (validToken) {
             return next();
         }
