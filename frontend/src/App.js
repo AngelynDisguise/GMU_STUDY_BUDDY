@@ -21,11 +21,11 @@ import './styles/ChatList.css';
 import './styles/Chat.css';
 
 function App() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(null);
 
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
   
   return ( 
     <div className="App" >
