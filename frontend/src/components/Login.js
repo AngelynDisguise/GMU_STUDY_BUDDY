@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import Register from './Register';
 import '../styles/Login.css';
 
+//export default function Login({setToken}, {setRegister}) {
 export default function Login({setToken}) {
   const initialValues = {
     email: "",
@@ -144,7 +145,10 @@ export default function Login({setToken}) {
           </Form>
         </Formik>
         <Link to= '/register'>
-          <button>Don't have an account?</button>
+          {/* <button onClick={setRegister(true)}> */}
+          <button>
+            Don't have an account?
+          </button>
         </Link>
       </div>
     </div>
@@ -152,5 +156,6 @@ export default function Login({setToken}) {
 }
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
+  // setRegister: PropTypes.func.isRequired
 };
