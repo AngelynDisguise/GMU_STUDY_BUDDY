@@ -62,10 +62,10 @@ export default function Login({setToken}) {
     response !== "Email not found - please register!" &&
     response !== "") {
       const userToken = JSON.stringify(response);
-      setToken(userToken);
       localStorage.setItem('token', userToken);
       setLoggedIn(true);
       console.log("(authenticate) Logged in: "+loggedIn);
+      setToken(userToken);
       //return <Navigate to="/" />;
     }
   }
