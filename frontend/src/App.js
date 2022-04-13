@@ -24,7 +24,11 @@ function App() {
   const [token, setToken] = useState(null);
 
   if(!token) {
+    console.log("App token: "+token+"\nRedirecting to Login...");
     return <Login setToken={setToken} />
+  } else {
+    console.log("App token: "+token+"\nRedirecting to Home...");
+
   }
   
   return ( 

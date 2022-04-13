@@ -1,5 +1,5 @@
-import React , { useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import React , { useState, useEffect } from 'react';
+import { Link, Route, Routes, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
@@ -21,17 +21,30 @@ export default function Login({setToken}) {
     <Route path="/register" element={<Register />} />
   </Routes>
 
+  // useEffect(() => {
+  //   console.log("(useEffect) Response: "+response); //doesn't work
+  //   //Assign token if user authenticated
+  //   authenticate(response);
+  //   console.log("(useEffect) Logged in: "+loggedIn); //doesn't work
+  //   if(loggedIn){
+  //     //Redirect to home page
+  //     <App />
+  //   }
+  // }, []);
 
-  const statusMessage = (response) => {
+
+  function statusMessage(response){
     // if (response === "Incorrect Password!" ||
     //     response === "Email not found - please register!") {
     if (loggedIn) {
       console.log("(statusMessage) Logged in: "+loggedIn);
+      //authenticate(response);
       return (<p className="status-message" 
       style={{color: 'blue', paddingTop: '.5em'}}
       >
         Login successful!
       </p>);
+      // return <Navigate to="/" />;
     } else {
       console.log("(statusMessage) Logged in: "+loggedIn);
       return (<p className="status-message" 
@@ -42,20 +55,22 @@ export default function Login({setToken}) {
     }
   };
 
-  const authenticate = (response) => {
+  function authenticate(response) {
     //response is the token
+    console.log("(authenticate) Response: "+response); //doesn't work
     if (response !== "Incorrect Password!" &&
     response !== "Email not found - please register!" &&
     response !== "") {
-      // const userToken = JSON.stringify(response);
-      // setToken(userToken);
-      // localStorage.setItem('token', userToken);
+      const userToken = JSON.stringify(response);
+      setToken(userToken);
+      localStorage.setItem('token', userToken);
       setLoggedIn(true);
       console.log("(authenticate) Logged in: "+loggedIn);
+      //return <Navigate to="/" />;
     }
   }
 
-  const onSubmit = async (data) => {
+  async function onSubmit(data){
     try {
       //HTTP Request to post data to server
       const responseVal = await axios.post("http://localhost:3001/users/login", data);
@@ -66,10 +81,10 @@ export default function Login({setToken}) {
       //Assign token if user authenticated
       authenticate(responseVal.data);
       console.log("(onSubmit) Logged in: "+loggedIn); //doesn't work
-      if(loggedIn){
-        //Redirect to home page
-        <Link to="/"/>
-      }
+      // if(loggedIn){
+      //   //Redirect to home page
+      //   <Link to="/"/>
+      // }
     } catch(error) {
         console.log(error);
     }
