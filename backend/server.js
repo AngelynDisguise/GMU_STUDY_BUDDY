@@ -15,6 +15,9 @@ app.use("/health", (req, res) => {
 const userRouter = require('./routes/Users');
 app.use("/users", userRouter);
 
+const studybuddyRouter = require('./routes/StudyBuddylist');
+app.use("/StudyBuddy", studybuddyRouter);
+
 //Initialize the server
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {
