@@ -14,7 +14,6 @@ router.post("/add", async(req, res) => {
     try {
         const newUser = await StudyBuddy.create({email : email});
         res.json(newUser);
-        //res.json("Added a buddy!");
     } catch (err) {
         res.status(500).send(err); 
     }
