@@ -1,0 +1,32 @@
+.matches{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+}
+
+.profpic{
+    padding: 5px;
+}
+
+.userinfo{
+    padding: 5px;
+}
+
+.userinfo2{
+    margin: auto;  
+}
+
+.unmatch_Button{
+    float: right;
+    padding: 10px; 
+}
+
+
+

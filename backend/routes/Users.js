@@ -3,7 +3,12 @@ const router = express.Router();
 const { Users } = require("../models");
 const bycrypt = require("bcrypt");
 
-//List all users
+const { sign } = require("jsonwebtoken");
+//const { validateToken } = require("../middleware/AuthMiddleware");
+// const cookieParser = require("cookie-parser");
+// app.use(cookieParser());
+
+//Display logged in user's profile
 router.get("/", async(req, res) => {
     const listOfUsers = await Users.findAll();
     res.json(listOfUsers);
@@ -24,13 +29,17 @@ router.post("/register", async(req, res) => {
                     email: email,
                     password: hash,
                 });
-                res.json(newUser);
+                // res.json(newUser);
+                const token = sign({ email: newUser.email, password: newUser.password }, "secret");
+                // res.json(token);
+                res.json("Registration successful!");
             } catch (err) {
+                res.json("Error occured! :(");
                 res.status(500).send(err);
             }
         });
     } else {
-        res.json("User already exists.");
+        res.json("User already exists!");
     }
 });
 
@@ -45,9 +54,11 @@ router.post("/login", async(req, res) => {
     if (user) {
         const isMatch = await bycrypt.compare(password, user.password);
         if (isMatch) {
-            res.json("Login Success");
+            const token = sign({ email: user.email, id: user.id }, "secret");
+            //res.json("Login successful!");
+            res.json(token);
         } else {
-            res.json("Incorrect Password");
+            res.json("Incorrect Password!");
         }
     } else {
         res.json("Email not found - please register!");
