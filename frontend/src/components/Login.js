@@ -118,13 +118,11 @@ export default function Login({setToken}) {
               <button type="submit">Login</button>
             </Form>
           </Formik>
-          <Link to= '/register'>
-            <button onClick={ () => {
-              setRegister(true)
-            }}>
-              Don't have an account?
-            </button>
-          </Link>
+          <button onClick={ () => {
+            setRegister(true)
+          }}>
+            Don't have an account?
+          </button>
         </div>
       </div>
     )
