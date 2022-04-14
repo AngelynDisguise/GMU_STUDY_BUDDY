@@ -1,7 +1,5 @@
 .wrap > h1{
     justify-content: center;
-    position: relative;
-    left: -10px;
 }
 
 .card {
@@ -28,7 +26,6 @@
 .cardsContainer{
     display: flex;
     justify-content: center;
-    
 }
 
 .Swipe{

@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Matches from './components/Matches';
+import MatchUser from './components/MatchUser'
 // import Chat from './components/Chat';
 
 //styles
@@ -19,6 +20,7 @@ import './styles/Header.css';
 import './styles/Home.css';
 import './styles/Profile.css';
 import './styles/Matches.css';
+import './styles/MatchUser.css';
 // import './styles/Chat.css';
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
   } else {
     console.log("App token: "+token+"\nRedirecting to Home...");
 
-  }
+  //}
   
   return ( 
     <div className="App" >
@@ -46,6 +48,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/matchUser/:user" element={<MatchUser/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
       </div>
