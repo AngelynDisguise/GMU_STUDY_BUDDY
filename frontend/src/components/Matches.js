@@ -54,7 +54,10 @@ function Matches() {
                           <h5>{student.number}</h5>
                         </div>
                         <div className='userinfo2'>
-                          <h5>{student.bio}</h5>
+                          <h5>Bio: {student.bio}</h5>
+                        </div>
+                        <div className='unmatch_Button'>
+                          <button type='submit'>Unmatch</button>
                         </div>
                     </ div>                    
                 ))}
