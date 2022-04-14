@@ -11,6 +11,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Matches from './components/Matches';
+import MatchUser from './components/MatchUser'
 // import Chat from './components/Chat';
 
 //styles
@@ -21,6 +22,7 @@ import './styles/Header.css';
 import './styles/Home.css';
 import './styles/Profile.css';
 import './styles/Matches.css';
+import './styles/MatchUser.css';
 // import './styles/Chat.css';
 
 function App() {
@@ -28,10 +30,10 @@ function App() {
   //const [register, setRegister] = useState(false);
 
   //setToken(localStorage.getItem('token'));
-  console.log(localStorage.getItem('token'));
+  //console.log(localStorage.getItem('token'));
   //console.log("Register: "+register);
 
-  if(!token && !localStorage.getItem('token')) {
+  //if(!token && !localStorage.getItem('token')) {
     // if(register){
     //   console.log("App token: "+token+"\nRedirecting to Register...");
     //   return <Register setToken={setToken} setRegister={setRegister}/>
@@ -39,12 +41,12 @@ function App() {
     //   console.log("App token: "+token+"\nRedirecting to Login...");
     //   return <Login setToken={setToken} setRegister={setRegister} />
     // }
-    console.log("App token: "+token+"\nRedirecting to Login...");
-    return <Login setToken={setToken} />
-  } else {
-    console.log("App token: "+token+"\nRedirecting to Home...");
+    //console.log("App token: "+token+"\nRedirecting to Login...");
+    //return <Login setToken={setToken} />
+  //} else {
+    //console.log("App token: "+token+"\nRedirecting to Home...");
 
-  }
+  //}
   
   return ( 
     <div className="App" >
@@ -62,6 +64,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/matchUser/:user" element={<MatchUser/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
       </div>

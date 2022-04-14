@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TinderCard from 'react-tinder-card';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import MatchUser from './MatchUser';
@@ -54,11 +54,13 @@ function Home() {
             >
               <h3>{student.name}</h3>
               
-              <Link to="/matchuser">
+              <Link 
+                to={"/matchUser/" + student.name}
+              >
                 <IconButton>
                   <InfoIcon />
                 </IconButton>
-              </Link>
+              </Link>              
             
             </div>
           
