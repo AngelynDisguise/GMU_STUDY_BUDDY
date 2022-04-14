@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { StudyBuddyList } = require("../models");
+const { StudyBuddyList: StudyBuddy } = require("../models");
 
 //List all users
 router.get("/", async(req, res) => {
-    const listOfUsers = await StudyBuddyList.findAll();
+    const listOfUsers = await StudyBuddy.findAll();
     res.json(listOfUsers);
 });
 
@@ -12,7 +12,7 @@ router.get("/", async(req, res) => {
 router.post("/add", async(req, res) => {
     const {email} = req.body; //get body of data being pass in
     try {
-        const newUser = await StudyBuddyList.create({email : email});
+        const newUser = await StudyBuddy.create({email : email});
         res.json(newUser);
         //res.json("Added a buddy!");
     } catch (err) {
@@ -22,23 +22,22 @@ router.post("/add", async(req, res) => {
 
 //Remove an existing user
 router.post("/remove", async(req, res, next) => {
-    
-    const user = await StudyBuddyList.findOne({
+    const {email} = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
         where: {
-            email: user.email,
+            email: email,
         },
     });
     if (user !== null) {
-        StudyBuddyList.destroy({
+        StudyBuddy.destroy({
             where: {
-                email: user.email,
+                email: email,
             }
         });
         res.json("User deleted successfully!");
     } else {
         res.json("User not found!");
     }
-
 });
 
 // //Remove a user
