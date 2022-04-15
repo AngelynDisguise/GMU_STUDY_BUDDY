@@ -1,7 +1,5 @@
-.wrapper{
-    float: center;
-}
-
-.mheader{
-    justify-content: baseline;
+.matchuser-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

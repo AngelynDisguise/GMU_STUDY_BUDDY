@@ -1,5 +1,10 @@
 .wrap > h1{
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-header{
+    text-align: center;
 }
 
 .card {

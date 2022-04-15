@@ -1,5 +1,11 @@
-.wrapper{
+.Pwrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.profile-actions{
+    display: flex;
+    flex-direction: column;
+    width: auto;
 }

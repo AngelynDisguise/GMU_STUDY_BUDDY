@@ -64,7 +64,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
-          <Route path="/matchUser/:user" element={<MatchUser/>} />
+          <Route path="/matchUser/:name" element={<MatchUser/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
       </div>
