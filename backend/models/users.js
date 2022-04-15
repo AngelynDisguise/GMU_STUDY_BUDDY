@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        
+
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
          * 
          * Prop not shown on matches list; shown as age only
          */
-         date: {
+        date: {
             type: DataTypes.STRING,
             defaultValue: "",
             allowNull: true,
