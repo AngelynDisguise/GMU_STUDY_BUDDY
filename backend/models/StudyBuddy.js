@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const studybuddies = sequelize.define("studybuddies", {
+    const StudyBuddy = sequelize.define("StudyBuddy", {
         /****************** PRIVATE INFO *****************/
         /**
          * Check if includes “@gmu.edu” substring
@@ -45,5 +45,5 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
     });
-    return studybuddies;
+    return StudyBuddy;
 };
