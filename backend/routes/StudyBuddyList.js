@@ -47,5 +47,28 @@ router.post("/remove", async(req, res, next) => {
         res.json("User not found!");
     }
 });
+
+//Update an existing user
+router.post("/update", async(req, res, next) => {
+    const { email, date, firstName, gender, major } = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        const newUser = await StudyBuddy.create({ 
+            email: email,
+            date: date,
+            firstName: firstName,
+            gender: gender,
+            major: major,
+        });
+        res.json(newUser);
+       
+    } else {
+        res.json("User not found!");
+    }
+});
 //middleware for server.js
 module.exports = router;
