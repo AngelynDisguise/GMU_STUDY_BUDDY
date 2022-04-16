@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Users = sequelize.define("Users", {
+    const StudyBuddy = sequelize.define("StudyBuddy", {
         /****************** PRIVATE INFO *****************/
         /**
          * Check if includes “@gmu.edu” substring
@@ -8,11 +8,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        /**
+         * Date format: [month/day/year]
+         * Index 1 = month
+         * Index 2 = day
+         * Index 3 = year
+         * 
+         * Prop not shown on matches list; shown as age only
+         */
+        date: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "",
+            allowNull: true,
         },
-
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
@@ -36,19 +44,6 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: "",
             allowNull: true,
         },
-        /**
-         * Date format: [month/day/year]
-         * Index 1 = month
-         * Index 2 = day
-         * Index 3 = year
-         * 
-         * Prop not shown on matches list; shown as age only
-         */
-        date: {
-            type: DataTypes.STRING,
-            defaultValue: "",
-            allowNull: true,
-        },
     });
-    return Users;
+    return StudyBuddy;
 };
