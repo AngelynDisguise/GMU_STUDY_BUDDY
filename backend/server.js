@@ -22,6 +22,9 @@ app.use("/users", userRouter);
 const studyBuddyRouter = require('./routes/StudyBuddy');
 app.use("/StudyBuddy", studyBuddyRouter);
 
+const MatchListRouter = require('./routes/MatchList');
+app.use("/MatchList", MatchListRouter);
+
 //Initialize the server
 db.sequelize.sync().then(() => {
     app.listen(process.env.PORT, () => {

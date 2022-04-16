@@ -65,5 +65,46 @@ router.post("/login", async(req, res) => {
     }
 });
 
+//Remove an existing user
+router.post("/remove", async(req, res, next) => {
+    const { email } = req.body; //get body of data being pass in
+    const user = await Users.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        Users.destroy({
+            where: {
+                email: email,
+            }
+        });
+        res.json("User deleted successfully!");
+    } else {
+        res.json("User not found!");
+    }
+});
+
+//Update an existing user
+router.post("/updatepassword", async(req, res, next) => {
+    const { email, password} = req.body; //get body of data being pass in
+    const user = await Users.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        bycrypt.hash(password, 10).then(async(hash) => {
+            await Users.update({ passowrd: hash }, {
+                where: {
+                    email: email,
+                },
+            });
+            res.json("Update successful!");
+        });
+    } else {
+        res.json("User not found!");
+    }
+});
 //middleware for server.js
 module.exports = router;
