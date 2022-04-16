@@ -48,5 +48,82 @@ router.post("/remove", async(req, res, next) => {
     }
 });
 
+//Update an existing user
+router.post("/updatedate", async(req, res, next) => {
+    const { email, date} = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        await StudyBuddy.update({ date: date }, {
+            where: {
+                email: email,
+            },
+        });
+        res.json("Update successful!");
+    } else {
+        res.json("User not found!");
+    }
+});
+//Update an existing user
+router.post("/updatename", async(req, res, next) => {
+    const { email, firstName} = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        await StudyBuddy.update({ firstName: firstName }, {
+            where: {
+                email: email,
+            },
+        });
+        res.json("Update successful!");
+    } else {
+        res.json("User not found!");
+    }
+});
+//Update an existing user
+router.post("/updategender", async(req, res, next) => {
+    const { email, gender} = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        await StudyBuddy.update({ gender: gender }, {
+            where: {
+                email: email,
+            },
+        });
+        res.json("Update successful!");
+    } else {
+        res.json("User not found!");
+    }
+});
+//Update an existing user
+router.post("/updatemajor", async(req, res, next) => {
+    const { email, major} = req.body; //get body of data being pass in
+    const user = await StudyBuddy.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        await StudyBuddy.update({ major: major }, {
+            where: {
+                email: email,
+            },
+        });
+        res.json("Update successful!");
+    } else {
+        res.json("User not found!");
+    }
+});
+
 //middleware for server.js
 module.exports = router;
