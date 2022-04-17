@@ -46,7 +46,7 @@ router.post("/register", async(req, res) => {
                 // res.json(token);
                 res.json("Registration successful!");
             } catch (err) {
-                res.json("Error occured! :(");
+                res.json("Error registering user! :(");
                 res.status(500).send(err);
             }
         });
@@ -64,13 +64,18 @@ router.post("/login", async(req, res) => {
         },
     });
     if (user) {
-        const isMatch = await bycrypt.compare(password, user.password);
-        if (isMatch) {
-            const token = sign({ email: user.email, id: user.id }, "secret");
-            //res.json("Login successful!");
-            res.json(token);
-        } else {
-            res.json("Incorrect Password!");
+        try {
+            const isMatch = await bycrypt.compare(password, user.password);
+            if (isMatch) {
+                const token = sign({ email: user.email, id: user.id }, "secret");
+                //res.json("Login successful!");
+                res.json(token);
+            } else {
+                res.json("Incorrect Password!");
+            }
+        } catch (err) {
+            res.json("Error logging in user! :(");
+            res.status(500).send(err);
         }
     } else {
         res.json("Email not found - please register!");
@@ -126,7 +131,7 @@ router.post("/remove", async(req, res) => {
                 }
             }
         } catch (err) {
-            res.json("Error occured! :(");
+            res.json("Error deleting user! :(");
             res.status(500).send(err);
         }
         res.json("User deleted successfully from all lists!");
@@ -173,7 +178,7 @@ router.post("/updatePassword", async(req, res) => {
                     }
                 }
             } catch (err) {
-                res.json("Error occured! :(");
+                res.json("Error updating password! :(");
                 res.status(500).send(err);
             }
         });
@@ -221,7 +226,7 @@ router.post("/updateDate", async(req, res) => {
                 }
             }
         } catch (err) {
-            res.json("Error occured! :(");
+            res.json("Error updating DOB! :(");
             res.status(500).send(err);
         }
         res.json("Update date successful in all lists!");
@@ -267,7 +272,7 @@ router.post("/updateGender", async(req, res) => {
                 }
             }
         } catch (err) {
-            res.json("Error occured! :(");
+            res.json("Error updating gender! :(");
             res.status(500).send(err);
         }
         res.json("Update gender successful in all lists!");
@@ -314,7 +319,7 @@ router.post("/updateFirstName", async(req, res) => {
                 }
             }
         } catch (err) {
-            res.json("Error occured! :(");
+            res.json("Error updating first name! :(");
             res.status(500).send(err);
         }
         res.json("Update first name successful in all lists!");
@@ -361,7 +366,7 @@ router.post("/updateMajor", async(req, res) => {
                 }
             }
         } catch (err) {
-            res.json("Error occured! :(");
+            res.json("Error updating study buddy! :(");
             res.status(500).send(err);
         }
         res.json("Update major successful in all lists!");
