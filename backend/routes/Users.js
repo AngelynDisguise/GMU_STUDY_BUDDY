@@ -1,28 +1,36 @@
 const express = require("express");
 const router = express.Router();
-const { Users, StudyBuddy, MatchList } = require("../models");
+const { Users } = require("../models");
 
 const bycrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 //Display logged in user's profile info
-router.get("/getUser", async(req, res) => {
+router.get("/", async(req, res) => {
     const { email } = req.body;
-    const user = await Users.findOne({
-        where: {
-            email: email,
-        },
-    });
-    if (user) {
-        res.json(user);
+    try {
+        const user = await Users.findOne({
+            where: {
+                email: email,
+            },
+        });
+        if (user) {
+            res.json(user);
+        }
+    } catch (err) {
+        res.status(500).send(err);
     }
 });
 
 
 //Display all users' profile info
-router.get("/getUsers", async(res) => {
-    const listOfUsers = await Users.findAll();
-    res.json(listOfUsers);
+router.get("/userList", async(req, res) => {
+    try {
+        const listOfUsers = await Users.findAll();
+        res.json(listOfUsers);
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 
@@ -100,36 +108,8 @@ router.post("/remove", async(req, res) => {
                 }
             });
             console.log("User deleted from user list!");
-
             //Delete user in match list (if found)
-            const match = await MatchList.findOne({
-                where: {
-                    email: email,
-                },
-            });
-            if (match) {
-                await MatchList.destroy({
-                    where: {
-                        email: email,
-                    }
-                });
-                console.log("User deleted from match list!");
-
-                //Delete user in study buddy list (if found)
-                const studyBuddy = await StudyBuddy.findOne({
-                    where: {
-                        email: email,
-                    },
-                });
-                if (studyBuddy) {
-                    await StudyBuddy.destroy({
-                        where: {
-                            email: email,
-                        },
-                    });
-                    console.log("User deleted from study buddy list!");
-                }
-            }
+            //Delete user in study buddy list (if found)
         } catch (err) {
             res.json("Error deleting user! :(");
             res.status(500).send(err);
@@ -150,38 +130,22 @@ router.post("/updatePassword", async(req, res) => {
         },
     });
     if (user) {
-        //Update user's password
-        bycrypt.hash(password, 10).then(async(hash) => {
-            try {
-                await user.update({ password: hash });
-                console.log("Successfully updated user's password!");
-
-                //Update Match user, if it exists
-                const match = await MatchList.findOne({
-                    where: {
-                        email: email,
-                    },
+        try {
+            const isMatch = await bycrypt.compare(password, user.password);
+            if (isMatch) {
+                res.json("Cannot use same password!");
+            } else {
+                //Update user's password
+                bycrypt.hash(password, 10).then(async(hash) => {
+                    await user.update({ password: hash });
+                    console.log("Successfully updated user's password!");
+                    //Update Match user, if it existsBuddy user, if it exists
                 });
-                if (match) {
-                    await MatchList.update({ password: hash });
-                    console.log("Successfully updated match's password!");
-
-                    //Update StudyBuddy user, if it exists
-                    const studyBuddy = await StudyBuddy.findOne({
-                        where: {
-                            email: email,
-                        }
-                    });
-                    if (studyBuddy) {
-                        await studyBuddy.update({ password: hash });
-                        console.log("Successfully updated study buddy's password!");
-                    }
-                }
-            } catch (err) {
-                res.json("Error updating password! :(");
-                res.status(500).send(err);
             }
-        });
+        } catch (err) {
+            res.json("Error updating password! :(");
+            res.status(500).send(err);
+        }
         res.json("Update password successful in all lists!");
     } else {
         res.json("User not found!");
@@ -203,28 +167,8 @@ router.post("/updateDate", async(req, res) => {
         try {
             await user.update({ date: date });
             console.log("Successfully updated user's DOB!");
-
             //Update Match user's DOB, if it exists
-            const match = await MatchList.findOne({
-                where: {
-                    email: email,
-                },
-            });
-            if (match) {
-                await MatchList.update({ date: date });
-                console.log("Successfully updated match's DOB!");
-
-                //Update StudyBuddy user's DOB, if it exists
-                const studyBuddy = await StudyBuddy.findOne({
-                    where: {
-                        email: email,
-                    }
-                });
-                if (studyBuddy) {
-                    await studyBuddy.update({ date: date });
-                    console.log("Successfully updated study buddy's DOB!");
-                }
-            }
+            //Update StudyBuddy user's DOB, if it exists
         } catch (err) {
             res.json("Error updating DOB! :(");
             res.status(500).send(err);
@@ -249,28 +193,8 @@ router.post("/updateGender", async(req, res) => {
         try {
             await user.update({ gender: gender });
             console.log("Successfully updated user's gender!");
-
             //Update Match user's gender, if it exists
-            const match = await MatchList.findOne({
-                where: {
-                    email: email,
-                },
-            });
-            if (match) {
-                await MatchList.update({ gender: gender });
-                console.log("Successfully updated match's gender!");
-
-                //Update StudyBuddy user's gender, if it exists
-                const studyBuddy = await StudyBuddy.findOne({
-                    where: {
-                        email: email,
-                    }
-                });
-                if (studyBuddy) {
-                    await studyBuddy.update({ gender: gender });
-                    console.log("Successfully updated study buddy's gender!");
-                }
-            }
+            //Update StudyBuddy user's gender, if it exists
         } catch (err) {
             res.json("Error updating gender! :(");
             res.status(500).send(err);
@@ -296,28 +220,8 @@ router.post("/updateFirstName", async(req, res) => {
         try {
             await user.update({ firstName: firstName });
             console.log("Successfully updated user's first name!");
-
             //Update Match user's first name, if it exists
-            const match = await MatchList.findOne({
-                where: {
-                    email: email,
-                },
-            });
-            if (match) {
-                await MatchList.update({ firstName: firstName });
-                console.log("Successfully updated match's first name!");
-
-                //Update StudyBuddy user's first name, if it exists
-                const studyBuddy = await StudyBuddy.findOne({
-                    where: {
-                        email: email,
-                    }
-                });
-                if (studyBuddy) {
-                    await studyBuddy.update({ firstName: firstName });
-                    console.log("Successfully updated study buddy's first name!");
-                }
-            }
+            //Update StudyBuddy user's first name, if it exists
         } catch (err) {
             res.json("Error updating first name! :(");
             res.status(500).send(err);
@@ -343,28 +247,8 @@ router.post("/updateMajor", async(req, res) => {
         try {
             await user.update({ major: major });
             console.log("Successfully updated user's major!");
-
             //Update Match user's major, if it exists
-            const match = await MatchList.findOne({
-                where: {
-                    email: email,
-                },
-            });
-            if (match) {
-                await MatchList.update({ major: major });
-                console.log("Successfully updated match's major!");
-
-                //Update StudyBuddy user's major, if it exists
-                const studyBuddy = await StudyBuddy.findOne({
-                    where: {
-                        email: email,
-                    }
-                });
-                if (studyBuddy) {
-                    await studyBuddy.update({ major: major });
-                    console.log("Successfully updated study buddy's major!");
-                }
-            }
+            //Update StudyBuddy user's major, if it exists
         } catch (err) {
             res.json("Error updating study buddy! :(");
             res.status(500).send(err);
