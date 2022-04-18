@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
 
+
+
         /****************** PUBLIC INFO *****************/
         firstName: {
             type: DataTypes.STRING,
