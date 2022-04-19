@@ -286,9 +286,9 @@ router.post("/updateMajor", async(req, res) => {
     }
 });
 
-//Create/update match list by MAJOR
-router.post("/matchByMajor", async(req, res) => {
-    const { email } = req.body; //get body of data being pass in
+//Create match list by user preferences
+router.post("/match", async(req, res) => {
+    const { email, byGender, byMajor, byAge } = req.body; //get body of data being pass in
     //Find if user exists
     const user = await Users.findOne({
         where: {
@@ -298,14 +298,83 @@ router.post("/matchByMajor", async(req, res) => {
     if (user) {
         //Create/update match list
         try {
-            const matchList = await Users.findAll({
-                where: {
-                    email: {
-                        [Op.ne]: user.email,
+            const matchList = [];
+            if (byGender && byMajor && byAge) {
+                const matchbyAll = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        gender: user.gender,
+                        major: user.major,
+                        age: user.age,
                     },
-                    major: user.major,
-                },
-            });
+                });
+                matchList.concat(matchbyAll);
+            } else if (byGender && byMajor) {
+                const matchbyGenderMajor = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        gender: user.gender,
+                        major: user.major,
+                    }
+                });
+                matchList.concat(matchbyGenderMajor);
+            } else if (byGender && byAge) {
+                const matchbyGenderAge = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        gender: user.gender,
+                        age: user.age,
+                    }
+                });
+                matchList.concat(matchbyGenderAge);
+            } else if (byMajor && byAge) {
+                const matchbyMajorAge = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        major: user.major,
+                        age: user.age,
+                    }
+                });
+                matchList.concat(matchbyMajorAge);
+            } else if (byGender) {
+                const matchbyGender = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        gender: user.gender,
+                    }
+                });
+                matchList.concat(matchbyGender);
+            } else if (byMajor) {
+                const matchbyMajor = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        major: user.major,
+                    }
+                });
+                matchList.concat(matchbyMajor);
+            } else if (byAge) {
+                const matchbyAge = await Users.findAll({
+                    where: {
+                        email: {
+                            [Op.ne]: user.email,
+                        },
+                        age: user.age,
+                    }
+                });
+                matchList.concat(matchbyAge);
+            }
             res.json(matchList);
         } catch (err) {
             res.json("Error creating/updating match list! :(");

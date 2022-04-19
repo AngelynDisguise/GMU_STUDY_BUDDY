@@ -80,8 +80,23 @@ module.exports = (sequelize, DataTypes) => {
          * Prop not shown on matches list; shown as age only
          */
         date: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING,
+            defaultValue: "",
             allowNull: true,
+        },
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            set(date) {
+                const today = new Date();
+                const birthDate = new Date(date);
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                this.setDataValue('age', age);
+            }
         },
     });
     return Users;
