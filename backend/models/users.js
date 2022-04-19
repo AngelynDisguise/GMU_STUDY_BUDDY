@@ -8,12 +8,45 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        /**
+         * Hashed with bycrypt
+         */
         password: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
-
+        /**
+         * List/array of match users to be displayed on cards.
+         * Contains all user info (will change later)
+         */
+        matchList: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        numMatches: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            get() {
+                const rawValue = this.getDataValue('numMatches');
+                return rawValue ? matchList.length : 0;
+            }
+        },
+        /**
+         * List/array of study buddies swiped by user.
+         * Contains all user model info (will change later)
+         */
+        studyBuddyList: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        numStudyBuddies: {
+            type: DataTypes.JSON,
+            allowNull: true,
+            get() {
+                const rawValue = this.getDataValue('numMatches');
+                return rawValue ? studyBuddyList.length : 0;
+            }
+        },
 
         /****************** PUBLIC INFO *****************/
         firstName: {
@@ -47,8 +80,7 @@ module.exports = (sequelize, DataTypes) => {
          * Prop not shown on matches list; shown as age only
          */
         date: {
-            type: DataTypes.STRING,
-            defaultValue: "",
+            type: DataTypes.JSON,
             allowNull: true,
         },
     });

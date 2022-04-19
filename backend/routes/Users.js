@@ -1,4 +1,5 @@
 const express = require("express");
+const { Op } = require("sequelize");
 const router = express.Router();
 const { Users } = require("../models");
 
@@ -60,6 +61,32 @@ router.post("/register", async(req, res) => {
         });
     } else {
         res.json("User already exists!");
+    }
+});
+
+//Register a new user's profile info
+router.post("/register2", async(req, res) => {
+    const { email, firstName, gender, major, date } = req.body;
+    try {
+        const user = await Users.findOne({
+            where: {
+                email: email,
+            },
+        });
+        if (user) {
+            user.update({
+                firstName: firstName,
+                gender: gender,
+                major: major,
+                date: date,
+            });
+            res.json(user);
+        } else {
+            //should not happen, since this gets called right after register
+            res.json("User does not exist!");
+        }
+    } catch (err) {
+        res.status(500).send(err);
     }
 });
 
@@ -258,6 +285,39 @@ router.post("/updateMajor", async(req, res) => {
         res.json("User not found!");
     }
 });
+
+//Create/update match list by MAJOR
+router.post("/matchByMajor", async(req, res) => {
+    const { email } = req.body; //get body of data being pass in
+    //Find if user exists
+    const user = await Users.findOne({
+        where: {
+            email: email,
+        },
+    });
+    if (user) {
+        //Create/update match list
+        try {
+            const matchList = await Users.findAll({
+                where: {
+                    email: {
+                        [Op.ne]: user.email,
+                    },
+                    major: user.major,
+                },
+            });
+            res.json(matchList);
+        } catch (err) {
+            res.json("Error creating/updating match list! :(");
+            res.status(500).send(err);
+        }
+        console.log("Create/update match list successful!");
+    } else {
+        res.json("User not found!");
+    }
+});
+
+//Create/update study buddy list
 
 //middleware for server.js
 module.exports = router;
