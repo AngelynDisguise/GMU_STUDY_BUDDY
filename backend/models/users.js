@@ -36,12 +36,15 @@ module.exports = (sequelize, DataTypes) => {
         matchList: {
             type: DataTypes.JSON,
             allowNull: true,
-            // get() {
-            //     const rawValue = this.getDataValue('matchList');
-            //     const parsedValue = JSON.parse(rawValue);
-            //     return parsedValue;
-            //     //return rawValue ? matchList.length : [];
-            // }
+            get() {
+                let nameList = [];
+                const rawValue = this.getDataValue('matchList');
+                return rawValue ?
+                    rawValue.forEach(user => {
+                        nameList.push(user.name);
+                    }) :
+                    [];
+            }
         },
         numMatches: {
             type: DataTypes.INTEGER,

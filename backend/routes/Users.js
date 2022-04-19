@@ -27,9 +27,12 @@ router.get("/", async(req, res) => {
                 email: email,
             },
         });
+        //user throwing error!?
         console.log(user);
+        //res.json("yay", user);
         if (user) {
-            res.json(user);
+            //res.json(user);
+            res.json("yay");
         } else {
             res.status(404).json({
                 message: "User not found",
@@ -45,7 +48,15 @@ router.get("/", async(req, res) => {
 router.get("/userList", async(req, res) => {
     try {
         const listOfUsers = await Users.findAll();
-        res.json(listOfUsers);
+        //res.json("yay!");
+        console.log(listOfUsers);
+        if (listOfUsers) {
+            res.json(listOfUsers);
+        } else {
+            res.status(404).json({
+                message: "No users found.",
+            });
+        }
     } catch (err) {
         res.status(500).send(err);
     }
@@ -178,11 +189,11 @@ router.post("/match", async(req, res) => {
             email: email,
         },
     });
-    //console.log(user);
+    console.log(user);
     if (user) {
         //Create/update match list
         try {
-            const matchList = new Array();
+            //let matchList = new Array();
             if (byGender && byMajor && byAge) {
                 const matchbyAll = await Users.findAll({
                     where: {
@@ -194,9 +205,14 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     },
                 });
+                await user.update({
+                    numMatches: matchbyAll.length,
+                    matchList: match,
+                });
+                res.json(matchbyAll);
+                //matchList = matchbyAll;
                 // matchList.push(matchbyAll);
-                matchList.concat(matchbyAll);
-                // matchList[matchList.length] = matchbyAll;
+                // matchList.concat(matchbyAll);
             } else if (byGender && byMajor) {
                 const matchbyGenderMajor = await Users.findAll({
                     where: {
@@ -207,9 +223,14 @@ router.post("/match", async(req, res) => {
                         major: user.major,
                     }
                 });
+                await user.update({
+                    numMatches: matchbyGenderMajor.length,
+                    matchList: matchbyGenderMajor,
+                });
+                res.json(matchbyGenderMajor);
+                //matchList = matchbyGenderMajor;
                 // matchList.push(matchbyGenderMajor);
-                matchList.concat(matchbyGenderMajor);
-                // matchList[matchList.length] = matchbyGenderMajor;
+                // matchList.concat(matchbyGenderMajor);
             } else if (byGender && byAge) {
                 const matchbyGenderAge = await Users.findAll({
                     where: {
@@ -220,9 +241,14 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
+                await user.update({
+                    numMatches: matchbyGenderAge.length,
+                    matchList: matchbyGenderAge,
+                });
+                res.json(matchbyGenderAge);
+                //matchList = matchbyGenderAge;
                 // matchList.push(matchbyGenderAge);
-                matchList.concat(matchbyGenderAge);
-                // matchList[matchList.length] = matchbyGenderAge;
+                // matchList.concat(matchbyGenderAge);
             } else if (byMajor && byAge) {
                 const matchbyMajorAge = await Users.findAll({
                     where: {
@@ -233,9 +259,14 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
+                await user.update({
+                    numMatches: matchbyMajorAge.length,
+                    matchList: matchbyMajorAge,
+                });
+                res.json(matchbyMajorAge);
+                //matchList = matchbyMajorAge;
                 // matchList.push(matchbyMajorAge);
-                matchList.concat(matchbyMajorAge);
-                // matchList[matchList.length] = matchbyMajorAge;
+                // matchList.concat(matchbyMajorAge);
             } else if (byGender) {
                 const matchbyGender = await Users.findAll({
                     where: {
@@ -245,9 +276,14 @@ router.post("/match", async(req, res) => {
                         gender: user.gender,
                     }
                 });
+                await user.update({
+                    numMatches: matchbyGender.length,
+                    matchList: matchbyGender,
+                });
+                res.json(matchbyGender);
+                //matchList = matchbyGender;
                 // matchList.push(matchbyGender);
-                matchList.concat(matchbyGender);
-                // matchList[matchList.length] = matchbyGender;
+                // matchList.concat(matchbyGender);
             } else if (byMajor) {
                 const matchbyMajor = await Users.findAll({
                     where: {
@@ -257,9 +293,14 @@ router.post("/match", async(req, res) => {
                         major: user.major,
                     }
                 });
+                await user.update({
+                    numMatches: matchbyMajor.length,
+                    matchList: matchbyMajor,
+                });
+                res.json(matchbyMajor);
+                //matchList = matchbyMajor;
                 // matchList.push(matchbyMajor);
-                matchList.concat(matchbyMajor);
-                // matchList[matchList.length] = matchbyMajor;
+                // matchList.concat(matchbyMajor);
             } else if (byAge) {
                 //console.log("User age: ", user.age);
                 const matchbyAge = await Users.findAll({
@@ -270,30 +311,33 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
-                // console.log("Match user age: ", matchbyAge);
+                await user.update({
+                    numMatches: matchbyAge.length,
+                    matchList: matchbyAge,
+                });
+                res.json(matchbyAge);
+                //matchList = matchbyAge;
                 // matchList.push(matchbyAge);
-                matchList.concat(matchbyAge);
-                console.log(matchList.concat(matchbyAge));
-                console.log(matchbyAge.concat(matchList));
-                // matchList[matchList.length] = matchbyAge;
-                //console.log(typeof matchbyAge);
-                console.log("MATCH BY AGE\n", matchbyAge);
-                //console.log(typeof matchbyAge);
-                console.log("MATCH LIST\n", matchList);
+                // matchList.concat(matchbyAge);
+                // console.log("Match By Age: ", matchbyAge.length);
+                // console.log("Match List: ", matchList.length);
+                //console.log("Match By Age: \n", matchbyAge);
+                //console.log("Match List: \n", matchList);
+            } else {
+                //res.json("At least one preference must be selected!");
+                res.status(400).send(err);
             }
-            console.log("Num matches: ", matchList.length);
-            console.log("Type of Match List: ", typeof matchList);
-            await user.update({
-                numMatches: matchList.length,
-                matchList: matchList,
-            });
-            //res.json("yay!");
-            res.json(matchList);
+            // console.log("Match List: \n", matchList);
+            // await user.update({
+            //     numMatches: matchList.length,
+            //     matchList: matchList,
+            // });
+            //res.json(matchList);
         } catch (err) {
-            res.json("Error creating/updating match list! :(");
+            //res.json("Error creating/updating match list! :(");
             res.status(500).send(err);
         }
-        console.log("Create match list successful!");
+        //console.log("Create match list successful!");
     } else {
         res.json("User not found!");
     }
