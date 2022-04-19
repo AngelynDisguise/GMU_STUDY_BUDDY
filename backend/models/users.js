@@ -1,3 +1,17 @@
+//const { get } = require("../routes/Users");
+
+// const getAge = (date) => {
+//     const today = new Date();
+//     const birthDate = new Date(date);
+//     let age = today.getFullYear() - birthDate.getFullYear();
+//     const m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     //console.log("Age is... ", age);
+//     return age;
+// }
+
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
         /****************** PRIVATE INFO *****************/
@@ -22,6 +36,12 @@ module.exports = (sequelize, DataTypes) => {
         matchList: {
             type: DataTypes.JSON,
             allowNull: true,
+            // get() {
+            //     const rawValue = this.getDataValue('matchList');
+            //     const parsedValue = JSON.parse(rawValue);
+            //     return parsedValue;
+            //     //return rawValue ? matchList.length : [];
+            // }
         },
         numMatches: {
             type: DataTypes.INTEGER,
@@ -42,10 +62,10 @@ module.exports = (sequelize, DataTypes) => {
         numStudyBuddies: {
             type: DataTypes.JSON,
             allowNull: true,
-            get() {
-                const rawValue = this.getDataValue('numMatches');
-                return rawValue ? studyBuddyList.length : 0;
-            }
+            // get() {
+            //     const rawValue = this.getDataValue('numStudyBuddies');
+            //     return rawValue ? studyBuddyList.length : 0;
+            // }
         },
 
         /****************** PUBLIC INFO *****************/
@@ -87,16 +107,10 @@ module.exports = (sequelize, DataTypes) => {
         age: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            set(date) {
-                const today = new Date();
-                const birthDate = new Date(date);
-                const age = today.getFullYear() - birthDate.getFullYear();
-                const m = today.getMonth() - birthDate.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
-                this.setDataValue('age', age);
-            }
+            // get() {
+            //     const rawValue = this.getDataValue('date');
+            //     return rawValue ? getAge(rawValue) : 0;
+            // }
         },
     });
     return Users;
