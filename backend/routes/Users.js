@@ -145,20 +145,76 @@ router.post("/remove", async(req, res) => {
             email: email,
         },
     });
-    //Delete user in user list
     if (user) {
         try {
-            Users.destroy({
+            //Delete user in user list
+            await Users.destroy({
                 where: {
                     email: email,
                 }
             });
-            //Delete user in match list (if found)
-            //Delete user in study buddy list (if found)
+
+            // Find all users and remove user from all lists
+            // (User list should not be empty if user exists)
+            const listOfUsers = await Users.findAll();
+            // console.log(listOfUsers);
+            for (let i = 0; i < listOfUsers.length; i++) {
+                //Delete user in all match lists (if found)
+                //Find user's match list, if it exists
+                const matchList = listOfUsers[i].matchList;
+                if (matchList) {
+                    //Find if user exists in match list
+                    const matchIndex = matchList.indexOf(email);
+                    if (matchIndex > -1) {
+                        //Remove user from match list
+                        matchList.splice(matchIndex, 1);
+                        //update user's match list
+                        //await listOfUsers[i].update({ matchList: matchList });
+                        await Users.update({
+                            numMatches: matchList.length,
+                            matchList: matchList,
+                        }, {
+                            where: {
+                                email: listOfUsers[i].email,
+                            }
+                        });
+                        console.log("User removed from ${listOfUsers[i].firstName}'s match list!");
+                    }
+                    //console.log("match list found");
+                } else {
+                    console.log("No match list found for ${listOfUsers[i].firstName}");
+                }
+
+                //Delete user in all study buddy lists (if found)
+                //Find user's study buddy list, if it exists
+                const studyBuddyList = listOfUsers[i].studyBuddyList;
+                if (studyBuddyList) {
+                    //Find if user exists in match list
+                    const studyBuddyIndex = studyBuddyList.indexOf(email);
+                    if (studyBuddyIndex > -1) {
+                        //Remove user from match list
+                        studyBuddyList.splice(studyBuddyIndex, 1);
+                        //update user's match list
+                        //await studyBuddyList[i].update({ studyBuddyList: studyBuddyList });
+                        await Users.update({
+                            numStudyBuddies: studyBuddyList.length,
+                            studyBuddyList: studyBuddyList,
+                        }, {
+                            where: {
+                                email: listOfUsers[i].email,
+                            }
+                        });
+                    } else {
+                        console.log("User removed from ${listOfUsers[i].firstName}'s study buddy list!");
+                    }
+                } else {
+                    console.log("No study buddy list found for ${listOfUsers[i].firstName}");
+                }
+                console.log("hello ", i);
+            }
             res.json("User deleted successfully from all lists!");
         } catch (err) {
-            res.json("Error deleting user! :(");
-            res.status(400).send(err);
+            res.status(500).json("Error deleting user! :(");
         }
     } else {
         res.status(400).json("User not found!");
@@ -305,7 +361,7 @@ router.post("/match", async(req, res) => {
                 //matchList = matchbyAge;
             }
             const numMatches = matchList.length;
-            console.log("Match List: \n", matchList);
+            //console.log("Match List: \n", matchList);
             await user.update({
                 numMatches: numMatches,
                 matchList: matchList,
@@ -350,17 +406,18 @@ router.post("/addStudyBuddy", async(req, res) => {
                     res.status(400).json("Study buddy already in study buddy list!");
                 } else {
                     console.log("Before add: ", user.studyBuddyList);
-                    //add study buddy to study buddy list
+                    //Add study buddy to study buddy list
                     currentStudyBuddyList.push(studyBuddyEmail);
+                    const numStudyBuddies = currentStudyBuddyList.length;
+                    //Update study buddy list
                     await Users.update({
                         studyBuddyList: currentStudyBuddyList,
+                        numStudyBuddies: numStudyBuddies,
                     }, {
                         where: {
                             email: userEmail,
                         },
                     });
-                    // user.studyBuddyList = currentStudyBuddyList;
-                    // user.save();
                     console.log("After add: ", user.studyBuddyList);
                     console.log(currentStudyBuddyList);
                     res.json(user.studyBuddyList);
@@ -403,18 +460,16 @@ router.post("/removeStudyBuddy", async(req, res) => {
                     const index = currentStudyBuddyList.indexOf(studyBuddyEmail);
                     if (index > -1) {
                         currentStudyBuddyList.splice(index, 1);
-                        // await user.update({
-                        //     studyBuddyList: currentStudyBuddyList,
-                        // });
+                        const numStudyBuddies = currentStudyBuddyList.length;
+                        //Update study buddy list
                         await Users.update({
                             studyBuddyList: currentStudyBuddyList,
+                            numStudyBuddies: numStudyBuddies,
                         }, {
                             where: {
                                 email: userEmail,
                             },
                         });
-                        // user.studyBuddy = currentStudyBuddyList;
-                        // user.save();
                         console.log("After removal: ", user.studyBuddyList);
                         console.log("Current Study Buddy List: ", currentStudyBuddyList);
                         res.json(user.studyBuddyList);
