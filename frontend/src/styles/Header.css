@@ -1,19 +1,19 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid lightgreen;
+    border-bottom: 2px solid lightgreen;    
 }
 
 .patriotLogo {
-    display: block;
-    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
-.navButton {
-    display: block;
-    height: 40px;
-    width: 40px;
+.navButton{
     padding: 20px;
+}
+
+.icButton{
+    height: 70px;
+    width: 70px;
 }

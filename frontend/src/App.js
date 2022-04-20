@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import Matches from './components/Matches';
 import MatchUser from './components/MatchUser'
+import EditProfile from './components/EditProfile';
 // import Chat from './components/Chat';
 
 //styles
@@ -21,21 +22,22 @@ import './styles/Home.css';
 import './styles/Profile.css';
 import './styles/Matches.css';
 import './styles/MatchUser.css';
+import './styles/EditProfile.css';
 // import './styles/Chat.css';
 
 function App() {
-  //TOKEN CODE **********************************************************
-  const [token, setToken] = useState(null);
+  // //TOKEN CODE **********************************************************
+  // const [token, setToken] = useState(null);
 
-  console.log(localStorage.getItem('token'));
+  // console.log(localStorage.getItem('token'));
   
-  if(!token && !localStorage.getItem('token')) {
-    console.log("App token: "+token+"\nRedirecting to Login...");
-    return <Login setToken={setToken} />
-  } else {
-    console.log("App token: "+token+"\nRedirecting to Home...");
-  }
-  //TOKEN CODE **********************************************************
+  // if(!token && !localStorage.getItem('token')) {
+  //   console.log("App token: "+token+"\nRedirecting to Login...");
+  //   return <Login setToken={setToken} />
+  // } else {
+  //   console.log("App token: "+token+"\nRedirecting to Home...");
+  // }
+  // //TOKEN CODE **********************************************************
 
   return ( 
     <div className="App" >
@@ -48,7 +50,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
-          <Route path="/matchUser/:user" element={<MatchUser/>} />
+          <Route path="/matchUser/:name" element={<MatchUser/>} />
+          <Route path="/editprofile" element={<EditProfile/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
       </div>
