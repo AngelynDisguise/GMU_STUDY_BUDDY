@@ -8,9 +8,57 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        /**
+         * Hashed with bycrypt
+         */
         password: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        /**
+         * List/array of preferences, 
+         * based on match categories (all public info, except firstName)
+         */
+        preferences: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        /**
+         * Date of birth
+         * Calculates age based on today's date (/register2)
+         * Date format: [month/day/year]
+         * Example: [1/1/2000]
+         */
+        date: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true,
+        },
+        /**
+         * List/array of match users to be displayed on cards.
+         * Contains all user info (will change later)
+         */
+        matchList: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        numMatches: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            allowNull: true,
+        },
+        /**
+         * List/array of study buddies swiped by user.
+         * Contains all user model info (will change later)
+         */
+        studyBuddyList: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        numStudyBuddies: {
+            type: DataTypes.JSON,
+            defaultValue: 0,
+            allowNull: true,
         },
 
         /****************** PUBLIC INFO *****************/
@@ -36,17 +84,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: "",
             allowNull: true,
         },
-        /**
-         * Date format: [month/day/year]
-         * Index 1 = month
-         * Index 2 = day
-         * Index 3 = year
-         * 
-         * Prop not shown on matches list; shown as age only
-         */
-        date: {
-            type: DataTypes.STRING,
-            defaultValue: "",
+        age: {
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
     });

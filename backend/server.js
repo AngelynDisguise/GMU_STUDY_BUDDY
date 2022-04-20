@@ -19,11 +19,8 @@ app.use("/health", (req, res) => {
 const userRouter = require('./routes/Users');
 app.use("/users", userRouter);
 
-const studyBuddyRouter = require('./routes/StudyBuddy');
-app.use("/StudyBuddy", studyBuddyRouter);
-
 //Initialize the server
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
     app.listen(process.env.PORT, () => {
         console.log("Server is running on port", process.env.PORT);
     });
