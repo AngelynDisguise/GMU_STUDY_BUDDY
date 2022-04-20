@@ -349,12 +349,19 @@ router.post("/addStudyBuddy", async(req, res) => {
                 if (currentStudyBuddyList.indexOf(studyBuddyEmail) > -1) {
                     res.status(400).json("Study buddy already in study buddy list!");
                 } else {
+                    console.log("Before add: ", user.studyBuddyList);
                     //add study buddy to study buddy list
                     currentStudyBuddyList.push(studyBuddyEmail);
-                    await user.update({
+                    await Users.update({
                         studyBuddyList: currentStudyBuddyList,
+                    }, {
+                        where: {
+                            email: userEmail,
+                        },
                     });
-                    console.log(user.studyBuddyList);
+                    // user.studyBuddyList = currentStudyBuddyList;
+                    // user.save();
+                    console.log("After add: ", user.studyBuddyList);
                     console.log(currentStudyBuddyList);
                     res.json(user.studyBuddyList);
                     console.log("Add study buddy successful!");
@@ -396,10 +403,18 @@ router.post("/removeStudyBuddy", async(req, res) => {
                     const index = currentStudyBuddyList.indexOf(studyBuddyEmail);
                     if (index > -1) {
                         currentStudyBuddyList.splice(index, 1);
-                        await user.update({
+                        // await user.update({
+                        //     studyBuddyList: currentStudyBuddyList,
+                        // });
+                        await Users.update({
                             studyBuddyList: currentStudyBuddyList,
+                        }, {
+                            where: {
+                                email: userEmail,
+                            },
                         });
-                        user.save();
+                        // user.studyBuddy = currentStudyBuddyList;
+                        // user.save();
                         console.log("After removal: ", user.studyBuddyList);
                         console.log("Current Study Buddy List: ", currentStudyBuddyList);
                         res.json(user.studyBuddyList);
