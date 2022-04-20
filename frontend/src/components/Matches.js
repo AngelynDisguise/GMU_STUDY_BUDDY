@@ -40,23 +40,23 @@ function Matches() {
     ]);
 
     return(
-        <div className='wrapper'>
+        <div className='matches'>
             <h2>Matches</h2>
-            <div className='matches'>
+            <div className='matches-body'>
                 {students.map((student) => (
-                    <div className='profile'>
-                        <div className='profpic'>
+                    <div className='matches-profile'>
+                        <div className='matches-profpic'>
                           <img src={student.url} height="100" width="100"/>
                         </div>
-                        <div className='userinfo'>
+                        <div className='matches-userinfo'>
                           <h4>{student.name}</h4>
                           <h5>{student.email}</h5>
                           <h5>{student.number}</h5>
                         </div>
-                        <div className='userinfo2'>
+                        <div className='matches-userinfo2'>
                           <h3>Bio: {student.bio}</h3>
                         </div>
-                        <div className='unmatch_Button'>
+                        <div className='matches-unmatch_Button'>
                           <button type='submit'>Unmatch</button>
                         </div>
                     </ div>                    

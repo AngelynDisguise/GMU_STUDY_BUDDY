@@ -24,7 +24,7 @@ import './styles/MatchUser.css';
 // import './styles/Chat.css';
 
 function App() {
-  //TOKEN CODE **********************************************************
+  /*//TOKEN CODE **********************************************************
   const [token, setToken] = useState(null);
 
   console.log(localStorage.getItem('token'));
@@ -35,7 +35,7 @@ function App() {
   } else {
     console.log("App token: "+token+"\nRedirecting to Home...");
   }
-  //TOKEN CODE **********************************************************
+  *///TOKEN CODE **********************************************************
 
   return ( 
     <div className="App" >

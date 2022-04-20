@@ -1,29 +1,29 @@
-.matches{
+.matches-body{
     display: flex;
     flex-direction: column;
 }
 
-.profile{
+.matches-profile{
     display: flex;
     flex-direction: row;
-    margin-right: 20px;
+    
     margin-bottom: 10px;
     border: 3px solid black;
 }
 
-.profpic{
+.matches-profpic{
     padding: 5px;
 }
 
-.userinfo{
+.matches-userinfo{
     padding: 5px;
 }
 
-.userinfo2{
+.matches-userinfo2{
     margin: auto;
 }
 
-.unmatch_Button{
+.matches-unmatch_Button{
     float: right;
     padding: 10px; 
 }

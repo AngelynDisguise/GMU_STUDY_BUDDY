@@ -22,7 +22,7 @@ const major = "cs";
 
 function Profile(){
     return(
-        <div className="Pwrapper">
+        <div className="profile-wrapper">
             <div className="profile-header">
                 <h2>Account Information</h2>
             </div>
