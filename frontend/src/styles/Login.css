@@ -63,9 +63,9 @@
     align-items: center;
 } */
 
-span {
+.err {
     color: red;
-    padding-left: 4em;
+    /* padding-left: 4em; */
     margin-bottom: .5em;
 }
 

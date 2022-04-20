@@ -105,7 +105,7 @@ export default function Login({setToken}) {
                 placeholder="{student@gmu.edu}"
                 />
               </div>
-              <ErrorMessage name="email" component="span" />
+              <ErrorMessage className="err" name="email" component="span" />
               <div className= 'password-container'>
                 <label>Password: </label>
                 <Field 
@@ -114,7 +114,7 @@ export default function Login({setToken}) {
                 name="password" 
                 placeholder="{password}" />
               </div>
-              <ErrorMessage name="password" component="span" />
+              <ErrorMessage className="err" name="password" component="span" />
               <button type="submit">Login</button>
             </Form>
           </Formik>
@@ -223,7 +223,7 @@ export default function Login({setToken}) {
                 placeholder="{student@gmu.edu}"
                 />
               </div>
-              <ErrorMessage name="email" component="span" />
+              <ErrorMessage className="err" name="email" component="span" />
               <div className= 'password-container'>
                 <label>Password: </label>
                 <Field 
@@ -232,7 +232,7 @@ export default function Login({setToken}) {
                 name="password" 
                 placeholder="{password}" />
               </div>
-              <ErrorMessage name="password" component="span" />
+              <ErrorMessage className="err" name="password" component="span" />
               <button type="submit">Register</button>
             </Form>
           </Formik>
