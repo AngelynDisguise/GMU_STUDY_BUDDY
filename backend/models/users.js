@@ -1,17 +1,3 @@
-//const { get } = require("../routes/Users");
-
-// const getAge = (date) => {
-//     const today = new Date();
-//     const birthDate = new Date(date);
-//     let age = today.getFullYear() - birthDate.getFullYear();
-//     const m = today.getMonth() - birthDate.getMonth();
-//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-//         age--;
-//     }
-//     //console.log("Age is... ", age);
-//     return age;
-// }
-
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
         /****************** PRIVATE INFO *****************/
@@ -36,23 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         matchList: {
             type: DataTypes.JSON,
             allowNull: true,
-            get() {
-                let nameList = [];
-                const rawValue = this.getDataValue('matchList');
-                return rawValue ?
-                    rawValue.forEach(user => {
-                        nameList.push(user.name);
-                    }) :
-                    [];
-            }
         },
         numMatches: {
             type: DataTypes.INTEGER,
+            defaultValue: 0,
             allowNull: true,
-            get() {
-                const rawValue = this.getDataValue('numMatches');
-                return rawValue ? matchList.length : 0;
-            }
         },
         /**
          * List/array of study buddies swiped by user.
@@ -64,11 +38,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         numStudyBuddies: {
             type: DataTypes.JSON,
+            defaultValue: 0,
             allowNull: true,
-            // get() {
-            //     const rawValue = this.getDataValue('numStudyBuddies');
-            //     return rawValue ? studyBuddyList.length : 0;
-            // }
         },
 
         /****************** PUBLIC INFO *****************/
@@ -95,12 +66,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         /**
+         * Date of birth
+         * Calculates age based on today's date (/register2)
          * Date format: [month/day/year]
-         * Index 1 = month
-         * Index 2 = day
-         * Index 3 = year
-         * 
-         * Prop not shown on matches list; shown as age only
+         * Example: [1/1/2000]
          */
         date: {
             type: DataTypes.STRING,
@@ -110,10 +79,6 @@ module.exports = (sequelize, DataTypes) => {
         age: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            // get() {
-            //     const rawValue = this.getDataValue('date');
-            //     return rawValue ? getAge(rawValue) : 0;
-            // }
         },
     });
     return Users;

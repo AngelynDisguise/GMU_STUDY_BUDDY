@@ -31,8 +31,8 @@ router.get("/", async(req, res) => {
         console.log(user);
         //res.json("yay", user);
         if (user) {
-            //res.json(user);
-            res.json("yay");
+            res.json(user);
+            //res.json("yay");
         } else {
             res.status(404).json({
                 message: "User not found",
@@ -193,7 +193,7 @@ router.post("/match", async(req, res) => {
     if (user) {
         //Create/update match list
         try {
-            //let matchList = new Array();
+            let matchList = new Array();
             if (byGender && byMajor && byAge) {
                 const matchbyAll = await Users.findAll({
                     where: {
@@ -205,12 +205,12 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     },
                 });
-                await user.update({
-                    numMatches: matchbyAll.length,
-                    matchList: match,
-                });
-                res.json(matchbyAll);
-                //matchList = matchbyAll;
+                // await user.update({
+                //     numMatches: matchbyAll.length,
+                //     matchList: match,
+                // });
+                // res.json(matchbyAll);
+                matchList = matchbyAll;
                 // matchList.push(matchbyAll);
                 // matchList.concat(matchbyAll);
             } else if (byGender && byMajor) {
@@ -223,12 +223,12 @@ router.post("/match", async(req, res) => {
                         major: user.major,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyGenderMajor.length,
-                    matchList: matchbyGenderMajor,
-                });
-                res.json(matchbyGenderMajor);
-                //matchList = matchbyGenderMajor;
+                // await user.update({
+                //     numMatches: matchbyGenderMajor.length,
+                //     matchList: matchbyGenderMajor,
+                // });
+                // res.json(matchbyGenderMajor);
+                matchList = matchbyGenderMajor;
                 // matchList.push(matchbyGenderMajor);
                 // matchList.concat(matchbyGenderMajor);
             } else if (byGender && byAge) {
@@ -241,12 +241,12 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyGenderAge.length,
-                    matchList: matchbyGenderAge,
-                });
-                res.json(matchbyGenderAge);
-                //matchList = matchbyGenderAge;
+                // await user.update({
+                //     numMatches: matchbyGenderAge.length,
+                //     matchList: matchbyGenderAge,
+                // });
+                // res.json(matchbyGenderAge);
+                matchList = matchbyGenderAge;
                 // matchList.push(matchbyGenderAge);
                 // matchList.concat(matchbyGenderAge);
             } else if (byMajor && byAge) {
@@ -259,12 +259,12 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyMajorAge.length,
-                    matchList: matchbyMajorAge,
-                });
-                res.json(matchbyMajorAge);
-                //matchList = matchbyMajorAge;
+                // await user.update({
+                //     numMatches: matchbyMajorAge.length,
+                //     matchList: matchbyMajorAge,
+                // });
+                // res.json(matchbyMajorAge);
+                matchList = matchbyMajorAge;
                 // matchList.push(matchbyMajorAge);
                 // matchList.concat(matchbyMajorAge);
             } else if (byGender) {
@@ -276,12 +276,12 @@ router.post("/match", async(req, res) => {
                         gender: user.gender,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyGender.length,
-                    matchList: matchbyGender,
-                });
-                res.json(matchbyGender);
-                //matchList = matchbyGender;
+                // await user.update({
+                //     numMatches: matchbyGender.length,
+                //     matchList: matchbyGender,
+                // });
+                // res.json(matchbyGender);
+                matchList = matchbyGender;
                 // matchList.push(matchbyGender);
                 // matchList.concat(matchbyGender);
             } else if (byMajor) {
@@ -293,12 +293,12 @@ router.post("/match", async(req, res) => {
                         major: user.major,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyMajor.length,
-                    matchList: matchbyMajor,
-                });
-                res.json(matchbyMajor);
-                //matchList = matchbyMajor;
+                // await user.update({
+                //     numMatches: matchbyMajor.length,
+                //     matchList: matchbyMajor,
+                // });
+                // res.json(matchbyMajor);
+                matchList = matchbyMajor;
                 // matchList.push(matchbyMajor);
                 // matchList.concat(matchbyMajor);
             } else if (byAge) {
@@ -311,33 +311,26 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
-                await user.update({
-                    numMatches: matchbyAge.length,
-                    matchList: matchbyAge,
-                });
-                res.json(matchbyAge);
-                //matchList = matchbyAge;
-                // matchList.push(matchbyAge);
-                // matchList.concat(matchbyAge);
-                // console.log("Match By Age: ", matchbyAge.length);
-                // console.log("Match List: ", matchList.length);
-                //console.log("Match By Age: \n", matchbyAge);
-                //console.log("Match List: \n", matchList);
-            } else {
-                //res.json("At least one preference must be selected!");
-                res.status(400).send(err);
+                // const numMatches = matchbyAge.length;
+                // await user.update({
+                //     numMatches: numMatches,
+                //     matchList: matchbyAge,
+                // });
+                // res.json(matchbyAge);\
+                matchList = matchbyAge;
             }
-            // console.log("Match List: \n", matchList);
-            // await user.update({
-            //     numMatches: matchList.length,
-            //     matchList: matchList,
-            // });
-            //res.json(matchList);
+            const numMatches = matchList.length;
+            console.log("Match List: \n", matchList);
+            await user.update({
+                numMatches: numMatches,
+                matchList: matchList,
+            });
+            res.json(matchList);
         } catch (err) {
-            //res.json("Error creating/updating match list! :(");
+            res.json("Error creating/updating match list! :(");
             res.status(500).send(err);
         }
-        //console.log("Create match list successful!");
+        console.log("Create match list successful!");
     } else {
         res.json("User not found!");
     }
