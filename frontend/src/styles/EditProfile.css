@@ -1,10 +1,9 @@
 .ed-form-container{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
 }
 
-.ed-password-container{
-    display: flex;
-    justify-content: space-around;
+.ed-form-container > button{
+    width: 75px;
 }
