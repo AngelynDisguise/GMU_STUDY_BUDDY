@@ -13,19 +13,19 @@ import "../styles/Header.css";
 function Header() {
     return (
         <div className="header">
-            <IconButton style={{}}>
+            <IconButton className='icButton'>
                 <Link to="/profile">
                     <PersonIcon className="navButton"/>
                 </Link>
             </IconButton>
             
-            <IconButton>
+            <IconButton className='icButton'>
                 <Link to="/">
                     <img alt="Patriot Logo" className="patriotLogo" src={PatriotLogo} />
                 </Link>
             </IconButton>
            
-            <IconButton>
+            <IconButton className='icButton'>
                 <Link to="/matches">
                         <DensityMediumIcon className="navButton"/>
                 </Link>
