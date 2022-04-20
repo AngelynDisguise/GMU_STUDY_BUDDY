@@ -16,6 +16,25 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         /**
+         * List/array of preferences, 
+         * based on match categories (all public info, except firstName)
+         */
+        preferences: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
+        /**
+         * Date of birth
+         * Calculates age based on today's date (/register2)
+         * Date format: [month/day/year]
+         * Example: [1/1/2000]
+         */
+        date: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true,
+        },
+        /**
          * List/array of match users to be displayed on cards.
          * Contains all user info (will change later)
          */
@@ -61,17 +80,6 @@ module.exports = (sequelize, DataTypes) => {
          * Limited to one major (for now)
          */
         major: {
-            type: DataTypes.STRING,
-            defaultValue: "",
-            allowNull: true,
-        },
-        /**
-         * Date of birth
-         * Calculates age based on today's date (/register2)
-         * Date format: [month/day/year]
-         * Example: [1/1/2000]
-         */
-        date: {
             type: DataTypes.STRING,
             defaultValue: "",
             allowNull: true,
