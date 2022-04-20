@@ -21,18 +21,22 @@ function Home() {
     {
       name: "Mengistu",
       url: Mengistu,
+      gender: "M",
     },
     {
       name: "Monkeh, hehe",
       url: Monkeh,
+      gender: "M",
     },
     {
       name: "Russell",
       url: Russell,
+      gender: "F",
     }, 
     {
       name: "Ed Helms",
-      url: Helms,     
+      url: Helms,
+      gender: "M",     
     },
   ]);
 
@@ -57,9 +61,9 @@ function Home() {
             >
               <h3>{student.name}</h3>
               
-              <Link 
-                to={"/matchUser/" + student.name}
-              >
+              <Link to={{
+                pathname: "/matchUser/" + student.name,
+              }}>
                 <IconButton>
                   <InfoIcon />
                 </IconButton>
