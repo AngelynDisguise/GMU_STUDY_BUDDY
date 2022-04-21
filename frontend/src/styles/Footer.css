@@ -1,0 +1,9 @@
+.footer-wrapper{
+    display: flex;
+    justify-content: right;
+
+    border-top: solid lightgreen 2px;
+
+    position: relative;
+    bottom: -550px;
+}
