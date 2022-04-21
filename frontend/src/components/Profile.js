@@ -33,18 +33,21 @@ function Profile(){
                         <h2>Account Information</h2>
                     </div>
 
-                    <div className="profile-info">
-                        <h3>Name: {name}</h3>
-                        <h3>Email: {email}</h3>
-                        <h3>Date of Birth: {dob}</h3>
-                        <h3>Gender: {gender}</h3>
-                        <h3>Major: {major}</h3>
-                    </div>            
+                    <div className="profile-infoactions">
+                        <div className="profile-info">
+                            <h3>Name: {name}</h3>
+                            <h3>Email: {email}</h3>
+                            <h3>Date of Birth: {dob}</h3>
+                            <h3>Gender: {gender}</h3>
+                            <h3>Major: {major}</h3>
+                        </div>            
 
-                    <div className="profile-actions">
-                        <button type="button" onClick={logOut}>Logout</button>
-                        <button type="button">Deactivate Account</button>
+                        <div className="profile-actions">
+                            <button type="button" onClick={logOut}>Logout</button>
+                            <button type="button">Deactivate Account</button>
+                        </div>
                     </div>
+                    
                 </div>
                 
                 <div className="profile-editButton">

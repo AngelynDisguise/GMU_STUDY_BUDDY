@@ -48,68 +48,77 @@ function EditProfile(){
             <Form className = 'ed-form-container'>
               <ErrorMessage className="ed-err" name="email" component="span" />
               
-                <div className= 'ed-password-container'>
-                    <label>Password: </label>
-                    <Field 
-                        id="password" 
-                        type="password" 
-                        name="password" 
-                        placeholder="{password}" 
-                    />
+                <div className='ed-form-header'>
+                    <h2>Edit Profile</h2>
                 </div>
 
-                <div className='ed-name-container'>
-                    <label>Name: </label>
-                    <Field
-                        id="name"
-                        type="name"
-                        name="name"
-                        placeholder="{Name}"
-                    />
-                </div>
+                <div className='ed-form-body'>
+                    <div className= 'ed-password-container'>
+                        <label>Password: </label>
+                        <Field 
+                            id="password" 
+                            type="password" 
+                            name="password" 
+                            placeholder="{password}" 
+                        />
+                    </div>
 
-                <div className='ed-dob-container'>
-                    <label>DOB: </label>
-                    <Field
-                        id="dob"
-                        type="dob"
-                        name="dob"
-                        placeholder="{dob}"
-                    />
-                </div>
+                    <div className='ed-name-container'>
+                        <label>Name: </label>
+                        <Field
+                            id="name"
+                            type="name"
+                            name="name"
+                            placeholder="{Name}"
+                        />
+                    </div>
 
-                <div className='ed-gender-container'>
-                    <label>Gender: </label>
-                    <Field
-                        id="gender"
-                        type="gender"
-                        name="gender"
-                        placeholder="{gender}"
-                    />
-                </div>
+                    <div className='ed-dob-container'>
+                        <label>DOB: </label>
+                        <Field
+                            id="dob"
+                            type="dob"
+                            name="dob"
+                            placeholder="{dob}"
+                        />
+                    </div>
 
-                <div className='ed-major-container'>
-                    <label>Major: </label>
-                    <Field
-                        id="major"
-                        type="major"
-                        name="major"
-                        placeholder="{major}"
-                    />
-                </div>
+                    <div className='ed-gender-container'>
+                        <label>Gender: </label>
+                        <Field
+                            id="gender"
+                            type="gender"
+                            name="gender"
+                            placeholder="{gender}"
+                        />
+                    </div>
 
-                <div className='ed-bio-container'>
-                    <label>Bio: </label>
-                    <Field
-                        id="bio"
-                        type="bio"
-                        name="bio"
-                        placeholder="{bio}"
-                    />
-                </div>
+                    <div className='ed-major-container'>
+                        <label>Major: </label>
+                        <Field
+                            id="major"
+                            type="major"
+                            name="major"
+                            placeholder="{major}"
+                        />
+                    </div>
 
-              <ErrorMessage className="ed-err" name="password" component="span" />
-              <button type="submit">Update</button>
+                    <div className='ed-bio-container'>
+                        <label>Bio: </label>
+                        <Field
+                            id="bio"
+                            type="bio"
+                            name="bio"
+                            placeholder="{bio}"
+                        />
+                    </div>
+                    
+                    <ErrorMessage className="ed-err" name="password" component="span" />
+                    <button type="submit">Update</button>
+                </div>
+                
+
+              
             </Form>
 
         </Formik>
