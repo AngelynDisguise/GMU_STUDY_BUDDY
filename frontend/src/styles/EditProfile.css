@@ -4,7 +4,29 @@
     align-items: center;
 }
 
-.ed-password-container{
+.ed-form-header{
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid green 3px;
+    
+    height: 60px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 5px;
+}
+
+.ed-form-body{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    bottom: -100px;
+}
+
+.ed-form-container > button{
+    width: 75px;
 }

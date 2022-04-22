@@ -12,6 +12,8 @@ import Profile from './components/Profile';
 import Matches from './components/Matches';
 import MatchUser from './components/MatchUser'
 import EditProfile from './components/EditProfile';
+import Footer from './components/Footer';
+import Help from './components/Help';
 // import Chat from './components/Chat';
 
 //styles
@@ -23,6 +25,8 @@ import './styles/Profile.css';
 import './styles/Matches.css';
 import './styles/MatchUser.css';
 import './styles/EditProfile.css';
+import './styles/Footer.css';
+import './styles/Help.css';
 // import './styles/Chat.css';
 
 function App() {
@@ -52,9 +56,14 @@ function App() {
           <Route path="/matches" element={<Matches />} />
           <Route path="/matchUser/:name" element={<MatchUser/>} />
           <Route path="/editprofile" element={<EditProfile/>} />
+          <Route path='/help' element={<Help/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
+
+     
       </div>
+      
+      <Footer />
     </div>
   );
 }

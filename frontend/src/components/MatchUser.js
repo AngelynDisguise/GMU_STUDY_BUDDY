@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 function MatchUser() {
-
     /* User Variables */
     let { name } = useParams();
     const gender = "";
@@ -12,7 +11,7 @@ function MatchUser() {
     return(
         <div className='matchuser-wrapper'>
             <div className='mu-header'>
-                <h1>User info</h1>
+                <h2>User info</h2>
             </div>
             
             <div className='mu-info'>
