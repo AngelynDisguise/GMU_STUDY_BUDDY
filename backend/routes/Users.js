@@ -72,14 +72,16 @@ router.post("/register", async(req, res) => {
                 });
                 // res.json(newUser);
                 const token = sign({ email: newUser.email, password: newUser.password }, "secret");
-                res.json(token);
-                //res.json("Registration successful!");
+                //res.json(token);
+                res.json("Registration successful!");
             } catch (err) {
-                res.status(500).json("Error registering user! :(");
+                res.json("Error registering user! :(");
+                //res.status(500).json("Error registering user! :(");
             }
         });
     } else {
-        res.status(400).json("User already exists!");
+        res.json("User already exists!");
+        //res.status(400).json("User already exists!");
     }
 });
 
@@ -123,16 +125,19 @@ router.post("/login", async(req, res) => {
             const isMatch = await bycrypt.compare(password, user.password);
             if (isMatch) {
                 const token = sign({ email: user.email, id: user.id }, "secret");
-                //res.json("Login successful!");
-                res.json(token);
+                res.json("Login successful!");
+                //res.json(token);
             } else {
-                res.status(400).json("Incorrect Password!");
+                res.json("Incorrect Password!");
+                //res.status(400).json("Incorrect Password!");
             }
         } catch (err) {
-            res.status(500).json("Error logging in user! :(");
+            res.json("Error logging in user! :(");
+            //res.status(500).json("Error logging in user! :(");
         }
     } else {
-        res.status(400).json("Email not found - please register!");
+        res.json("Email not found - please register!");
+        //res.status(400).json("Email not found - please register!");
     }
 });
 

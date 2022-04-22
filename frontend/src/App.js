@@ -26,18 +26,18 @@ import './styles/EditProfile.css';
 // import './styles/Chat.css';
 
 function App() {
-  // //TOKEN CODE **********************************************************
-  // const [token, setToken] = useState(null);
+  //TOKEN CODE **********************************************************
+  const [token, setToken] = useState(null);
 
-  // console.log(localStorage.getItem('token'));
+  console.log(localStorage.getItem('token'));
   
-  // if(!token && !localStorage.getItem('token')) {
-  //   console.log("App token: "+token+"\nRedirecting to Login...");
-  //   return <Login setToken={setToken} />
-  // } else {
-  //   console.log("App token: "+token+"\nRedirecting to Home...");
-  // }
-  // //TOKEN CODE **********************************************************
+  if(!token && !localStorage.getItem('token')) {
+    console.log("App token: "+token+"\nRedirecting to Login...");
+    return <Login setToken={setToken} />
+  } else {
+    console.log("App token: "+token+"\nRedirecting to Home...");
+  }
+  //TOKEN CODE **********************************************************
 
   return ( 
     <div className="App" >
