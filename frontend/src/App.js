@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 //components
-import Login from './components/Login';
+import Auth from './components/Auth';
 import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -18,7 +18,7 @@ import Help from './components/Help';
 
 //styles
 import './App.css';
-import './styles/Login.css';
+//import './styles/Auth.css';
 import './styles/Header.css';
 import './styles/Home.css';
 import './styles/Profile.css';
@@ -32,12 +32,13 @@ import './styles/Help.css';
 function App() {
   //TOKEN CODE **********************************************************
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   console.log(localStorage.getItem('token'));
   
   if(!token && !localStorage.getItem('token')) {
     console.log("App token: "+token+"\nRedirecting to Login...");
-    return <Login setToken={setToken} />
+    return <Auth setToken={setToken} setUser={setUser} />
   } else {
     console.log("App token: "+token+"\nRedirecting to Home...");
   }
@@ -51,6 +52,7 @@ function App() {
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
+          {/* <Route path="/" element={<Register />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
@@ -59,10 +61,7 @@ function App() {
           <Route path='/help' element={<Help/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>
-
-     
       </div>
-      
       <Footer />
     </div>
   );

@@ -72,8 +72,8 @@ router.post("/register", async(req, res) => {
                 });
                 // res.json(newUser);
                 const token = sign({ email: newUser.email, password: newUser.password }, "secret");
-                //res.json(token);
-                res.json("Registration successful!");
+                res.json(token);
+                //res.json("Registration successful!");
             } catch (err) {
                 res.json("Error registering user! :(");
                 //res.status(500).json("Error registering user! :(");
@@ -125,8 +125,8 @@ router.post("/login", async(req, res) => {
             const isMatch = await bycrypt.compare(password, user.password);
             if (isMatch) {
                 const token = sign({ email: user.email, id: user.id }, "secret");
-                res.json("Login successful!");
-                //res.json(token);
+                //res.json("Login successful!");
+                res.json(token);
             } else {
                 res.json("Incorrect Password!");
                 //res.status(400).json("Incorrect Password!");
