@@ -15,10 +15,10 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import Help from './components/Help';
 // import Chat from './components/Chat';
+import Register from './components/Register';
 
 //styles
 import './App.css';
-//import './styles/Auth.css';
 import './styles/Header.css';
 import './styles/Home.css';
 import './styles/Profile.css';
@@ -31,17 +31,19 @@ import './styles/Help.css';
 
 function App() {
   //TOKEN CODE **********************************************************
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  // //token: gives user access to app if they are logged in
+  // const [token, setToken] = useState(null);
+  // //user: identifies logged in user; used to access user information
+  // const [userEmail, setUserEmail] = useState(null);
 
-  console.log(localStorage.getItem('token'));
+  // //console.log(localStorage.getItem('token'));
   
-  if(!token && !localStorage.getItem('token')) {
-    console.log("App token: "+token+"\nRedirecting to Login...");
-    return <Auth setToken={setToken} setUser={setUser} />
-  } else {
-    console.log("App token: "+token+"\nRedirecting to Home...");
-  }
+  // if(!token && !localStorage.getItem('token')) {
+  //   console.log("(App.js) App token: "+token+"\nRedirecting to Login...");
+  //   return <Auth setToken={setToken} setUserEmail={setUserEmail} />
+  // } else {
+  //   console.log("App token: "+token+"\nRedirecting to Home...");
+  // }
   //TOKEN CODE **********************************************************
 
   return ( 
@@ -52,8 +54,8 @@ function App() {
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
-          {/* <Route path="/" element={<Register />} /> */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Register />} />
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/matchUser/:name" element={<MatchUser/>} />

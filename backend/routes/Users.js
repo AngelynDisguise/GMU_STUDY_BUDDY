@@ -19,7 +19,7 @@ const getAge = (date) => {
 }
 
 //Display logged in user's profile info
-router.get("/", async(req, res) => {
+router.post("/", async(req, res) => {
     const { email } = req.body;
     try {
         const user = await Users.findOne({

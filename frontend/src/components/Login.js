@@ -31,33 +31,34 @@ export default function Login(props) {
         }
     };
 
-    function authenticate(response) {
+    function authenticate(response, data) {
         //response is the token
-        console.log("(authenticate) Response: "+response); //doesn't work
+        //console.log("(authenticate) Response: "+response); //doesn't work
         if (response !== "Incorrect Password!" &&
         response !== "Email not found - please register!" &&
         response !== "") {
-        const userToken = JSON.stringify(response);
-        localStorage.setItem('token', userToken);
-        setLoggedIn(true);
-        console.log("(authenticate) Logged in: "+loggedIn);
-        props.setToken(userToken);
+            const userToken = JSON.stringify(response);
+            localStorage.setItem('token', userToken);
+            setLoggedIn(true);
+            //console.log("(authenticate) Logged in: "+loggedIn);
+            console.log("(authenticate) email: ", data.email);
+            props.setUserEmail(data.email);
+            //console.log("(authenticate) token: ", userToken);
+            props.setToken(userToken);
         }
     }
 
     async function onSubmit(data){
         try {
-        //HTTP Request to post data to server
-        const responseVal = await axios.post("http://localhost:3001/users/login", data);
-        //Save and display response from server
-        setResponse(responseVal.data); //doesn't save until after function???
-        console.log("(onSubmit) ResponseVal: "+responseVal.data); //works
-        console.log("(onSubmit) Response: "+response); //doesn't work
-        //Assign token if user authenticated
-        authenticate(responseVal.data);
-        console.log("(onSubmit) Logged in: "+loggedIn); //doesn't work
+            //HTTP Request to post data to server
+            const responseVal = await axios.post("http://localhost:3001/users/login", data);
+            //Save and display response from server
+            setResponse(responseVal.data); //doesn't save until after function???
+            console.log("(onSubmit) ResponseVal: "+responseVal.data);
+            //Assign token if user authenticated
+            authenticate(responseVal.data, data);
         } catch(error) {
-            console.log(error);
+            console.log("(onSubmit) Error: "+error);
         }
     };
 
@@ -125,6 +126,6 @@ export default function Login(props) {
 
 Login.propTypes = {
     setToken: PropTypes.func.isRequired,
-    setUser: PropTypes.func.isRequired,
+    setUserEmail: PropTypes.func.isRequired,
     setRegister: PropTypes.func.isRequired
 };

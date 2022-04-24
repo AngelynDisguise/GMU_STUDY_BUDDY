@@ -6,6 +6,7 @@ import Register from './Register';
 import '../styles/Auth.css';
 
 export default function Auth(props) {
+    //register: switches between login and register
     const [register, setRegister] = useState(false);
 
     if (register) {
@@ -13,8 +14,8 @@ export default function Auth(props) {
         return (
             <Register 
               setToken={props.setToken} 
-              setUser={props.setUser} 
-              setRegister={setRegister}
+              setUserEmail={props.setUserEmail} 
+              setRegister={setRegister} 
             />
         );
     } else {
@@ -22,7 +23,7 @@ export default function Auth(props) {
         return (
             <Login
             setToken={props.setToken} 
-            setUser={props.setUser} 
+            setUserEmail={props.setUserEmail} 
             setRegister={setRegister}
             />
         );
@@ -31,5 +32,5 @@ export default function Auth(props) {
 
 Auth.propTypes = {
     setToken: PropTypes.func.isRequired,
-    setUser: PropTypes.func.isRequired
+    setUserEmail: PropTypes.func.isRequired
 };
