@@ -1,0 +1,72 @@
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 10px solid green;
+    background-color: greenyellow;
+    margin: 1em;
+    padding: 2.5em;
+    padding-bottom: 10em;
+    /* position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px; */
+}
+
+.login-banner {
+    background-color: green;
+    padding: 2.5em;
+    margin-bottom: 2.5em;
+}
+
+.login-banner h1 {
+    color: whitesmoke;
+    font-size: 400%;
+}
+
+.login-banner h3 {
+    color: gold;
+}
+
+.login-wrapper {
+    padding: 2em;
+    padding-bottom: 5em;
+    background-color: gold;
+    border: 10px solid goldenrod;
+}
+
+.login-title {
+    align-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.email-container,
+.password-container {
+    display: block;
+}
+
+.password-container {
+    padding-right: 1.6em;
+}
+
+.login-button-container {
+    padding: 1em;
+    align-items: center;
+}
+
+.err {
+    color: red;
+    /* padding-left: 4em; */
+    margin-bottom: .5em;
+}
+
+.status-message {
+    color: red;
+}
