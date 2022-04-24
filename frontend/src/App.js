@@ -30,21 +30,21 @@ import './styles/Help.css';
 // import './styles/Chat.css';
 
 function App() {
-  //TOKEN CODE **********************************************************
-  // token: gives user access to app if they are logged in
-  const [token, setToken] = useState(null);
-  // user: identifies logged in user; used to access user information
-  const [userEmail, setUserEmail] = useState(null);
-// 
-  // console.log(localStorage.getItem('token'));
-  // 
-  if(!token && !localStorage.getItem('token')) {
-    console.log("(App.js) App token: "+token+"\nRedirecting to Login...");
-    return <Auth setToken={setToken} setUserEmail={setUserEmail} />
-  } else {
-    console.log("App token: "+token+"\nRedirecting to Home...");
-  }
-  //TOKEN CODE **********************************************************
+//   //TOKEN CODE **********************************************************
+//   // token: gives user access to app if they are logged in
+//   const [token, setToken] = useState(null);
+//   // user: identifies logged in user; used to access user information
+//   const [userEmail, setUserEmail] = useState(null);
+// // 
+//   // console.log(localStorage.getItem('token'));
+//   // 
+//   if(!token && !localStorage.getItem('token')) {
+//     console.log("(App.js) App token: "+token+"\nRedirecting to Login...");
+//     return <Auth setToken={setToken} setUserEmail={setUserEmail} />
+//   } else {
+//     console.log("App token: "+token+"\nRedirecting to Home...");
+//   }
+//   //TOKEN CODE **********************************************************
 
   return ( 
     <div className="App" >
