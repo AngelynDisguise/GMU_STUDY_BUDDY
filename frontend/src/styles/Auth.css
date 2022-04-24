@@ -37,7 +37,7 @@
 }
 
 .login-title {
-    padding-top: 1em;
+    align-content: center;
 }
 
 .form-container {
@@ -56,12 +56,10 @@
     padding-right: 1.6em;
 }
 
-
-/* .login-button-container {
-    padding-left: 4em;
+.login-button-container {
     padding: 1em;
     align-items: center;
-} */
+}
 
 .err {
     color: red;
@@ -69,8 +67,6 @@
     margin-bottom: .5em;
 }
 
-
-/* .status-message {
+.status-message {
     color: red;
-    padding-top: .5em;
-} */
+}

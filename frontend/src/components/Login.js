@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
+import '../styles/Auth.css';
+
 export default function Login(props) {
     const initialValues = {
         email: "",
@@ -77,49 +79,49 @@ export default function Login(props) {
 
     return(
         <div className='login-wrapper'>
-        <div className= 'login-banner'>
-            <h1>GMU STUDY BUDDY</h1>
-            <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
-        </div>
-        <div className = 'login-wrapper'>
-            <div className= 'login-title'>
-            <h1>Login:</h1>
-            {statusMessage(response)}
+            <div className= 'login-banner'>
+                <h1>GMU STUDY BUDDY</h1>
+                <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
             </div>
-            <Formik 
-            initialValues={initialValues} 
-            onSubmit={onSubmit} 
-            validationSchema={validationSchema}
-            >
-            <Form className = 'form-container'>
-                <div className='email-container'>
-                <label>Email: </label>
-                <Field 
-                id="email" 
-                type="email" 
-                name="email" 
-                placeholder="{student@gmu.edu}"
-                />
+            <div className = 'login-wrapper'>
+                <div className= 'login-title'>
+                    <h1>Login:</h1>
                 </div>
-                <ErrorMessage className="err" name="email" component="span" />
-                <div className= 'password-container'>
-                <label>Password: </label>
-                <Field 
-                id="password" 
-                type="password" 
-                name="password" 
-                placeholder="{password}" />
-                </div>
-                <ErrorMessage className="err" name="password" component="span" />
-                <button type="submit">Login</button>
-            </Form>
-            </Formik>
-            <button onClick={ () => {
-            props.setRegister(true)
-            }}>
-            Don't have an account?
-            </button>
-        </div>
+                {statusMessage(response)}
+                <Formik 
+                initialValues={initialValues} 
+                onSubmit={onSubmit} 
+                validationSchema={validationSchema}
+                >
+                    <Form className = 'form-container'>
+                        <div className='email-container'>
+                            <label>Email: </label>
+                            <Field 
+                            id="email" 
+                            type="email" 
+                            name="email" 
+                            placeholder="{student@gmu.edu}"
+                            />
+                        </div>
+                        <ErrorMessage className="err" name="email" component="span" />
+                        <div className= 'password-container'>
+                            <label>Password: </label>
+                            <Field 
+                            id="password" 
+                            type="password" 
+                            name="password" 
+                            placeholder="{password}" />
+                        </div>
+                        <ErrorMessage className="err" name="password" component="span" />
+                        <button type="submit">Login</button>
+                    </Form>
+                </Formik>
+                <button onClick={ () => {
+                props.setRegister(true)
+                }}>
+                Don't have an account?
+                </button>
+            </div>
         </div>
     )
 }
