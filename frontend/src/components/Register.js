@@ -4,8 +4,9 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 //import moment from 'moment';
+
+import SelectField from '../util/SelectField'
 import '../styles/Register.css';
-import '../styles/Auth.css';
 
 export default function Register(props) {
     const [response, setResponse] = useState("");
@@ -154,15 +155,19 @@ export default function Register(props) {
             firstName: "",
             lastName: "",
             date: "",
-            preferences: null,
+            preferences: [],
+            // byMajor: false,
+            // byGender: false,
+            // byAge: false,
             gender: "",
             major: "",
             bio: "", //not required
-            classTaken: null, //not required (yet)
+            classTaken: [], //not required (yet)
         };
     
         async function onSubmit(data){
             try {
+                console.log(data)
                 let request = { ...data, email: email };
                 //console.log(request);
                 const responseVal = await axios.post("http://localhost:3001/users/register2", request);
@@ -184,12 +189,39 @@ export default function Register(props) {
         //     });
         // });
 
+        const selectObjects = [
+            {
+                label: "CS 112",
+                value: "CS 112"
+            },
+            {
+                label: "CS 211",
+                value: "CS 211"
+            },
+            {
+                label: "CS 310",
+                value: "CS 310"
+            },
+            {
+                label: "CS 321",
+                value: "CS 321"
+            },
+            {
+                label: "CS 367",
+                value: "CS 367"
+            },
+            {
+                label: "CS 330",
+                value: "CS 330"
+            }
+            ];
+
 
         const validationSchema = Yup.object().shape({
             pfp: Yup.mixed()
-                .test("fileSize", "The file is too large", (value) => {
-                    if (!value.length) return true // profile pic is optional
-                    return value[0].size <= 2000000})
+                // .test("fileSize", "The file is too large", (value) => {
+                //     if (!value.length) return true // profile pic is optional
+                //     return value[0].size <= 2000000})
                     .required("Profile image is required."),
             firstName: Yup.string()
                 .required('First name is required.'),
@@ -210,7 +242,7 @@ export default function Register(props) {
                 .required('Major is required.'),
             bio: Yup.string()
                 .max(500, "Bio cannot exceed 500 characters."),
-            classesTaken: Yup.string(),
+            //classesTaken: Yup.string(),
                 //.required("Classes taken are required."),
         });
     
@@ -227,6 +259,14 @@ export default function Register(props) {
                     </div>
                     <h3 className="ed-profile-info-title">Profile Information: </h3>
                     <div className='ed-profile-info-body'>
+                        <div className="ed-pfp-container">
+                            <label>Profile Picture: </label>
+                            <Field
+                            id="pfp"
+                            type="file"
+                            name="pfp"
+                            />
+                        </div>
                         <div className='ed-name-container'>
                             <label>First Name: </label>
                             <Field
@@ -280,32 +320,44 @@ export default function Register(props) {
                             />
                             <ErrorMessage className="ed-err" name="major" component="span" />
                         </div>
+                        <div className='ed-bio-container'>
+                            <label>Bio (optional): </label>
+                            <Field
+                                as="textarea"
+                                id="bio"
+                                type="bio"
+                                name="bio"
+                            />
+                            <ErrorMessage className="ed-err" name="bio" component="span" />
+                        </div>
+                        <div className='ed-class-container'>
+                            <label>Classes Taken (optional): </label>
+                            <Field
+                                component={SelectField}
+                                options={selectObjects}
+                                id="classesTaken"
+                                type="classesTaken"
+                                name="classesTaken"
+                            />
+                            <ErrorMessage className="ed-err" name="classesTaken" component="span" />
+                        </div>
                     </div>
                     <h3 className="ed-preferences-title">Matching Preferences: </h3>
                     <div className='ed-preferences-container'>
                         <div className='ed-pref-container'>
                             <label>
-                                <Field type="checkbox" name="preferences" value={true}/>
+                                <Field type="checkbox" name="preferences" value="byMajor"/>
                                 Major
                             </label>
                             <label>
-                                <Field type="checkbox" name="preferences" value={true}/>
+                                <Field type="checkbox" name="preferences" value="byGender"/>
                                 Gender
                             </label>
                             <label>
-                                <Field type="checkbox" name="preferences" value={true}/>
+                                <Field type="checkbox" name="preferences" value="byAge"/>
                                 Age
                             </label>
                         </div>
-                        {/* <div className='ed-bio-container'>
-                            <label>Bio: </label>
-                            <Field
-                                id="bio"
-                                type="bio"
-                                name="bio"
-                                placeholder="{bio}"
-                            />
-                        </div> */}
                         
                         <button className="r2-button" type="submit">Create Account</button>
                     </div>
