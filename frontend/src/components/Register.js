@@ -16,20 +16,15 @@ export default function Register(props) {
 
     if(registered){
         return(
-            <Register2 
-                setToken={props.setToken}
-            />
+            <Register2/>
         );
     } else {
         return (
-            <Register1 
-                setUserEmail={props.setUserEmail} 
-                setRegister={props.setRegister}
-            />
+            <Register1/>
         );
     }
 
-    function Register1(props) {
+    function Register1() {
         // const [response, setResponse] = useState("");
         // const [registered, setRegistered] = useState(false);
 
@@ -99,59 +94,59 @@ export default function Register(props) {
         });
         
         return(
-            <Register2 />
-            // <div className='login-wrapper'>
-            //     <div className= 'login-banner'>
-            //         <h1>GMU STUDY BUDDY</h1>
-            //         <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
-            //     </div>
-            //     <div className = 'login-wrapper'>
-            //         <div className= 'login-title'>
-            //             <h1>Register:</h1>
-            //         </div>
-            //         {statusMessage(response)}
-            //         <Formik 
-            //         initialValues={initialValues} 
-            //         onSubmit={onSubmit} 
-            //         validationSchema={validationSchema}
-            //         >
-            //             <Form className = 'form-container'>
-            //                 <div className='email-container'> 
-            //                     <label>Email: </label>
-            //                     <Field 
-            //                     id="email" 
-            //                     type="email" 
-            //                     name="email" 
-            //                     placeholder="{student@gmu.edu}"
-            //                     />
-            //                 </div>
-            //                 <ErrorMessage className="err" name="email" component="span" />
-            //                 <div className= 'password-container'>
-            //                     <label>Password: </label>
-            //                     <Field 
-            //                     id="password" 
-            //                     type="password" 
-            //                     name="password" 
-            //                     placeholder="{password}" />
-            //                 </div>
-            //                 <ErrorMessage className="err" name="password" component="span" />
-            //                 <button type="submit">Register</button>
-            //             </Form>
-            //         </Formik>
-            //         <button onClick={ () => {
-            //             props.setRegister(false)
-            //             }}>
-            //             Already have an account?
-            //         </button>
-            //     </div> 
-            // </div>
+            // <Register2 />
+            <div className='login-wrapper'>
+                <div className= 'login-banner'>
+                    <h1>GMU STUDY BUDDY</h1>
+                    <h3>... a Tinder-like social media app for Mason students looking for study buddies!</h3>
+                </div>
+                <div className = 'login-wrapper'>
+                    <div className= 'login-title'>
+                        <h1>Register:</h1>
+                    </div>
+                    {statusMessage(response)}
+                    <Formik 
+                    initialValues={initialValues} 
+                    onSubmit={onSubmit} 
+                    validationSchema={validationSchema}
+                    >
+                        <Form className = 'form-container'>
+                            <div className='email-container'> 
+                                <label>Email: </label>
+                                <Field 
+                                id="email" 
+                                type="email" 
+                                name="email" 
+                                placeholder="{student@gmu.edu}"
+                                />
+                            </div>
+                            <ErrorMessage className="err" name="email" component="span" />
+                            <div className= 'password-container'>
+                                <label>Password: </label>
+                                <Field 
+                                id="password" 
+                                type="password" 
+                                name="password" 
+                                placeholder="{password}" />
+                            </div>
+                            <ErrorMessage className="err" name="password" component="span" />
+                            <button type="submit">Register</button>
+                        </Form>
+                    </Formik>
+                    <button onClick={ () => {
+                        props.setRegister(false)
+                        }}>
+                        Already have an account?
+                    </button>
+                </div> 
+            </div>
         );
     }
 
-    function Register2(props){
+    function Register2(){
         const initialValues = {
             //password: "",
-            pfp: null,
+            pfp: "",
             firstName: "",
             lastName: "",
             date: "",
@@ -167,8 +162,27 @@ export default function Register(props) {
     
         async function onSubmit(data){
             try {
-                console.log(data)
-                let request = { ...data, email: email };
+                console.log(data);
+                let list = [];
+                data.classesTaken.forEach((item) => list.push(item.value));
+                let pref = [];
+                data.preferences.forEach((item) => {
+                    if(item === 'byGender'){
+                        pref.push({byGender: true});
+                    }
+                    if(item === 'byMajor'){
+                        pref.push({byMajor: true});
+                    }
+                    if(item === 'byAge'){
+                        pref.push({byAge: true});
+                    }
+                });
+                let request = { 
+                    ...data, 
+                    email: email,
+                    classesTaken: list,
+                    preferences: pref
+                };
                 //console.log(request);
                 const responseVal = await axios.post("http://localhost:3001/users/register2", request);
                 console.log(responseVal.data);
@@ -218,15 +232,15 @@ export default function Register(props) {
 
 
         const validationSchema = Yup.object().shape({
-            pfp: Yup.mixed()
+            pfp: Yup.mixed(),
                 // .test("fileSize", "The file is too large", (value) => {
                 //     if (!value.length) return true // profile pic is optional
                 //     return value[0].size <= 2000000})
-                    .required("Profile image is required."),
+                    //.required("Profile image is required."),
             firstName: Yup.string()
                 .required('First name is required.'),
             lastName: Yup.string()
-                .required('First name is required.'),
+                .required('Last name is required.'),
             //Validate birthdate by month/date/year
             //MM/DD/YYYY
             date: Yup.date()
@@ -234,7 +248,7 @@ export default function Register(props) {
                 .typeError('Date format must be MM/DD/YYYY')
                 //.format('DD-MM-YYYY', true)
                 .required('Birthday is required.'),
-            preferences: Yup.string(),
+            preferences: Yup.mixed(),
                 //.required('Preferences are required.'),
             gender: Yup.string()
                 .required("Gender is required."),
@@ -242,7 +256,7 @@ export default function Register(props) {
                 .required('Major is required.'),
             bio: Yup.string()
                 .max(500, "Bio cannot exceed 500 characters."),
-            //classesTaken: Yup.string(),
+            classesTaken: Yup.mixed(),
                 //.required("Classes taken are required."),
         });
     
@@ -253,7 +267,6 @@ export default function Register(props) {
                 validationSchema={validationSchema}
             >
                 <Form className = 'ed-form-container'>
-                    <ErrorMessage className="ed-err" name="email" component="span" />
                     <div className='ed-form-header'>
                         <h2>Create Your Account</h2>
                     </div>
@@ -262,9 +275,9 @@ export default function Register(props) {
                         <div className="ed-pfp-container">
                             <label>Profile Picture: </label>
                             <Field
-                            id="pfp"
-                            type="file"
-                            name="pfp"
+                                id="pfp"
+                                type="file"
+                                name="pfp"
                             />
                         </div>
                         <div className='ed-name-container'>
@@ -293,8 +306,8 @@ export default function Register(props) {
                                 name="date"
                                 placeholder="{ MM/DD/YYYY }"
                             />
-                            <ErrorMessage className="ed-err" name="date" component="span" />
                         </div>
+                        <ErrorMessage className="ed-err" name="date" component="span" />
                         <div className='ed-gender-container'>
                             <label>Gender: </label>
                             <Field 
@@ -308,8 +321,8 @@ export default function Register(props) {
                                 <option value="Non-binary">Non-binary</option>
                                 <option value="Other">Other</option>
                             </Field>
-                            <ErrorMessage className="ed-err" name="gender" component="span" />
                         </div>
+                        <ErrorMessage className="ed-err" name="gender" component="span" />
                         <div className='ed-major-container'>
                             <label>Major: </label>
                             <Field
@@ -318,8 +331,8 @@ export default function Register(props) {
                                 name="major"
                                     placeholder="{ e.g. Computer Science }"
                             />
-                            <ErrorMessage className="ed-err" name="major" component="span" />
                         </div>
+                        <ErrorMessage className="ed-err" name="major" component="span" />
                         <div className='ed-bio-container'>
                             <label>Bio (optional): </label>
                             <Field
@@ -328,8 +341,8 @@ export default function Register(props) {
                                 type="bio"
                                 name="bio"
                             />
-                            <ErrorMessage className="ed-err" name="bio" component="span" />
                         </div>
+                        <ErrorMessage className="ed-err" name="bio" component="span" />
                         <div className='ed-class-container'>
                             <label>Classes Taken (optional): </label>
                             <Field
@@ -339,8 +352,8 @@ export default function Register(props) {
                                 type="classesTaken"
                                 name="classesTaken"
                             />
-                            <ErrorMessage className="ed-err" name="classesTaken" component="span" />
                         </div>
+                        <ErrorMessage className="ed-err" name="classesTaken" component="span" />
                     </div>
                     <h3 className="ed-preferences-title">Matching Preferences: </h3>
                     <div className='ed-preferences-container'>
@@ -358,9 +371,8 @@ export default function Register(props) {
                                 Age
                             </label>
                         </div>
-                        
-                        <button className="r2-button" type="submit">Create Account</button>
                     </div>
+                    <button className="r2-button" type="submit">Create Account</button>
                 </Form>
             </Formik>
         )

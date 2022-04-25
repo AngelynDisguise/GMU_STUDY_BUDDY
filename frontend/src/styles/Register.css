@@ -21,3 +21,9 @@
     margin-top: 2em;
     margin-left: 3em;
 }
+
+.ed-err {
+    color: red;
+    font-size: .8em;
+    padding: .5em;
+}
