@@ -15,10 +15,10 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import Help from './components/Help';
 // import Chat from './components/Chat';
-import Register from './components/Register';
 
 //styles
 import './App.css';
+//import './styles/Auth.css'
 import './styles/Header.css';
 import './styles/Home.css';
 import './styles/Profile.css';
@@ -54,7 +54,6 @@ function App() {
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
-          {/* <Route path="/" element={<Register />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
