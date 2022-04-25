@@ -44,7 +44,9 @@ function Matches() {
             <h2>Matches</h2>
             <div className='matches-body'>
                 {students.map((student) => (
-                    <div className='matches-profile'>
+                    <div className='matches-profile'
+                          key={student.name}
+                    >
                         <div className='matches-profpic'>
                           <img src={student.url} height="100" width="100"/>
                         </div>
