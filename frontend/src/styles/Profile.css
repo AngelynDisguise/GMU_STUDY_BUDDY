@@ -1,40 +1,51 @@
-.profile-wrapper{
+.profile-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 20px;
 }
 
-.profile-header{
-    display: inline-block;
+.profile-header {
+    /* display: inline-flex; */
     text-align: center;
     border-bottom: solid green 3px;
-    
-    height: 60px;
-
+    margin: 10px;
+    /* height: 60px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-
-    padding: 5px;
+    padding: 5px; */
 }
 
-.profile-body{
+
+/* .profile-body {
     display: flex;
     flex-direction: row;
-}
+} */
 
-.profile-infoactions{
+
+/* .profile-info {
+    display: block;
+} */
+
+
+/* .profile-infoactions {
     position: relative;
     bottom: -100px;
-}
+} */
 
-.profile-actions{
+.profile-actions {
     display: flex;
     flex-direction: column;
     width: auto;
 }
 
-.profile-editButton{
+.profile-editButton {
     position: relative;
-    bottom: -100px;
+    left: 330px;
+    top: -70px;
+}
+
+.profile-pic {
+    text-align: center;
 }

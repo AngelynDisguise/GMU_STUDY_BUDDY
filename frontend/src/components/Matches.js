@@ -11,8 +11,6 @@ import Helms from '../images/helms.jpg';
 import Anon from '../images/anon.jpg';
 
 function Matches(props) {
-    
-
 
   //Dummy code for testing
   // const [students, setStudents] = useState([

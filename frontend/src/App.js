@@ -15,7 +15,7 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import Help from './components/Help';
 // import Chat from './components/Chat';
-import {getUserInfo, fetchMatchList} from './util/UserInfo';
+import {getUserInfo} from './util/UserInfo';
 
 //styles
 import './App.css';
@@ -35,7 +35,7 @@ function App() {
   
   //USER INFO **********************************************************
   // token: gives user access to app if they are logged in
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null); //kind of useless....
   // userEmail: identifies logged in user; used to access user information
   const [userEmail, setUserEmail] = useState(null);
   // user info
@@ -49,8 +49,9 @@ function App() {
   //useFootGun
   // useEffect(() => {
   //   console.log("App.js: useEffect()");
-  //   setToken(localStorage.getItem('token'));
-  //   setUserEmail(localStorage.getItem('userEmail'));
+  //   // setToken(localStorage.getItem('token'));
+  //   // setUserEmail(localStorage.getItem('userEmail'));
+  //   //getUserInfo(userEmail).then(user => {if(user) setUserFirstName(user.firstName)});
   // }, []);
   
   if(!localStorage.getItem('token') && !localStorage.getItem('userEmail')) {
@@ -72,7 +73,10 @@ function App() {
               user ={userFirstName} 
               backButton="/"
             /> 
-            <Profile /> 
+            <Profile 
+              user ={userFirstName}
+              userEmail={localStorage.getItem('userEmail')} 
+            /> 
             <Footer/> 
           </>} />
           <Route path="/matches" element={<>
@@ -106,6 +110,7 @@ function App() {
           <Route path='/help' element={<>
             <Header 
               user ={userFirstName} 
+              userEmail={localStorage.getItem('userEmail')} 
               backButton="/" 
             />
             <Help />
