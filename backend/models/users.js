@@ -65,6 +65,10 @@ module.exports = (sequelize, DataTypes) => {
         pfp: {
             type: DataTypes.BLOB("long"),
             allowNull: true,
+            get() {
+                //return this.getDataValue('pfp') ? this.getDataValue('pfp').toString('base64') : null;
+                return this.getDataValue('pfp') ? "something's there" : null;
+            }
         },
         firstName: {
             type: DataTypes.STRING,

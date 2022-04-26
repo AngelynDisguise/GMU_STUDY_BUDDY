@@ -68,6 +68,17 @@ export async function updateUserInfo(data) {
 //     return response.data;
 // }
 
+export async function popMatchUser(email) {
+    if (!email) return;
+    try {
+        const response = await axios.post("http://localhost:3001/users/match/delete", JSON.parse(`{ \"email\": \"${email}\" }`));
+        //console.log(response);
+        return (response.data);
+    } catch (error) {
+        return error;
+    }
+}
+
 export async function fetchMatchList(email) {
     if (!email) return;
     try {
@@ -83,15 +94,17 @@ export async function fetchMatchList(email) {
     }
 }
 
-// function addStudyBuddy(data) {
-//     //data = email
-//     try {
-//         const response = await axios.get("http://localhost:3001/users/addStudyBuddy", data);
-//     } catch (error) {
-//         return error;
-//     }
-//     return response.data;
-// }
+export async function addStudyBuddy(userEmail, studyBuddyEmail) {
+    //data = { email, studyBuddyEmail }
+    if (!userEmail || !studyBuddyEmail) return null;
+    try {
+        const response = await axios.post("http://localhost:3001/users/addStudyBuddy", JSON.parse(`{ \"userEmail\": \"${userEmail}\", \"studyBuddyEmail\": \"${studyBuddyEmail}\" }`));
+        console.log("studyBuddy response: " + response.data);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}
 
 // function removeStudyBuddy(data) {
 //     //data = email

@@ -254,22 +254,33 @@ router.post("/remove", async(req, res) => {
 //Create match list by user preferences
 router.post("/match", async(req, res) => {
     const { email } = req.body; //get body of data being pass in
-    console.log(req.body);
-    // console.log("byGender: ", byGender);
-    // console.log("byMajor: ", byMajor);
-    // console.log("byAge: ", byAge);
+    //console.log(req.body);
     //Find if user exists
     const user = await Users.findOne({
         where: {
             email: email,
         },
     });
-    console.log(user);
+    //console.log(user);
     if (user) {
         try {
-            const byGender = user.preferences.byGender;
-            const byMajor = user.preferences.byMajor;
-            const byAge = user.preferences.byAge;
+            let byGender, byMajor, byAge;
+            console.log(user.preferences);
+            user.preferences.forEach((pref) => {
+                if (pref.byGender) {
+                    byGender = pref.byGender;
+                }
+                if (pref.byMajor) {
+                    byMajor = pref.byMajor;
+                }
+                if (pref.byAge) {
+                    byAge = pref.byAge;
+                }
+                console.log(pref);
+            });
+            console.log("byGender: ", byGender);
+            console.log("byMajor: ", byMajor);
+            console.log("byAge: ", byAge);
             //Create/update match list
             let matchList = new Array();
             if (byGender && byMajor && byAge) {
@@ -285,7 +296,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyAll.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyAll;
@@ -301,7 +313,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGenderMajor.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyGenderMajor;
@@ -317,7 +330,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGenderAge.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyGenderAge;
@@ -333,7 +347,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyMajorAge.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyMajorAge;
@@ -348,7 +363,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGender.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyGender;
@@ -363,7 +379,8 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyMajor.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyMajor;
@@ -376,9 +393,11 @@ router.post("/match", async(req, res) => {
                         age: user.age,
                     }
                 });
+                //console.log(matchbyAge);
                 //Add every JSON object's email to matchList
                 matchbyAge.forEach(match => {
-                    matchList.push(match.email);
+                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
                 //matchList = matchbyAge;
@@ -388,11 +407,52 @@ router.post("/match", async(req, res) => {
             await user.update({
                 numMatches: numMatches,
                 matchList: matchList,
+                studyBuddyList: [],
+                numStudyBuddies: 0,
             });
             res.json(user.matchList);
             console.log("Create match list successful!");
         } catch (err) {
             res.status(500).json("Error creating/updating match list! :(");
+        }
+    } else {
+        res.status(400).json("User not found!");
+    }
+});
+
+router.post("/match/delete", async(req, res) => {
+    const { email } = req.body; //get body of data being pass in
+    //console.log(req.body);
+    //Find if user exists
+    const user = await Users.findOne({
+        where: {
+            email: email,
+        },
+    });
+    //console.log(user);
+    if (user) {
+        if (user.matchList.length > 0) {
+            let matchList = user.matchList;
+            let removedUser = matchList.pop();
+            let numMatches = matchList.length;
+            // console.log(user.matchList);
+            // console.log(matchList);
+            try {
+                await Users.update({
+                    numMatches: numMatches,
+                    matchList: matchList,
+                }, {
+                    where: {
+                        email: email,
+                    },
+                });
+                console.log(removedUser.firstName + " removed from match list!");
+                res.json(removedUser);
+            } catch (err) {
+                res.status(500).json("Error deleting match list! :(");
+            }
+        } else {
+            res.status(400).json("No matches to delete!");
         }
     } else {
         res.status(400).json("User not found!");
@@ -426,6 +486,7 @@ router.post("/addStudyBuddy", async(req, res) => {
                 }
                 //Check if study buddy already in study buddy list
                 if (currentStudyBuddyList.indexOf(studyBuddyEmail) > -1) {
+                    console.log("Study buddy already in study buddy list!");
                     res.status(400).json("Study buddy already in study buddy list!");
                 } else {
                     console.log("Before add: ", user.studyBuddyList);
@@ -443,7 +504,8 @@ router.post("/addStudyBuddy", async(req, res) => {
                     });
                     console.log("After add: ", user.studyBuddyList);
                     console.log(currentStudyBuddyList);
-                    res.json(user.studyBuddyList);
+                    res.json(currentStudyBuddyList);
+                    //res.json(user.studyBuddyList);
                     console.log("Add study buddy successful!");
                 }
             } catch (err) {
@@ -451,6 +513,7 @@ router.post("/addStudyBuddy", async(req, res) => {
             }
         }
     } else {
+        console.log("User or study buddy does not exist!");
         res.status(400).json("User or study buddy does not exist!");
     }
 });

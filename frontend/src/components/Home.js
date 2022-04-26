@@ -4,7 +4,7 @@ import TinderCard from 'react-tinder-card';
 import { Link, Route } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import {getUserInfo, fetchMatchList} from '../util/UserInfo';
+import {getUserInfo, fetchMatchList, popMatchUser, addStudyBuddy} from '../util/UserInfo';
 import MatchUser from './MatchUser';
 
 //images
@@ -17,19 +17,72 @@ import Anon from '../images/anon.jpg';
 function Home(props) {
 
   const [matchList, setMatchList] = useState([]);
-  const [user, setUser] = useState();
 
   useEffect (() => {
     console.log("Home.js: useEffect()");
+    console.log(props.userEmail);
     fetchMatchList(props.userEmail).then(result => {
       if(result) setMatchList(result);
       console.log(matchList);
     });
-    getUserInfo(props.userEmail).then(result => {if(result) setUser(result.firstName)});
-    //getMatchList();
   }, []);
 
-  
+  const onSwipe = (direction) => {
+    console.log('You swiped: ' + direction);
+    //remove user from match list
+    popMatchUser(props.userEmail).then((removedMatchUser) => {
+      if(removedMatchUser) setMatchUserEmail(removedMatchUser.email);
+      console.log(removedMatchUser.firstName + " removed from match list");
+      if(direction === 'right') {
+        //add removed user to study buddy list
+        addStudyBuddy(props.userEmail, removedMatchUser.email)
+        .then((list) => {
+          //save study buddy list
+          if(list) {
+            props.setStudyBuddyList(list);
+            console.log("New study buddy list made: ", list);
+          }
+        });
+      }
+    });
+  }
+
+  function generateCards() {
+    if(matchList && matchList.length > 0) {
+      return (
+        matchList.map((match) => (
+          
+          <TinderCard 
+            className="Swipe"
+            key={match.email}
+            onSwipe={onSwipe}
+            preventSwipe={['up', 'down']}
+          >
+            <div 
+              className="card"
+              style={{ backgroundImage: `url(${Anon})` }}
+            >
+              <h3 className="matchName">{match.firstName}</h3>
+              <Link to={{
+                pathname: "/matchUser/" + match.firstName,
+              }}>
+                <IconButton>
+                  <InfoIcon />
+                </IconButton>
+              </Link>
+            </div>
+          </TinderCard>
+        ))
+      );
+    } else {
+      return (
+        <div className="no-match-err">
+          <h1 className="no-match-err-line1">No Matches found :(</h1>
+          <h2 className="no-match-err-line2">Please come back later!</h2>
+        </div>
+      );
+    }
+  }
 
 
   /*Array of Tinder Cards 
@@ -37,28 +90,24 @@ function Home(props) {
   - will eventually be generated based off "matches" 
   from existing accounts, stored in database
   */
-  const [matches, setMatches] = useState([
-    {
-      name: "Mengistu",
-      url: Mengistu,
-      gender: "M",
-    },
-    {
-      name: "Monkeh, hehe",
-      url: Monkeh,
-      gender: "M",
-    },
-    {
-      name: "Russell",
-      url: Russell,
-      gender: "F",
-    }, 
-    {
-      name: "Ed Helms",
-      url: Helms,
-      gender: "M",     
-    },
-  ]);
+  // const [matches, setMatches] = useState([
+  //   {
+  //     name: "Mengistu",
+  //     url: Mengistu,
+  //   },
+  //   {
+  //     name: "Monkeh, hehe",
+  //     url: Monkeh,
+  //   },
+  //   {
+  //     name: "Russell",
+  //     url: Russell,
+  //   }, 
+  //   {
+  //     name: "Ed Helms",
+  //     url: Helms,     
+  //   },
+  // ]);
 
   return (
     <div className='home'>
@@ -68,32 +117,7 @@ function Home(props) {
       
       <div className='cardsContainer'>
         
-        {matches.map((match) => (
-          
-          <TinderCard 
-            className="Swipe"
-            key={match.name}
-            preventSwipe={['up', 'down']}
-          >
-            <div 
-              className="card"
-              style={{ backgroundImage: `url(${match.url})` }}
-            >
-              <h3>{match.name}</h3>
-              
-              <Link to={{
-                pathname: "/matchUser/" + match.name,
-              }}>
-                <IconButton>
-                  <InfoIcon />
-                </IconButton>
-              </Link>              
-            
-            </div>
-          
-          </TinderCard>
-          
-        ))}
+        {generateCards()}
       </div>
     </div>
   );

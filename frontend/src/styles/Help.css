@@ -1,24 +1,21 @@
-.help-wrapper{
+.help-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.help-header{
+.help-header {
     display: inline-block;
     text-align: center;
     border-bottom: solid green 3px;
-    
     height: 60px;
-
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-
     padding: 5px;
 }
 
-.help-body{
+.help-body {
     position: relative;
     bottom: -100px;
 }
