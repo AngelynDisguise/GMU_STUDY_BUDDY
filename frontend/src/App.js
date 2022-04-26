@@ -39,8 +39,6 @@ function App() {
   // userEmail: identifies logged in user; used to access user information
   const [userEmail, setUserEmail] = useState(null);
   // user info
-  const [userFirstName, setUserFirstName] = useState(null);
-  getUserInfo(userEmail).then(user => {if(user) setUserFirstName(user.firstName)});
   const [studyBuddyList, setStudyBuddyList] = useState([]);
   //const [matchList, setMatchList] = useState([]);
   //USER INFO **********************************************************
@@ -70,18 +68,17 @@ function App() {
         <Routes>
           <Route path="/profile" element={<>
             <Header 
-              user ={userFirstName} 
+              userEmail={localStorage.getItem('userEmail')}
               backButton="/"
             /> 
             <Profile 
-              user ={userFirstName}
               userEmail={localStorage.getItem('userEmail')} 
             /> 
             <Footer/> 
           </>} />
           <Route path="/matches" element={<>
-            <Header 
-              user ={userFirstName} 
+            <Header
+              userEmail={localStorage.getItem('userEmail')} 
               backButton="/"
             /> 
             <Matches 
@@ -93,15 +90,14 @@ function App() {
           </>} />
           <Route path="/matchUser/:name" element={<>
             <Header 
-              user ={userFirstName} 
               backButton="/"
             /> 
             <MatchUser/> 
             <Footer />
           </>} />
           <Route path="/editprofile" element={<>
-            <Header 
-              user ={userFirstName} 
+            <Header
+              userEmail={localStorage.getItem('userEmail')} 
               backButton="/profile"
             /> 
             <EditProfile/> 
@@ -109,7 +105,6 @@ function App() {
           </>} />
           <Route path='/help' element={<>
             <Header 
-              user ={userFirstName} 
               userEmail={localStorage.getItem('userEmail')} 
               backButton="/" 
             />
@@ -117,7 +112,9 @@ function App() {
           </>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/" element={<>
-            <Header user={userFirstName}/> 
+            <Header
+              userEmail={localStorage.getItem('userEmail')}
+            /> 
             <Home 
               userEmail={localStorage.getItem('userEmail')} 
               setStudyBuddyList = {setStudyBuddyList}

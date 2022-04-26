@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
+import {getUserInfo} from '../util/UserInfo';
+
 
 // material-ui
 import { IconButton } from '@material-ui/core';
@@ -12,6 +14,13 @@ import PatriotLogo from "../images/gmulogo.png";
 import "../styles/Header.css";
 
 function Header(props) {
+    const [userFirstName, setUserFirstName] = useState(null);
+
+    useEffect(() => {
+        console.log("Header.js: useEffect()");
+        getUserInfo(props.userEmail).then(user => {if(user) setUserFirstName(user.firstName)});
+    }, []); //...not working :(
+
     return (
         <>
         <div className="header">
@@ -42,7 +51,7 @@ function Header(props) {
                 </Link>
             </IconButton>
         </div>
-        <div className="user"><b>{props.user}</b></div>
+        <div className="user"><b>{userFirstName}</b></div>
         </>
     );
 }
