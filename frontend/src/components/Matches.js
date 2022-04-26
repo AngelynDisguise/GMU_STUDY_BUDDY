@@ -7,7 +7,7 @@ import Monkeh from '../images/monkeh.jpg';
 import Russell from '../images/russell.jfif';
 import Helms from '../images/helms.jpg';
 
-function Matches() {
+function Matches(props) {
     const [students, setStudents] = useState([
         {
           name: "Mengistu",

@@ -38,47 +38,49 @@ function App() {
   const [token, setToken] = useState(null);
   // userEmail: identifies logged in user; used to access user information
   const [userEmail, setUserEmail] = useState(null);
+  // user info
   const [userFirstName, setUserFirstName] = useState(null);
   getUserInfo(userEmail).then(user => {if(user) setUserFirstName(user.firstName)});
+  const [studyBuddyList, setStudyBuddyList] = useState([]);
   //const [matchList, setMatchList] = useState([]);
   //USER INFO **********************************************************
   
   //TOKEN CODE **********************************************************
   //useFootGun
-  useEffect(() => {
-    console.log("App.js: useEffect()");
-    setToken(localStorage.getItem('token'));
-    setUserEmail(localStorage.getItem('userEmail'));
-  }, []);
+  // useEffect(() => {
+  //   console.log("App.js: useEffect()");
+  //   setToken(localStorage.getItem('token'));
+  //   setUserEmail(localStorage.getItem('userEmail'));
+  // }, []);
   
-  if(!token && !userEmail) {
+  if(!localStorage.getItem('token') && !localStorage.getItem('userEmail')) {
     console.log("(App.js) App token: "+token+"\nRedirecting to Login...");
     return <Auth setToken={setToken} setUserEmail={setUserEmail} />
   } else {
-    // console.log("App.js: token: "+token+"\nRedirecting to Home...");
+    console.log("App.js: token: "+token+"\nRedirecting to Home...");
     // console.log("App.js: userEmail: "+userEmail);
-    // console.log("App.js: username: "+user.firstName);
+    //console.log("App.js: username: "+userFirstName);
   }
   //TOKEN CODE **********************************************************
   
-  
-
-
   return ( 
-   
     <div className="App" >
-      {/* Header */}
       <div className="wrapper">
-        {/* Routes */}
         <Routes>
-          {/* Home: Profile+ Study Buddy Card + Matches List*/}
           <Route path="/profile" element={<><Header user ={userFirstName} backButton="/"/> <Profile /> <Footer/> </>} />
-          <Route path="/matches" element={<><Header user ={userFirstName} backButton="/"/> <Matches /> <Footer /></>} />
+          <Route path="/matches" element={<><Header user ={userFirstName} backButton="/"/> <Matches studyBuddyList= {studyBuddyList}/> <Footer /></>} />
           <Route path="/matchUser/:name" element={<><Header user ={userFirstName} backButton="/"/> <MatchUser/> <Footer /></>} />
           <Route path="/editprofile" element={<><Header user ={userFirstName} backButton="/profile"/> <EditProfile/> <Footer/></>} />
           <Route path='/help' element={<><Header user ={userFirstName} backButton="/" /><Help /></>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
-          <Route path="/" element={<><Header user ={userFirstName}/> <Home /> <Footer /></>} />
+          <Route path="/" element={<>
+            <Header user={userFirstName}/> 
+            <Home 
+              userEmail={localStorage.getItem('userEmail')} 
+              setStudyBuddyList = {setStudyBuddyList}
+            /> 
+            <Footer /></>} 
+          />
         </Routes>
       </div>
       

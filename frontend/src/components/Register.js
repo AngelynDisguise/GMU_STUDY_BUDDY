@@ -240,8 +240,8 @@ export default function Register(props) {
                     //.required("Profile image is required."),
             firstName: Yup.string()
                 .required('First name is required.'),
-            lastName: Yup.string()
-                .required('Last name is required.'),
+            lastName: Yup.string(),
+                //.required('Last name is required.'),
             //Validate birthdate by month/date/year
             //MM/DD/YYYY
             date: Yup.date()
@@ -282,7 +282,7 @@ export default function Register(props) {
                             />
                         </div>
                         <div className='ed-name-container'>
-                            <label>First Name: </label>
+                            <label>First Name/Nickname: </label>
                             <Field
                                 id="firstName"
                                 type="firstName"
