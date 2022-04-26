@@ -1,7 +1,10 @@
 import React from 'react';
 import '../styles/Help.css';
 
-function Help(){
+
+
+function Help({ fromPage }){
+    
     return(
         <div className='help-wrapper'>
             <div className='help-header'>
