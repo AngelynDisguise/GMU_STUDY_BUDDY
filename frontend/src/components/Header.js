@@ -15,7 +15,7 @@ function Header(props) {
     return (
         <>
         <div className="header">
-            {backButton ? (
+            {props.backButton ? (
                 <IconButton className='icButton'>
                     <Link to={props.backButton}>
                         <ArrowBackIcon className='navButton' />

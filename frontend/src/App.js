@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 //components
+import Auth from './components/Auth';
 import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -67,19 +68,17 @@ function App() {
    
     <div className="App" >
       {/* Header */}
-      <Header user={userFirstName}/>
       <div className="wrapper">
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
-          <Route path="/" element={<Home userEmail={userEmail}/>} />
-          <Route path="/profile" element={<><Header backButton="/"/> <Profile /> <Footer/> </>} />
-          <Route path="/matches" element={<><Header backButton="/"/> <Matches /> <Footer /></>} />
-          <Route path="/matchUser/:name" element={<><Header backButton="/"/> <MatchUser/> <Footer /></>} />
-          <Route path="/editprofile" element={<><Header backButton="/profile"/> <EditProfile/> <Footer/></>} />
-          <Route path='/help' element={<><Header backButton="/" /><Help /></>} />
+          <Route path="/profile" element={<><Header user ={userFirstName} backButton="/"/> <Profile /> <Footer/> </>} />
+          <Route path="/matches" element={<><Header user ={userFirstName} backButton="/"/> <Matches /> <Footer /></>} />
+          <Route path="/matchUser/:name" element={<><Header user ={userFirstName} backButton="/"/> <MatchUser/> <Footer /></>} />
+          <Route path="/editprofile" element={<><Header user ={userFirstName} backButton="/profile"/> <EditProfile/> <Footer/></>} />
+          <Route path='/help' element={<><Header user ={userFirstName} backButton="/" /><Help /></>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
-          <Route path="/" element={<><Header /> <Home /> <Footer /></>} />
+          <Route path="/" element={<><Header user ={userFirstName}/> <Home /> <Footer /></>} />
         </Routes>
       </div>
       
