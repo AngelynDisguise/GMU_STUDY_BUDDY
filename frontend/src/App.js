@@ -67,11 +67,49 @@ function App() {
     <div className="App" >
       <div className="wrapper">
         <Routes>
-          <Route path="/profile" element={<><Header user ={userFirstName} backButton="/"/> <Profile /> <Footer/> </>} />
-          <Route path="/matches" element={<><Header user ={userFirstName} backButton="/"/> <Matches studyBuddyList= {studyBuddyList}/> <Footer /></>} />
-          <Route path="/matchUser/:name" element={<><Header user ={userFirstName} backButton="/"/> <MatchUser/> <Footer /></>} />
-          <Route path="/editprofile" element={<><Header user ={userFirstName} backButton="/profile"/> <EditProfile/> <Footer/></>} />
-          <Route path='/help' element={<><Header user ={userFirstName} backButton="/" /><Help /></>} />
+          <Route path="/profile" element={<>
+            <Header 
+              user ={userFirstName} 
+              backButton="/"
+            /> 
+            <Profile /> 
+            <Footer/> 
+          </>} />
+          <Route path="/matches" element={<>
+            <Header 
+              user ={userFirstName} 
+              backButton="/"
+            /> 
+            <Matches 
+              userEmail={localStorage.getItem('userEmail')} 
+              studyBuddyList= {studyBuddyList} 
+              setStudyBuddyList= {setStudyBuddyList}
+            /> 
+            <Footer />
+          </>} />
+          <Route path="/matchUser/:name" element={<>
+            <Header 
+              user ={userFirstName} 
+              backButton="/"
+            /> 
+            <MatchUser/> 
+            <Footer />
+          </>} />
+          <Route path="/editprofile" element={<>
+            <Header 
+              user ={userFirstName} 
+              backButton="/profile"
+            /> 
+            <EditProfile/> 
+            <Footer/>
+          </>} />
+          <Route path='/help' element={<>
+            <Header 
+              user ={userFirstName} 
+              backButton="/" 
+            />
+            <Help />
+          </>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/" element={<>
             <Header user={userFirstName}/> 
@@ -79,8 +117,8 @@ function App() {
               userEmail={localStorage.getItem('userEmail')} 
               setStudyBuddyList = {setStudyBuddyList}
             /> 
-            <Footer /></>} 
-          />
+            <Footer />
+          </>}/>
         </Routes>
       </div>
       
