@@ -43,8 +43,8 @@ function App() {
 //     console.log("App token: "+token+"\nRedirecting to Home...");
 //   }
 //   //TOKEN CODE **********************************************************
-
   return ( 
+   
     <div className="App" >
       {/* Header */}
       
@@ -54,11 +54,11 @@ function App() {
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
           {/* <Route path="/" element={<Register />} /> */}
           
-          <Route path="/profile" element={<><Header backButton="/"/> <Profile /> <Footer /></>} />
+          <Route path="/profile" element={<><Header backButton="/"/> <Profile /> <Footer/> </>} />
           <Route path="/matches" element={<><Header backButton="/"/> <Matches /> <Footer /></>} />
           <Route path="/matchUser/:name" element={<><Header backButton="/"/> <MatchUser/> <Footer /></>} />
-          <Route path="/editprofile" element={<><Header backButton="/profile"/> <EditProfile/> <Footer /></>} />
-          <Route path='/help' element={<> <Header backButton="/"/> <Help/></>} />
+          <Route path="/editprofile" element={<><Header backButton="/profile"/> <EditProfile/> <Footer/></>} />
+          <Route path='/help' element={<><Header backButton="/" /><Help /></>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
           <Route path="/" element={<><Header /> <Home /> <Footer /></>} />
         </Routes>
