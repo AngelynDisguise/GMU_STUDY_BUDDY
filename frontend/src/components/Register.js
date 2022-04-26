@@ -187,6 +187,7 @@ export default function Register(props) {
                 const responseVal = await axios.post("http://localhost:3001/users/register2", request);
                 console.log(responseVal.data);
                 if (responseVal) {
+                    localStorage.setItem('userEmail', email);
                     localStorage.setItem('token', tok);
                     props.setToken(tok);
                 } else throw "Something went wrong...";

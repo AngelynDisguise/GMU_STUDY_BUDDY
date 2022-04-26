@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import {
   Route,
   Routes,
@@ -15,6 +15,7 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import Help from './components/Help';
 // import Chat from './components/Chat';
+import {getUserInfo, fetchMatchList} from './util/UserInfo';
 
 //styles
 import './App.css';
@@ -27,38 +28,55 @@ import './styles/MatchUser.css';
 import './styles/EditProfile.css';
 import './styles/Footer.css';
 import './styles/Help.css';
+import { contextTypes } from 'react-tinder-card';
 // import './styles/Chat.css';
 
 function App() {
-  //TOKEN CODE **********************************************************
+  
+  //USER INFO **********************************************************
   // token: gives user access to app if they are logged in
   const [token, setToken] = useState(null);
-  // user: identifies logged in user; used to access user information
+  // userEmail: identifies logged in user; used to access user information
   const [userEmail, setUserEmail] = useState(null);
-// 
-  // console.log(localStorage.getItem('token'));
-  // 
-  if(!token && !localStorage.getItem('token')) {
+  const [userFirstName, setUserFirstName] = useState(null);
+  getUserInfo(userEmail).then(user => {if(user) setUserFirstName(user.firstName)});
+  //const [matchList, setMatchList] = useState([]);
+  //USER INFO **********************************************************
+  
+  //TOKEN CODE **********************************************************
+  //useFootGun
+  useEffect(() => {
+    console.log("App.js: useEffect()");
+    setToken(localStorage.getItem('token'));
+    setUserEmail(localStorage.getItem('userEmail'));
+  }, []);
+  
+  if(!token && !userEmail) {
     console.log("(App.js) App token: "+token+"\nRedirecting to Login...");
     return <Auth setToken={setToken} setUserEmail={setUserEmail} />
   } else {
-    console.log("App token: "+token+"\nRedirecting to Home...");
+    // console.log("App.js: token: "+token+"\nRedirecting to Home...");
+    // console.log("App.js: userEmail: "+userEmail);
+    // console.log("App.js: username: "+user.firstName);
   }
   //TOKEN CODE **********************************************************
+  
+  
+
 
   return ( 
     <div className="App" >
       {/* Header */}
-      <Header />
+      <Header user={userFirstName}/>
       <div className="wrapper">
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home userEmail={userEmail}/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/matches" element={<Matches />} />
-          <Route path="/matchUser/:name" element={<MatchUser/>} />
-          <Route path="/editprofile" element={<EditProfile/>} />
+          <Route path="/matchUser/:name" element={<MatchUser />} />
+          <Route path="/editprofile" element={<EditProfile />} />
           <Route path='/help' element={<Help/>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
         </Routes>

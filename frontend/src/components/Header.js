@@ -10,8 +10,9 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import PatriotLogo from "../images/gmulogo.png";
 import "../styles/Header.css";
 
-function Header() {
+function Header(props) {
     return (
+        <>
         <div className="header">
             <IconButton className='icButton'>
                 <Link to="/profile">
@@ -24,13 +25,14 @@ function Header() {
                     <img alt="Patriot Logo" className="patriotLogo" src={PatriotLogo} />
                 </Link>
             </IconButton>
-           
             <IconButton className='icButton'>
                 <Link to="/matches">
                         <DensityMediumIcon className="navButton"/>
                 </Link>
             </IconButton>
         </div>
+        <div className="user"><b>{props.user}</b></div>
+        </>
     );
 }
  
