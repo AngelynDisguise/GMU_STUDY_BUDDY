@@ -19,3 +19,22 @@
     position: relative;
     bottom: -100px;
 }
+
+.help-image-wrapper{
+    padding: 10px;
+}
+
+.help-image{
+    height: 300px;
+    object-fit: contain;
+    display: flex;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 3px;
+    background-color: black;
+    
+    border-radius: 5%;
+}

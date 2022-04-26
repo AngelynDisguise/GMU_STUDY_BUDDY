@@ -18,10 +18,10 @@ function logOut() {
  * just placeholders
  */
 const name = "Ian";
-const email = "ianalexboyd@gmail.com";
-const dob = "01/29/2000";
+const email = "gmustudybuddy@gmu.edu";
+const dob = "05/24/2001";
 const gender = "M";
-const major = "cs";
+const major = "CS";
 
 function Profile(){
     return(

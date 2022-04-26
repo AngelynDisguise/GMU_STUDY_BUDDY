@@ -18,14 +18,14 @@ function Home(props) {
 
   const [matchList, setMatchList] = useState([]);
 
-  useEffect (() => {
-    console.log("Home.js: useEffect()");
-    console.log(props.userEmail);
-    fetchMatchList(props.userEmail).then(result => {
-      if(result) setMatchList(result);
-      console.log(matchList);
-    });
-  }, []);
+  // useEffect (() => {
+  //   console.log("Home.js: useEffect()");
+  //   console.log(props.userEmail);
+  //   fetchMatchList(props.userEmail).then(result => {
+  //     if(result) setMatchList(result);
+  //     console.log(matchList);
+  //   });
+  // }, []);
 
   const onSwipe = (direction) => {
     console.log('You swiped: ' + direction);
