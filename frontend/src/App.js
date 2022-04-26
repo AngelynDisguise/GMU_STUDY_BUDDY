@@ -1,11 +1,10 @@
-import React , { useState } from 'react';
+import React from 'react';
 import {
   Route,
   Routes,
 } from 'react-router-dom';
 
 //components
-import Auth from './components/Auth';
 import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -15,7 +14,6 @@ import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import Help from './components/Help';
 // import Chat from './components/Chat';
-import Register from './components/Register';
 
 //styles
 import './App.css';
@@ -49,22 +47,23 @@ function App() {
   return ( 
     <div className="App" >
       {/* Header */}
-      <Header />
+      
       <div className="wrapper">
         {/* Routes */}
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
           {/* <Route path="/" element={<Register />} /> */}
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/matchUser/:name" element={<MatchUser/>} />
-          <Route path="/editprofile" element={<EditProfile/>} />
-          <Route path='/help' element={<Help/>} />
+          
+          <Route path="/profile" element={<><Header backButton="/"/> <Profile /> <Footer /></>} />
+          <Route path="/matches" element={<><Header backButton="/"/> <Matches /> <Footer /></>} />
+          <Route path="/matchUser/:name" element={<><Header backButton="/"/> <MatchUser/> <Footer /></>} />
+          <Route path="/editprofile" element={<><Header backButton="/profile"/> <EditProfile/> <Footer /></>} />
+          <Route path='/help' element={<> <Header backButton="/"/> <Help/></>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
+          <Route path="/" element={<><Header /> <Home /> <Footer /></>} />
         </Routes>
       </div>
-      <Footer />
+      
     </div>
   );
 }
