@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 //components
-import Auth from './components/Auth';
 import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -65,6 +64,7 @@ function App() {
 
 
   return ( 
+   
     <div className="App" >
       {/* Header */}
       <Header user={userFirstName}/>
@@ -73,15 +73,16 @@ function App() {
         <Routes>
           {/* Home: Profile+ Study Buddy Card + Matches List*/}
           <Route path="/" element={<Home userEmail={userEmail}/>} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/matchUser/:name" element={<MatchUser />} />
-          <Route path="/editprofile" element={<EditProfile />} />
-          <Route path='/help' element={<Help/>} />
+          <Route path="/profile" element={<><Header backButton="/"/> <Profile /> <Footer/> </>} />
+          <Route path="/matches" element={<><Header backButton="/"/> <Matches /> <Footer /></>} />
+          <Route path="/matchUser/:name" element={<><Header backButton="/"/> <MatchUser/> <Footer /></>} />
+          <Route path="/editprofile" element={<><Header backButton="/profile"/> <EditProfile/> <Footer/></>} />
+          <Route path='/help' element={<><Header backButton="/" /><Help /></>} />
           {/* <Route path="/chat" element={<Chat />} /> */}
+          <Route path="/" element={<><Header /> <Home /> <Footer /></>} />
         </Routes>
       </div>
-      <Footer />
+      
     </div>
   );
 }
