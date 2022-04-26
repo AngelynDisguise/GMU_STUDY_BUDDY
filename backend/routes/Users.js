@@ -87,7 +87,19 @@ router.post("/register", async(req, res) => {
 
 //Register a new user's profile info
 router.post("/register2", async(req, res) => {
-    const { email, firstName, gender, major, date } = req.body;
+    const {
+        email,
+        password,
+        pfp,
+        firstName,
+        lastName,
+        date,
+        preferences,
+        gender,
+        major,
+        bio,
+        classesTaken
+    } = req.body;
     try {
         const user = await Users.findOne({
             where: {
@@ -95,13 +107,26 @@ router.post("/register2", async(req, res) => {
             },
         });
         if (user) {
+            //Save user preferences
+            // const preferences = new Array();
+            // preferences.push({ byGender: byGender });
+            // preferences.push({ byMajor: byMajor });
+            // preferences.push({ byAge: byAge });
+            //console.log(preferences);
             await user.update({
+                password: password,
+                pfp: pfp,
                 firstName: firstName,
+                lastName: lastName,
+                date: date,
+                preferences: preferences,
                 gender: gender,
                 major: major,
-                date: date,
+                bio: bio,
+                classesTaken: classesTaken
             });
-            await user.update({ age: getAge(date) });
+            //update date first, then age
+            await user.update({ age: getAge(user.date) });
             res.json(user);
         } else {
             //should not happen, since this gets called right after register
@@ -228,11 +253,11 @@ router.post("/remove", async(req, res) => {
 
 //Create match list by user preferences
 router.post("/match", async(req, res) => {
-    const { email, byGender, byMajor, byAge } = req.body; //get body of data being pass in
+    const { email } = req.body; //get body of data being pass in
     console.log(req.body);
-    console.log("byGender: ", byGender);
-    console.log("byMajor: ", byMajor);
-    console.log("byAge: ", byAge);
+    // console.log("byGender: ", byGender);
+    // console.log("byMajor: ", byMajor);
+    // console.log("byAge: ", byAge);
     //Find if user exists
     const user = await Users.findOne({
         where: {
@@ -242,16 +267,9 @@ router.post("/match", async(req, res) => {
     console.log(user);
     if (user) {
         try {
-            //Save user preferences
-            const preferences = new Array();
-            preferences.push({ byGender: byGender });
-            preferences.push({ byMajor: byMajor });
-            preferences.push({ byAge: byAge });
-            //console.log(preferences);
-            await user.update({
-                preferences: preferences,
-            });
-
+            const byGender = user.preferences.byGender;
+            const byMajor = user.preferences.byMajor;
+            const byAge = user.preferences.byAge;
             //Create/update match list
             let matchList = new Array();
             if (byGender && byMajor && byAge) {

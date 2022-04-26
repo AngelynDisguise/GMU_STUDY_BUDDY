@@ -62,7 +62,16 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         /****************** PUBLIC INFO *****************/
+        pfp: {
+            type: DataTypes.BLOB("long"),
+            allowNull: true,
+        },
         firstName: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true,
+        },
+        lastName: {
             type: DataTypes.STRING,
             defaultValue: "",
             allowNull: true,
@@ -86,6 +95,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         age: {
             type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        bio: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true,
+        },
+        classesTaken: {
+            type: DataTypes.JSON,
             allowNull: true,
         },
     });

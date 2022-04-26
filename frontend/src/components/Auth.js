@@ -13,9 +13,9 @@ export default function Auth(props) {
         console.log("Register");
         return (
             <Register 
-              setToken={props.setToken} 
-              setUserEmail={props.setUserEmail} 
-              setRegister={setRegister} 
+                setToken={props.setToken} 
+                setUserEmail={props.setUserEmail} 
+                setRegister={setRegister} 
             />
         );
     } else {

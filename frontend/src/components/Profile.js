@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
     console.log("User has logged out...");
     <Link to="/" />
     window.location.assign("/");

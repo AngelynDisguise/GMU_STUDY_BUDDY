@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import TinderCard from 'react-tinder-card';
 import { Link, Route } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import {getUserInfo, fetchMatchList} from '../util/UserInfo';
 import MatchUser from './MatchUser';
 
 //images
 import Mengistu from '../images/mengistu.jfif';
 import Russell from '../images/russell.jfif';
 import Helms from '../images/helms.jpg';
-import Monkeh from '../images/monkeh.jpg'
+import Monkeh from '../images/monkeh.jpg';
+import Anon from '../images/anon.jpg';
 
-function Home() {
+function Home(props) {
+
+  const [matchList, setMatchList] = useState([]);
+  const [user, setUser] = useState();
+
+  useEffect (() => {
+    console.log("Home.js: useEffect()");
+    fetchMatchList(props.userEmail).then(result => {
+      if(result) setMatchList(result);
+      console.log(matchList);
+    });
+    getUserInfo(props.userEmail).then(result => {if(result) setUser(result.firstName)});
+    //getMatchList();
+  }, []);
+
+  
+
+
   /*Array of Tinder Cards 
   - dummy data: cs professors
   - will eventually be generated based off "matches" 
   from existing accounts, stored in database
   */
-  const [students, setStudents] = useState([
+  const [matches, setMatches] = useState([
     {
       name: "Mengistu",
       url: Mengistu,
@@ -48,21 +68,21 @@ function Home() {
       
       <div className='cardsContainer'>
         
-        {students.map((student) => (
+        {matches.map((match) => (
           
           <TinderCard 
             className="Swipe"
-            key={student.name}
+            key={match.name}
             preventSwipe={['up', 'down']}
           >
             <div 
               className="card"
-              style={{ backgroundImage: `url(${student.url})` }}
+              style={{ backgroundImage: `url(${match.url})` }}
             >
-              <h3>{student.name}</h3>
+              <h3>{match.name}</h3>
               
               <Link to={{
-                pathname: "/matchUser/" + student.name,
+                pathname: "/matchUser/" + match.name,
               }}>
                 <IconButton>
                   <InfoIcon />
@@ -75,7 +95,6 @@ function Home() {
           
         ))}
       </div>
-     
     </div>
   );
 }

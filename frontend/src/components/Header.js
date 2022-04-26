@@ -11,13 +11,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PatriotLogo from "../images/gmulogo.png";
 import "../styles/Header.css";
 
-function Header( { backButton } ) {
-
+function Header(props) {
     return (
+        <>
         <div className="header">
-            {backButton ? (
+            {props.backButton ? (
                 <IconButton className='icButton'>
-                    <Link to={backButton}>
+                    <Link to={props.backButton}>
                         <ArrowBackIcon className='navButton' />
                     </Link>
                 </IconButton>    
@@ -36,13 +36,14 @@ function Header( { backButton } ) {
                     <img alt="Patriot Logo" className="patriotLogo" src={PatriotLogo} />
                 </Link>
             </IconButton>
-           
             <IconButton className='icButton'>
                 <Link to="/matches">
                         <DensityMediumIcon className="navButton"/>
                 </Link>
             </IconButton>
         </div>
+        <div className="user"><b>{props.user}</b></div>
+        </>
     );
 }
  

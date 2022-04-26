@@ -1,0 +1,29 @@
+.ed-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.ed-profile-info-title {
+    padding-top: 5em;
+}
+
+.ed-preferences-title {
+    padding: .5em;
+}
+
+.ed-profile-info-body {
+    line-height: 2em;
+}
+
+.r2-button {
+    margin-top: 2em;
+    margin-left: 3em;
+}
+
+.ed-err {
+    color: red;
+    font-size: .8em;
+    padding: .5em;
+}

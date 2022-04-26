@@ -17,14 +17,14 @@ export default function Login(props) {
 
     function statusMessage(response){
         if (loggedIn) {
-        console.log("(statusMessage) Logged in: "+loggedIn);
+        //console.log("(statusMessage) Logged in: "+loggedIn);
         return (<p className="status-message" 
         style={{color: 'blue', paddingTop: '.5em'}}
         >
             Login successful!
         </p>);
         } else {
-        console.log("(statusMessage) Logged in: "+loggedIn);
+        //console.log("(statusMessage) Logged in: "+loggedIn);
         return (<p className="status-message" 
         style={{color: 'red', paddingTop: '.5em'}}
         >
@@ -40,12 +40,11 @@ export default function Login(props) {
         response !== "Email not found - please register!" &&
         response !== "") {
             const userToken = JSON.stringify(response);
-            localStorage.setItem('token', userToken);
             setLoggedIn(true);
-            //console.log("(authenticate) Logged in: "+loggedIn);
             console.log("(authenticate) email: ", data.email);
             props.setUserEmail(data.email);
-            //console.log("(authenticate) token: ", userToken);
+            localStorage.setItem('userEmail', data.email);
+            localStorage.setItem('token', userToken);
             props.setToken(userToken);
         }
     }
