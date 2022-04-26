@@ -194,7 +194,8 @@ router.post("/remove", async(req, res) => {
                 const matchList = listOfUsers[i].matchList;
                 if (matchList) {
                     //Find if user exists in match list
-                    const matchIndex = matchList.indexOf(email);
+                    let matchEmailList = matchList.map(match => match.email);
+                    const matchIndex = matchEmailList.indexOf(email);
                     if (matchIndex > -1) {
                         //Remove user from match list
                         matchList.splice(matchIndex, 1);
@@ -208,19 +209,21 @@ router.post("/remove", async(req, res) => {
                                 email: listOfUsers[i].email,
                             }
                         });
-                        console.log("User removed from ${listOfUsers[i].firstName}'s match list!");
+                        console.log(`User removed from ${listOfUsers[i].firstName}'s match list!`);
+                    } else {
+                        console.log(`User not found in ${listOfUsers[i].firstName}'s match list!`);
                     }
-                    //console.log("match list found");
                 } else {
-                    console.log("No match list found for ${listOfUsers[i].firstName}");
+                    console.log(`No match list found for ${listOfUsers[i].firstName}`);
                 }
 
                 //Delete user in all study buddy lists (if found)
                 //Find user's study buddy list, if it exists
                 const studyBuddyList = listOfUsers[i].studyBuddyList;
                 if (studyBuddyList) {
-                    //Find if user exists in match list
-                    const studyBuddyIndex = studyBuddyList.indexOf(email);
+                    //Find if user exists in study buddy list
+                    let studyBuddyEmailList = studyBuddyList.map(buddy => buddy.email);
+                    const studyBuddyIndex = studyBuddyEmailList.indexOf(email);
                     if (studyBuddyIndex > -1) {
                         //Remove user from match list
                         studyBuddyList.splice(studyBuddyIndex, 1);
@@ -234,13 +237,14 @@ router.post("/remove", async(req, res) => {
                                 email: listOfUsers[i].email,
                             }
                         });
+                        console.log(`User removed from ${listOfUsers[i].firstName}'s study buddy list!`);
                     } else {
-                        console.log("User removed from ${listOfUsers[i].firstName}'s study buddy list!");
+                        console.log(`User not found in ${listOfUsers[i].firstName}'s study buddy list!`);
                     }
                 } else {
-                    console.log("No study buddy list found for ${listOfUsers[i].firstName}");
+                    console.log(`No study buddy list found for ${listOfUsers[i].firstName}`);
                 }
-                console.log("hello ", i);
+                //console.log("hello ", i);
             }
             res.json("User deleted successfully from all lists!");
         } catch (err) {
@@ -479,7 +483,8 @@ router.post("/addStudyBuddy", async(req, res) => {
             res.status(400).json("You cannot add yourself to study buddy list!");
         } else {
             try {
-                let currentStudyBuddyList, emailList = new Array();
+                let currentStudyBuddyList = new Array();
+                let emailList = new Array();
                 //Check if study buddy list already exists
                 if (user.studyBuddyList) {
                     currentStudyBuddyList = user.studyBuddyList;
@@ -490,10 +495,10 @@ router.post("/addStudyBuddy", async(req, res) => {
                     console.log("Study buddy already in study buddy list!");
                     res.status(400).json("Study buddy already in study buddy list!");
                 } else {
-                    //console.log("Before add: ", user.studyBuddyList);
+                    console.log("Before add: ", user.studyBuddyList);
                     //Add study buddy to study buddy list
                     //currentStudyBuddyList.push(studyBuddyEmail);
-                    currentStudyBuddyList.push(studyBuddy);
+                    currentStudyBuddyList.push(studyBuddy.dataValues);
                     const numStudyBuddies = currentStudyBuddyList.length;
                     //Update study buddy list
                     await Users.update({
