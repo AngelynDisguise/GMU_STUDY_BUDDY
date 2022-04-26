@@ -31,7 +31,7 @@ function Home(props) {
     console.log('You swiped: ' + direction);
     //remove user from match list
     popMatchUser(props.userEmail).then((removedMatchUser) => {
-      if(removedMatchUser) setMatchUserEmail(removedMatchUser.email);
+      if(removedMatchUser) {
       console.log(removedMatchUser.firstName + " removed from match list");
       if(direction === 'right') {
         //add removed user to study buddy list
@@ -44,7 +44,7 @@ function Home(props) {
           }
         });
       }
-    });
+    }});
   }
 
   function generateCards() {

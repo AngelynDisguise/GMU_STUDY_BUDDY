@@ -95,7 +95,7 @@ export async function fetchMatchList(email) {
 }
 
 export async function addStudyBuddy(userEmail, studyBuddyEmail) {
-    //data = { email, studyBuddyEmail }
+    //data = { userEmail, studyBuddyEmail }
     if (!userEmail || !studyBuddyEmail) return null;
     try {
         const response = await axios.post("http://localhost:3001/users/addStudyBuddy", JSON.parse(`{ \"userEmail\": \"${userEmail}\", \"studyBuddyEmail\": \"${studyBuddyEmail}\" }`));
@@ -106,12 +106,14 @@ export async function addStudyBuddy(userEmail, studyBuddyEmail) {
     }
 }
 
-// function removeStudyBuddy(data) {
-//     //data = email
-//     try {
-//         const response = await axios.get("http://localhost:3001/users/removeStudyBuddy", data);
-//     } catch (error) {
-//         return error;
-//     }
-//     return response.data;
-// }
+export async function removeStudyBuddy(userEmail, studyBuddyEmail) {
+    //data = { userEmail, studyBuddyEmail }
+    if (!userEmail || !studyBuddyEmail) return null;
+    try {
+        const response = await axios.post("http://localhost:3001/users/removeStudyBuddy", JSON.parse(`{ \"userEmail\": \"${userEmail}\", \"studyBuddyEmail\": \"${studyBuddyEmail}\" }`));
+        console.log("studyBuddy response: " + response.data);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}

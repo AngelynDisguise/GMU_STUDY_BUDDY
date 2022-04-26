@@ -479,19 +479,21 @@ router.post("/addStudyBuddy", async(req, res) => {
             res.status(400).json("You cannot add yourself to study buddy list!");
         } else {
             try {
-                let currentStudyBuddyList = new Array();
+                let currentStudyBuddyList, emailList = new Array();
                 //Check if study buddy list already exists
                 if (user.studyBuddyList) {
                     currentStudyBuddyList = user.studyBuddyList;
+                    emailList = currentStudyBuddyList.map(buddy => buddy.email);
                 }
                 //Check if study buddy already in study buddy list
-                if (currentStudyBuddyList.indexOf(studyBuddyEmail) > -1) {
+                if (emailList.indexOf(studyBuddyEmail) > -1) {
                     console.log("Study buddy already in study buddy list!");
                     res.status(400).json("Study buddy already in study buddy list!");
                 } else {
-                    console.log("Before add: ", user.studyBuddyList);
+                    //console.log("Before add: ", user.studyBuddyList);
                     //Add study buddy to study buddy list
-                    currentStudyBuddyList.push(studyBuddyEmail);
+                    //currentStudyBuddyList.push(studyBuddyEmail);
+                    currentStudyBuddyList.push(studyBuddy);
                     const numStudyBuddies = currentStudyBuddyList.length;
                     //Update study buddy list
                     await Users.update({
@@ -502,8 +504,8 @@ router.post("/addStudyBuddy", async(req, res) => {
                             email: userEmail,
                         },
                     });
-                    console.log("After add: ", user.studyBuddyList);
-                    console.log(currentStudyBuddyList);
+                    // console.log("After add: ", user.studyBuddyList);
+                    // console.log(currentStudyBuddyList);
                     res.json(currentStudyBuddyList);
                     //res.json(user.studyBuddyList);
                     console.log("Add study buddy successful!");
@@ -533,17 +535,23 @@ router.post("/removeStudyBuddy", async(req, res) => {
             email: studyBuddyEmail,
         },
     });
+    // console.log(user);
+    // console.log("THE LIST\n\n", user.studyBuddyList);
+    // console.log("THE BUDDY\n\n", studyBuddy.dataValues);
+    // console.log(user.studyBuddyList.indexOf(studyBuddy.dataValues));
     if (user && studyBuddy) {
         if (userEmail === studyBuddyEmail) {
             res.status(400).json("You cannot remove yourself from your study buddy list!");
         } else {
             try {
                 //Check if user has a study buddy list
-                console.log("Before removal: ", user.studyBuddyList);
+                //console.log("Before removal: ", user.studyBuddyList);
                 const currentStudyBuddyList = user.studyBuddyList;
+                const emailList = currentStudyBuddyList.map(buddy => buddy.email);
                 if (currentStudyBuddyList) {
                     //Check if study buddy exists in study buddy list
-                    const index = currentStudyBuddyList.indexOf(studyBuddyEmail);
+                    const index = emailList.indexOf(studyBuddyEmail);
+                    console.log(index);
                     if (index > -1) {
                         currentStudyBuddyList.splice(index, 1);
                         const numStudyBuddies = currentStudyBuddyList.length;
@@ -556,14 +564,16 @@ router.post("/removeStudyBuddy", async(req, res) => {
                                 email: userEmail,
                             },
                         });
-                        console.log("After removal: ", user.studyBuddyList);
-                        console.log("Current Study Buddy List: ", currentStudyBuddyList);
+                        //console.log("After removal: ", user.studyBuddyList);
+                        //console.log("Current Study Buddy List: ", currentStudyBuddyList);
                         res.json(user.studyBuddyList);
                         console.log("Remove study buddy successful!");
                     } else {
+                        console.log("Study buddy not in the list!");
                         throw "Study buddy not in the list!";
                     }
                 } else {
+                    console.log("User has no study buddy list!");
                     throw "No bitches? :(";
                     //throw "User has no study buddy list!";
                 }
@@ -572,6 +582,7 @@ router.post("/removeStudyBuddy", async(req, res) => {
             }
         }
     } else {
+        console.log("User or study buddy does not exist!");
         res.status(400).json("User or study buddy does not exist!");
     }
 });
