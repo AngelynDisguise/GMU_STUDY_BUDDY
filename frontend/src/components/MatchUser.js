@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function MatchUser() {
+function MatchUser(props) {
     /* User Variables */
     let { name } = useParams();
     const gender = "";

@@ -92,7 +92,9 @@ function App() {
             <Header 
               backButton="/"
             /> 
-            <MatchUser/> 
+            <MatchUser
+              userEmail={localStorage.getItem('userEmail')} 
+            /> 
             <Footer />
           </>} />
           <Route path="/editprofile" element={<>
