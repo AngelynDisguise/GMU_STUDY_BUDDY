@@ -300,7 +300,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyAll.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -317,7 +324,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGenderMajor.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -334,7 +348,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGenderAge.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -351,7 +372,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyMajorAge.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -367,7 +395,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyGender.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -383,7 +418,14 @@ router.post("/match", async(req, res) => {
                 });
                 //Add every JSON object's email to matchList
                 matchbyMajor.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList
@@ -400,7 +442,14 @@ router.post("/match", async(req, res) => {
                 //console.log(matchbyAge);
                 //Add every JSON object's email to matchList
                 matchbyAge.forEach(match => {
-                    matchList.push({ email: match.email, firstName: match.firstName, pfp: match.pfp });
+                    matchList.push({
+                        email: match.email,
+                        firstName: match.firstName,
+                        pfp: match.pfp,
+                        major: match.major,
+                        gender: match.gender,
+                        age: match.age,
+                    });
                     // matchList.push({ email: match.email });
                 });
                 //Add every JSON object to matchList

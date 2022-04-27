@@ -233,7 +233,9 @@ export default function Register(props) {
 
 
         const validationSchema = Yup.object().shape({
-            pfp: Yup.mixed(),
+            pfp: Yup.mixed()
+                .nullable()
+                .notRequired(),
                 // .test("fileSize", "The file is too large", (value) => {
                 //     if (!value.length) return true // profile pic is optional
                 //     return value[0].size <= 2000000})
@@ -256,8 +258,12 @@ export default function Register(props) {
             major: Yup.string()
                 .required('Major is required.'),
             bio: Yup.string()
-                .max(500, "Bio cannot exceed 500 characters."),
-            classesTaken: Yup.mixed(),
+                .max(500, "Bio cannot exceed 500 characters.")
+                .nullable()
+                .notRequired(),
+            classesTaken: Yup.mixed()
+                .nullable()
+                .notRequired(),
                 //.required("Classes taken are required."),
         });
     

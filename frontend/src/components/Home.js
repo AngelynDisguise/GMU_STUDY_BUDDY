@@ -25,6 +25,7 @@ function Home(props) {
     fetchMatchList(props.userEmail).then(matchList => {
       if(matchList) {
         setMatchList(matchList);
+        props.setMatchList2(matchList);
         console.log(matchList);
       }
     });
