@@ -29,19 +29,27 @@ function deactivate() {
  * profile picture just yet, though. These are
  * just placeholders
  */
+// const name = "Ian";
+// const email = "gmustudybuddy@gmu.edu";
+// const dob = "05/24/2001";
+// const gender = "M";
+// const major = "CS";
 
 function Profile(props){
-    const [userFirstName, setUserFirstName] = useState("");
-    const [userLastName, setUserLastName] = useState("");
-    const [userDOB, setUserDOB] = useState("");
-    const [userBio, setUserBio] = useState("");
-    const [userGender, setUserGender] = useState("");
-    const [userMajor, setUserMajor] = useState("");
-    const [userClasses, setUserClasses] = useState([]);
+    const [userFirstName, setUserFirstName] = useState("Ian");
+    const [userLastName, setUserLastName] = useState("Boyd");
+    const [userDOB, setUserDOB] = useState("05/25/2022");
+    const [userBio, setUserBio] = useState("Example Text");
+    const [userGender, setUserGender] = useState("M");
+    const [userMajor, setUserMajor] = useState("CS");
+    const [userClasses, setUserClasses] = useState(["CS 321",]);
     const [userPreferences, setUserPreferences] = useState([]);
 
-    const userEmail = props.userEmail;
-    const pref = [];
+    // const userEmail = props.userEmail;
+    const userEmail = "example@gmu.edu";
+     const pref = [];
+
+
 
     useEffect (() => {
         getUserInfo(userEmail).then(user => {
