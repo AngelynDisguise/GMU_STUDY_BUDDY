@@ -19,9 +19,9 @@ function Help(){
             </div>
 
             <div className='help-body'>
-                <div className='help-item'>
+                <div className='help-intro'>
                     <h3>Welcome to the George Mason University Study Buddy App!</h3>
-                    <p>Let's get started!</p>
+                    <h4>Let's get started!</h4>
                 </div>              
                 
                 <div className='help-item'>
@@ -58,6 +58,17 @@ function Help(){
                 
                 <div className='help-item'>
                     <div className='help-image-wrapper'>
+                        <img src={MatchesScreen} className='help-image'/>
+                    </div>
+
+                    <ul>
+                        <li>This is the matches screen, displaying the contact information of your matches, so you may contact them and set up a time to study</li>
+                        <li>Any user you chose to swipe right on will appear here!</li>
+                    </ul>
+                </div>
+
+                <div className='help-item'>
+                    <div className='help-image-wrapper'>
                         <img src={ProfileScreen} className='help-image'/>
                     </div>
                     
@@ -79,15 +90,7 @@ function Help(){
                     </ul>
                 </div>
                 
-                <div className='help-item'>
-                    <div className='help-image-wrapper'>
-                        <img src={MatchesScreen} className='help-image'/>
-                    </div>
-
-                    <ul>
-                        <li>This is the matches screen, displaying the contact information of your matches, so you may contact them and set up a time to study</li>
-                    </ul>
-                </div>
+                
                 
             </div>
         </div>
