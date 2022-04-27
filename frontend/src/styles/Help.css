@@ -22,6 +22,11 @@
     bottom: -100px;
 }
 
+.help-body li{
+    color: #000;
+    
+}
+
 .help-intro{
     display: flex;
     flex-direction: column;
@@ -56,6 +61,26 @@
     background-color: black;
     
     border-radius: 5%;
+
+    margin-right: 150px;
+}
+
+.help-button{
+    width: 450px;
+    object-fit: contain;
+    display: flex;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    padding: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+    background-color: black;
+    
+    border-radius: 5%;
+
 }
 
 .help-item{
