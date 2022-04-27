@@ -18,24 +18,24 @@ function Home(props) {
 
   const [matchList, setMatchList] = useState([]);
 
-  // useEffect (() => {
-  //   console.log("Home.js: useEffect()");
-  //   console.log(props.userEmail);
-  //   //create new match list
-  //   fetchMatchList(props.userEmail).then(matchList => {
-  //     if(matchList) {
-  //       setMatchList(matchList);
-  //       console.log(matchList);
-  //     }
-  //   });
-  //   //set study buddy list
-  //   getUserInfo(props.userEmail).then(user => {
-  //     if(user && user.studyBuddyList) {
-  //       props.setStudyBuddyList(user.studyBuddyList);
-  //       console.log(user.studyBuddyList);
-  //     }
-  //   });
-  // }, []);
+  useEffect (() => {
+    console.log("Home.js: useEffect()");
+    console.log(props.userEmail);
+    //create new match list
+    fetchMatchList(props.userEmail).then(matchList => {
+      if(matchList) {
+        setMatchList(matchList);
+        console.log(matchList);
+      }
+    });
+    //set study buddy list
+    getUserInfo(props.userEmail).then(user => {
+      if(user && user.studyBuddyList) {
+        props.setStudyBuddyList(user.studyBuddyList);
+        console.log(user.studyBuddyList);
+      }
+    });
+  }, []);
 
   const onSwipe = (direction) => {
     console.log('You swiped: ' + direction);

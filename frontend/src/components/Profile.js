@@ -29,11 +29,11 @@ function deactivate() {
  * profile picture just yet, though. These are
  * just placeholders
  */
-const name = "Ian";
-const email = "gmustudybuddy@gmu.edu";
-const dob = "05/24/2001";
-const gender = "M";
-const major = "CS";
+// const name = "Ian";
+// const email = "gmustudybuddy@gmu.edu";
+// const dob = "05/24/2001";
+// const gender = "M";
+// const major = "CS";
 
 function Profile(props){
     const [userFirstName, setUserFirstName] = useState("Ian");
@@ -51,29 +51,29 @@ function Profile(props){
 
 
 
-    // useEffect (() => {
-    //     getUserInfo(userEmail).then(user => {
-    //         if(user) {
-    //             setUserFirstName(user.firstName);
-    //             setUserLastName(user.lastName);
-    //             setUserDOB(user.date);
-    //             setUserBio(user.bio);
-    //             setUserGender(user.gender);
-    //             setUserMajor(user.major);
-    //             setUserClasses(user.classesTaken);
-    //             //setUserPreferences(user.preferences);
-    //             user.preferences.forEach(element => {
-    //                 //console.log(element.byAge);
-    //                 if(element.byMajor) pref.push("Major");
-    //                 if(element.byGender) pref.push("Gender");
-    //                 if(element.byAge) pref.push("Age");
+    useEffect (() => {
+        getUserInfo(userEmail).then(user => {
+            if(user) {
+                setUserFirstName(user.firstName);
+                setUserLastName(user.lastName);
+                setUserDOB(user.date);
+                setUserBio(user.bio);
+                setUserGender(user.gender);
+                setUserMajor(user.major);
+                setUserClasses(user.classesTaken);
+                //setUserPreferences(user.preferences);
+                user.preferences.forEach(element => {
+                    //console.log(element.byAge);
+                    if(element.byMajor) pref.push("Major");
+                    if(element.byGender) pref.push("Gender");
+                    if(element.byAge) pref.push("Age");
                     
-    //             });
-    //             setUserPreferences(pref);
-    //             //console.log(pref);
-    //         }
-    //     });
-    // }, [])
+                });
+                setUserPreferences(pref);
+                //console.log(pref);
+            }
+        });
+    }, [])
 
     return(
         <div className="profile-wrapper">
