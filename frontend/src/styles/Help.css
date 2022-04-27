@@ -19,3 +19,33 @@
     position: relative;
     bottom: -100px;
 }
+
+.help-intro{
+    display: flex;
+    flex-direction: column;    
+}
+
+.help-image-wrapper{
+    padding: 10px;
+}
+
+.help-image{
+    height: 300px;
+    object-fit: contain;
+    display: flex;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+    background-color: black;
+    
+    border-radius: 5%;
+}
+
+.help-item{
+    display: flex;
+}
