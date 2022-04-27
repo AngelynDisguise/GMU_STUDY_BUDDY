@@ -45,8 +45,8 @@ function Profile(props){
     const [userClasses, setUserClasses] = useState(["CS 321",]);
     const [userPreferences, setUserPreferences] = useState([]);
 
-    // const userEmail = props.userEmail;
-    const userEmail = "example@gmu.edu";
+    const userEmail = props.userEmail;
+    //const userEmail = "example@gmu.edu";
      const pref = [];
 
 

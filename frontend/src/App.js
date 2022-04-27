@@ -47,7 +47,7 @@ function App() {
   const [userEmail, setUserEmail] = useState(null);
   // user info
   const [studyBuddyList, setStudyBuddyList] = useState([]);
-  //const [matchList, setMatchList] = useState([]);
+  const [matchList2, setMatchList2] = useState([]);
   //USER INFO **********************************************************
   
   //TOKEN CODE **********************************************************
@@ -133,6 +133,7 @@ function App() {
             /> 
             <MatchUser
               userEmail={localStorage.getItem('userEmail')} 
+              matchList2={matchList2}
             /> 
             <Footer />
           </>} />
@@ -159,6 +160,7 @@ function App() {
             <Home 
               userEmail={localStorage.getItem('userEmail')} 
               setStudyBuddyList = {setStudyBuddyList}
+              setMatchList2={setMatchList2}
             /> 
             <Footer />
           </>}/>

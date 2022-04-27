@@ -1,24 +1,25 @@
-.matchuser-wrapper{
+.matchuser-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.mu-header{
+.mu-header {
     display: inline-block;
     text-align: center;
     border-bottom: solid green 3px;
-    
     height: 60px;
-
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-
     padding: 5px;
 }
 
-.mu-info{
+.mu-info {
     position: relative;
     bottom: -100px;
+}
+
+.mu-pfp {
+    text-align: center;
 }
