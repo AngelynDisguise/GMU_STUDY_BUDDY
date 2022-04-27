@@ -59,14 +59,14 @@ export async function updateUserInfo(data) {
     }
 }
 
-function deleteUser(email) {
-    try {
-        const response = await axios.post("http://localhost:3001/users/remove", data);
-    } catch (error) {
-        return error;
-    }
-    return response.data;
-}
+// function deleteUser(email) {
+//     try {
+//         const response = await axios.post("http://localhost:3001/users/remove", data);
+//     } catch (error) {
+//         return error;
+//     }
+//     return response.data;
+// }
 
 export async function popMatchUser(email) {
     if (!email) return;
