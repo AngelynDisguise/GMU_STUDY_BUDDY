@@ -21,8 +21,8 @@ app.use("/users", userRouter);
 
 //Initialize the server
 db.sequelize.sync({ alter: true }).then(() => {
-    app.listen(process.env.PORT, () => {
-        console.log("Server is running on port", process.env.PORT);
+    app.listen(process.env.PORT, process.env.HOST, () => {
+        console.log("Server is running on " + process.env.HOST + ":" + process.env.PORT);
     });
 });
 

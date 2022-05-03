@@ -71,7 +71,10 @@ export default function Register(props) {
         async function onSubmit(data){
             try {
                 //HTTP Request to post data to server
-                const responseVal = await axios.post("http://localhost:3001/users/register", data);
+                //console.log("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register");
+                console.log("https://gmu-study-buddy.duckdns.org/users/register");
+                //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register", data);
+                const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register", data);
                 //Save and display response from server
                 setResponse(responseVal.data); //doesn't save until after function???
                 console.log("(onSubmit) ResponseVal: "+responseVal.data); //works
@@ -184,13 +187,14 @@ export default function Register(props) {
                     preferences: pref
                 };
                 //console.log(request);
-                const responseVal = await axios.post("http://localhost:3001/users/register2", request);
+                //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register2", request);
+                const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register2", request);
                 console.log(responseVal.data);
                 if (responseVal) {
                     localStorage.setItem('userEmail', email);
                     localStorage.setItem('token', tok);
                     props.setToken(tok);
-                } else throw "Something went wrong...";
+                } else throw new Error("Something went wrong...");
             } catch(error) {
                 console.log(error);
             }

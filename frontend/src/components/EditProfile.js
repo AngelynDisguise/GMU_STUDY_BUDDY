@@ -19,7 +19,7 @@ function EditProfile(){
     async function onSubmit(data){
         try {
           //HTTP Request to post data to server
-          const responseVal = await axios.post("http://localhost:3001/users/register", data);
+          const responseVal = await axios.post("http://" + process.env.HOST + ":" + process.env.PORT + "/users/register", data);
           //Save and display response from server
           console.log("(onSubmit) ResponseVal: "+responseVal.data); //works
           //Assign token if user authenticated
