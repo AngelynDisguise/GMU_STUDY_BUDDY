@@ -1,5 +1,5 @@
 # GMU Study Buddy
-Hi! The GMU Study Buddy app is a Tinder-like social media app that helps connect GMU students to potential study partners.
+Hi! The GMU Study Buddy app is a Tinder-like social media app that helps connect GMU students to potential study partners. http://gmu-study-buddy.duckdns.org/
 
 ## Requirements
 **Functional Requirements**
