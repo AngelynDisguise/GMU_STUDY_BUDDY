@@ -51,9 +51,11 @@ export default function Login(props) {
 
     async function onSubmit(data){
         try {
+            console.log("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/login");
+
             //HTTP Request to post data to server
-            //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/login", data);
-            const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/login", data);
+            const responseVal = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/login", data);
+            //const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/login", data);
             //Save and display response from server
             setResponse(responseVal.data); //doesn't save until after function???
             console.log("(onSubmit) ResponseVal: "+responseVal.data);

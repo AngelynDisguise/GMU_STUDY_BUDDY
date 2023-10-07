@@ -71,10 +71,12 @@ export default function Register(props) {
         async function onSubmit(data){
             try {
                 //HTTP Request to post data to server
-                //console.log("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register");
-                console.log("https://gmu-study-buddy.duckdns.org/users/register");
-                //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register", data);
-                const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register", data);
+                console.log("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/register");
+                //console.log("https://gmu-study-buddy.duckdns.org/users/register");
+
+                const responseVal = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/register", data);
+                //const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register", data);
+                
                 //Save and display response from server
                 setResponse(responseVal.data); //doesn't save until after function???
                 console.log("(onSubmit) ResponseVal: "+responseVal.data); //works
@@ -186,10 +188,14 @@ export default function Register(props) {
                     classesTaken: list,
                     preferences: pref
                 };
+                
                 //console.log(request);
-                //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/register2", request);
-                const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register2", request);
+                
+                const responseVal = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/register2", request);
+                //const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users/register2", request);
+                
                 console.log(responseVal.data);
+                
                 if (responseVal) {
                     localStorage.setItem('userEmail', email);
                     localStorage.setItem('token', tok);

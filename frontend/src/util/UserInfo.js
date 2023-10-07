@@ -1,13 +1,18 @@
 import axios from 'axios';
 
 export async function getUserInfo(email) {
-    //console.log("getUserInfo called, email: " + email);
+    console.log("getUserInfo called, email: " + email);
     if (!email) return;
     try {
-        //const responseVal = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users", JSON.parse(`{ email: ${email} }`));
-        const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users", { email: email });
+
+        console.log(await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/health"))
+        //console.log(await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users", JSON.parse(`{ "email": "${email}" }`))
+
+
+        const responseVal = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users", JSON.parse(`{ "email": "${email}" }`));
+        //const responseVal = await axios.post("https://gmu-study-buddy.duckdns.org/users", { email: email });
         
-        //console.log("(UserInfo.getUserInfo) First name: " + responseVal.data.firstName);
+        console.log("(UserInfo.getUserInfo) First name: " + responseVal.data.firstName); 
         return (responseVal.data);
     } catch (err) {
         console.log("(UserInfo.getUserInfo) Error: " + err);
@@ -64,8 +69,8 @@ export async function getUserInfo(email) {
 export async function deleteUser(email) {
     if (!email) return;
     try {
-        //const response = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/remove", JSON.parse(`{ email: ${email} }`));
-        const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/remove", { email: email });
+        const response = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/remove", JSON.parse(`{ email: ${email} }`));
+        //const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/remove", { email: email });
         
         return response;
     } catch (error) {
@@ -76,8 +81,8 @@ export async function deleteUser(email) {
 export async function popMatchUser(email) {
     if (!email) return;
     try {
-        //const response = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/match/delete", JSON.parse(`{ email: ${email} }`));
-        const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/match/delete", { email: email });
+        const response = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/match/delete", JSON.parse(`{ email: ${email} }`));
+        //const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/match/delete", { email: email });
         //console.log(response);
         return (response.data);
     } catch (error) {
@@ -88,8 +93,8 @@ export async function popMatchUser(email) {
 export async function fetchMatchList(email) {
     if (!email) return;
     try {
-        //const response = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/match", JSON.parse(`{ email: ${email} }`));
-        const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/match", { email: email });
+        const response = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/match", JSON.parse(`{ "email": "${email}" }`));
+        //const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/match", { email: email });
         
         if (response) {
             console.log("(UserInfo.fetchMatchList) response: " + response);
@@ -106,8 +111,8 @@ export async function addStudyBuddy(userEmail, studyBuddyEmail) {
     //data = { userEmail, studyBuddyEmail }
     if (!userEmail || !studyBuddyEmail) return null;
     try {
-        //const response = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/addStudyBuddy", JSON.parse(`{ userEmail: ${userEmail}, studyBuddyEmail: ${studyBuddyEmail} }`));
-        const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/addStudyBuddy", { userEmail: userEmail, studyBuddyEmail: studyBuddyEmail });
+        const response = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/addStudyBuddy", JSON.parse(`{ userEmail: ${userEmail}, studyBuddyEmail: ${studyBuddyEmail} }`));
+        //const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/addStudyBuddy", { userEmail: userEmail, studyBuddyEmail: studyBuddyEmail });
         console.log("studyBuddy response: " + response.data);
         return response.data;
     } catch (error) {
@@ -119,8 +124,8 @@ export async function removeStudyBuddy(userEmail, studyBuddyEmail) {
     //data = { userEmail, studyBuddyEmail }
     if (!userEmail || !studyBuddyEmail) return null;
     try {
-        //const response = await axios.post("http://" + process.env.DBHOST + ":" + process.env.DBPORT + "/users/removeStudyBuddy", JSON.parse(`{ userEmail: ${userEmail}, studyBuddyEmail: ${studyBuddyEmail} }`));
-        const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/removeStudyBuddy", { userEmail: userEmail, studyBuddyEmail: studyBuddyEmail });
+        const response = await axios.post("http://" + process.env.REACT_APP_DBHOST + ":" + process.env.REACT_APP_DBPORT + "/users/removeStudyBuddy", JSON.parse(`{ userEmail: ${userEmail}, studyBuddyEmail: ${studyBuddyEmail} }`));
+        //const response = await axios.post("https://gmu-study-buddy.duckdns.org/users/removeStudyBuddy", { userEmail: userEmail, studyBuddyEmail: studyBuddyEmail });
         
         console.log("studyBuddy response: " + response.data);
         return response.data;
